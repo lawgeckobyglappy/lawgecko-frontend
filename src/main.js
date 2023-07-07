@@ -5,9 +5,9 @@ import store from './store'
 import './assets/tailwind.css'
 
 //components
-import TheButton from "@/components/utils/TheButton.vue"
-import NavBar from "@/components/Layouts/NavBar.vue"
-import TheFooter from "@/components/Layouts/TheFooter.vue"
+import TheButton from "@/components/buttons/TheButton.vue"
+import NavBar from "@/components/layouts/NavBar.vue"
+import TheFooter from "@/components/layouts/TheFooter.vue"
 
 const app = createApp(App)
 
