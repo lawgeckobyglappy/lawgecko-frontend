@@ -1,13 +1,11 @@
 <template>
-    <div>
-
-    </div>
+    <div>The error page</div>
 </template>
 
 <script>
-export default {
-    
-}
+    export default {
+        
+    }
 </script>
 
 <style scoped>
