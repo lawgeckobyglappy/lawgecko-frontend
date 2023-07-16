@@ -1,7 +1,6 @@
 {
-  "message": "hello i18n !!",
+  "message": "The Home page",
   "nav":{
-    "features": "hello this is feature"
   },
   "header":{},
   "footer":{}
