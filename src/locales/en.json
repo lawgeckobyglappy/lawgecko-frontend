@@ -1,0 +1,8 @@
+{
+  "message": "hello i18n !!",
+  "nav":{
+    "features": "hello this is feature"
+  },
+  "header":{},
+  "footer":{}
+}
