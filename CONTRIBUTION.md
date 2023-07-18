@@ -13,7 +13,8 @@ This project uses **Vue3, HTML/CSS, Javascript and NODEJS for the backend**.
 ## How do I make a contribution?
 Never made an open source contribution before? Wondering how contributions work in the in our project? Here's a quick rundown!
 
-1. Clone the repository to your local machine using git clone https://github.com/github-username/screel.git.
+1. Clone the repository to your local machine using git clone
+https://github.com/lawgeckobyglappy/lawgecko-frontend.git
 2. Create a new branch with your name using **git checkout -b branch-name-here**.
 5. Make the appropriate changes for the issue you are trying to address or the feature that you want to add.
 6. Use **git add insert-paths-of-changed-files-here** or simple **git add .** to add the file contents of the changed files to the "snapshot" git uses to manage the state of the project, also known as the index.
