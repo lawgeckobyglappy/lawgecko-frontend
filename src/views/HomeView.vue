@@ -3,12 +3,17 @@
    <h1>{{ $t('message') }}</h1> 
    <fa-icon icon="user"/>
    <fa-icon :icon="['fab','font-awesome']"/>
- 
+   <LanguageSwitcher />
   </h1>
 </template>
 
 <script>
-export default {};
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
+export default {
+  components:{
+    LanguageSwitcher
+  }
+};
 </script>
 
 <style scoped></style>
