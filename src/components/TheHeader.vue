@@ -8,19 +8,16 @@
                 <li><router-link class="link" :to="{ name: 'home' }">Home</router-link></li>
                 <li><router-link class="link" :to="{ name: '' }">About Us</router-link></li>
                 <li><router-link class="link" :to="{ name: '' }">Categories</router-link></li>
-                <li><router-link class="link" :to="{ name: '' }">Sign in</router-link></li>
-                <li><router-link class="link" :to="{ name: '' }">Get started</router-link></li>
             </ul>
-            <!-- <Transition class="mobile-dev">
-                <ul v-show="!mobile" class="navigation">
-                    <li><router-link class="link" :to="{ name: '' }">Home</router-link></li>
-                    <li><router-link class="link" :to="{ name: '' }">About Us</router-link></li>
-                    <li><router-link class="link" :to="{ name: '' }">Categories</router-link></li>
-                    <li><router-link class="link" :to="{ name: '' }">Sign in</router-link></li>
-                    <li><router-link class="link" :to="{ name: '' }">Get started</router-link></li>
-                </ul>
-            </Transition> -->
-            <LanguageSwitcher />
+            <div class="authorization">
+                <button><router-link class="" :to="{ name: '' }">Sign in</router-link></button>
+                <button id="get-started"><router-link :to="{ name: '' }">Get started</router-link></button>
+                <LanguageSwitcher />
+            </div>
+            <Transition></Transition>
+            <div>
+                <fa-icon :icon="['fal','bars']"/>
+            </div>
         </nav>
     </header>
 </template>
@@ -46,16 +43,23 @@ nav {
     position: relative;
     display: flex;
     flex-direction: row;
-    padding: 9px 0px;
+    padding: 10px;
     transition: .5s ease all;
     width: 95%;
     margin: 0 auto;
+    font-size: 17px;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    flex: 1;
 }
 .navigation {
     display: flex;
-    flex: 1;
-    align-items: center;
-    justify-content: flex-end;
+    flex: 2;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
 }
 ul, .link {
     font-weight: 500;
@@ -64,14 +68,33 @@ li {
     padding: 16px;
     margin-left: 16px;
 }
+li button {
+    border: 1px solid ;
+}
 .link {
-    font-size: 20px;
     transition: .5s ease all;
     padding-bottom: 4px;
-    border-bottom: 1px solid transparent;
+    border-bottom: 4px solid transparent;
 }
 .link:hover {
-    color: red;
-    border-color: black;
+    border-color: #6CDFBD;
+}
+.authorization {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+button {
+  cursor: pointer;
+  padding: 15px 35px;
+  border-radius: 60px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+#get-started {
+    background-color: #6CDFBD;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border: 2px solid black;
 }
 </style>
