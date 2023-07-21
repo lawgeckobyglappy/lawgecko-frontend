@@ -15,8 +15,8 @@
                 <LanguageSwitcher />
             </div>
             <Transition></Transition>
-            <div>
-                <fa-icon :icon="['fal','bars']"/>
+            <div >
+                <fa-icon :icon="['fas', 'bars']" :class="{'icon-active': mobileNav}"/>
             </div>
         </nav>
     </header>
@@ -34,6 +34,11 @@ import LanguageSwitcher from './LanguageSwitcher.vue';
 </script>
 
 <style scoped>
+.icon{
+    font-size: 30px;
+    cursor: pointer;
+    transition: .8s ease all;
+}
 header {
     background-color: transparent;
     position: fixed;
