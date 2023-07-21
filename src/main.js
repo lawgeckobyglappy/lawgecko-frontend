@@ -20,6 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
+// import { fal } from "@fortawesome/free-regular-svg-icons";
 
 //add free icon styles to SVG core
 library.add(fas, far, fab);
