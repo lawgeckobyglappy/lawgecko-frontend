@@ -9,14 +9,24 @@
                 <li><router-link class="link" :to="{ name: '' }">About Us</router-link></li>
                 <li><router-link class="link" :to="{ name: '' }">Categories</router-link></li>
             </ul>
-            <div class="authorization">
+            <div v-show="!mobile" class="authorization">
                 <button><router-link class="" :to="{ name: '' }">Sign in</router-link></button>
                 <button id="get-started"><router-link :to="{ name: '' }">Get started</router-link></button>
-                <LanguageSwitcher />
             </div>
-            <Transition></Transition>
-            <div >
-                <fa-icon :icon="['fas', 'bars']" :class="{'icon-active': mobileNav}"/>
+            <LanguageSwitcher />
+            <Transition name="mobile-nav">
+                <ul v-show="mobileNav" class="dropdown-nav">
+                    <li><router-link class="link" :to="{ name: 'home' }">Home</router-link></li>
+                    <li><router-link class="link" :to="{ name: '' }">About Us</router-link></li>
+                    <li><router-link class="link" :to="{ name: '' }">Categories</router-link></li>
+                </ul>
+            </Transition>
+            <div v-show="mobile">
+                <fa-icon 
+                :icon="['fas', 'bars']" 
+                :class="{'icon-active': mobileNav}"
+                @click="toggleMobileNav"
+                />
             </div>
         </nav>
     </header>
@@ -26,8 +36,35 @@
 import LanguageSwitcher from './LanguageSwitcher.vue';
     export default {
         name: "NavBar",
+        data(){
+            return {
+                mobileNav: null,
+                mobile: null,
+                windowWidth: null
+            }
+        },
+        created(){
+            window.addEventListener('resize', this.checkScreen)
+            this.checkScreen()
+        },
         components: {
             LanguageSwitcher
+        },
+        methods: {
+            toggleMobileNav() {
+                this.mobileNav = !this.mobileNav
+            },
+
+            checkScreen(){
+                this.windowWidth = window.innerWidth;
+                console.log(this.windowWidth)
+                if(this.windowWidth <= 850){
+                    this.mobile = true
+                    return
+                }
+                this.mobile = false
+                this.mobileNav = false
+            }
         }
         
     }
@@ -53,8 +90,10 @@ nav {
     width: 95%;
     margin: 0 auto;
     font-size: 17px;
+    font-weight: 500;
     justify-content: space-between;
     align-items: center;
+    white-space: nowrap;
 }
 .logo {
     flex: 1;
@@ -65,9 +104,6 @@ nav {
     margin: 0;
     padding: 0;
     justify-content: center;
-}
-ul, .link {
-    font-weight: 500;
 }
 li {
     padding: 16px;
@@ -101,5 +137,33 @@ button {
     background-color: #6CDFBD;
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     border: 2px solid black;
+}
+.icon-active{
+    cursor: pointer;
+}
+.dropdown-nav{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    width: 90%;
+    height: 100%;
+    max-width: 250px;
+    background-color: white;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    border-right: 2px solid rgb(229, 229, 229);
+}
+.mobile-nav-enter-active,
+.mobile-nav-leave-active{
+    transition: 1s ease all;
+}
+
+.mobile-nav-enter-from,
+.mobile-nav-leave-to{
+    transform: translateX(-250px);
+}
+.mobile-nav-enter-to{
+    transform: translateX(0);
 }
 </style>
