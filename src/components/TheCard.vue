@@ -1,24 +1,30 @@
 <template>
-    <v-card class="mx-auto" max-width="400">
-        <v-img
-            src="/images/goal1.png" height="200px" cover>
+    <v-card class="mx-auto" max-width="400" max-height="800">
+        <v-img v-bind:src="cardImage" height="" >
         </v-img>
 
-        <v-card-title>
-            Empowerment
+        <v-card-title class="mt-5">
+          <span class="text-2xl font-bold">{{ cardTitle }}</span>  
         </v-card-title>
 
         <v-card-text>
-            With our platform we ensure our 
-            users get to feel empowered to tke control of their lives
+            <span class="text-lg text-gray-500">
+                {{ cardText }}
+            </span>
         </v-card-text>
-  
+
     </v-card>
 </template>
 
 <script>
 export default {
 
+    props: {
+        cardImage: String,
+        cardTitle: String,
+        cardText: String
+    }
+    
 }
 </script>
 
