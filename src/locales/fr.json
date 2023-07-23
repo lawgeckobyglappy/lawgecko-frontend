@@ -2,6 +2,12 @@
   "message": "Page D'accueil",
   "nav": {
   },
-  "header": {},
+  "header": {
+    "home": "Maison",
+    "about": "À propos de nous",
+    "categories": "Catégories",
+    "signIn": "S'identifier",
+    "getStarted": "Commencer"
+  },
   "footer": {}
 }
