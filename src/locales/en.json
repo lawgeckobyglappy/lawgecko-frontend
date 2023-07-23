@@ -2,6 +2,12 @@
   "message": "The Home page",
   "nav":{
   },
-  "header":{},
+  "header":{
+    "home": "Home",
+    "about": "About Us",
+    "categories": "Categories",
+    "signIn": "Sign In",
+    "getStarted": "Get Started"
+  },
   "footer":{}
 }
