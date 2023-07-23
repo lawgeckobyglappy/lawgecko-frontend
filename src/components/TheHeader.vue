@@ -5,20 +5,20 @@
                 <h3>Lawgecko</h3>
             </div>
             <ul v-show="!mobile" class="navigation">
-                <li><router-link class="link" :to="{ name: 'home' }">Home</router-link></li>
-                <li><router-link class="link" :to="{ name: '' }">About Us</router-link></li>
-                <li><router-link class="link" :to="{ name: '' }">Categories</router-link></li>
+                <li><router-link class="link" :to="{ name: 'home' }">{{ $t('header.home') }}</router-link></li>
+                <li><router-link class="link" :to="{ name: '' }">{{ $t('header.about') }}</router-link></li>
+                <li><router-link class="link" :to="{ name: '' }">{{ $t('header.categories') }}</router-link></li>
             </ul>
             <div v-show="!mobile" class="authorization">
-                <button><router-link class="" :to="{ name: '' }">Sign in</router-link></button>
-                <button id="get-started"><router-link :to="{ name: '' }">Get started</router-link></button>
+                <button><router-link class="" :to="{ name: '' }">{{ $t( 'header.signIn' ) }}</router-link></button>
+                <button id="get-started"><router-link :to="{ name: '' }">{{ $t('header.getStarted') }}</router-link></button>
             </div>
             <LanguageSwitcher />
             <Transition name="mobile-nav">
                 <ul v-show="mobileNav" class="dropdown-nav">
-                    <li><router-link class="link" :to="{ name: 'home' }">Home</router-link></li>
-                    <li><router-link class="link" :to="{ name: '' }">About Us</router-link></li>
-                    <li><router-link class="link" :to="{ name: '' }">Categories</router-link></li>
+                    <li><router-link class="link" :to="{ name: 'home' }">{{ $t('header.home') }}</router-link></li>
+                    <li><router-link class="link" :to="{ name: '' }">{{ $t('header.about') }}</router-link></li>
+                    <li><router-link class="link" :to="{ name: '' }">{{ $t('header.categories') }}</router-link></li>
                 </ul>
             </Transition>
             <div v-show="mobile">
