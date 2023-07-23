@@ -30,6 +30,7 @@
             </div>
         </nav>
     </header>
+    <div>The header</div>
 </template>
 
 <script>
