@@ -7,7 +7,16 @@
     "about": "About Us",
     "categories": "Categories",
     "signIn": "Sign In",
-    "getStarted": "Get Started"
-  },
+    "signUp":"Sign Up",
+    "getStarted": "Get Started",
+    "learnMore":"Learn More",
+    "commute":"commute",
+    "title-1":"Connect, grow and",
+    "title-2":"in a space suited to assist you in",
+    "title-3":"your needs",
+    "intro":"Our platform connects you to vetted professionals tailored to your need. Seamless communication and effective assistance are our top priority" ,
+    "personelle":"Incredible professionals",
+    "activeUSer":"Active Users"
+    },
   "footer":{}
 }
