@@ -11,7 +11,7 @@
             </ul>
             <div v-show="!mobile" class="authorization">
                 <button><router-link class="" :to="{ name: '' }">{{ $t( 'header.signIn' ) }}</router-link></button>
-                <button id="get-started"><router-link :to="{ name: '' }">{{ $t('header.getStarted') }}</router-link></button>
+                <button id="get-started"><router-link :to="{ name: 'sign-up' }">{{ $t('header.getStarted') }}</router-link></button>
             </div>
             <LanguageSwitcher />
             <Transition name="mobile-nav">
