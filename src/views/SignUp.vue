@@ -3,10 +3,24 @@
         <div class="signup-inner-container">
             <h1>Sign up to Lawgecko</h1>
             <div class="auth">
-                <button>Sign up with Google</button>
-                <button>Sign up with Apple</button>
+                <button id="google-btn">
+                    <img src="../assets/images/google.png"/>
+                    Sign up with Google
+                </button>
+                <button id="apple-btn">
+                    <img src="../assets/images/apple.png"/>
+                    Sign up with Apple
+                </button>
             </div>
-            <p>or</p>
+            <div class="or-demarcation">
+                <div class="hr">
+                    <hr/>
+                </div>
+                <p class="or-text">or</p>
+                <div class="hr">
+                    <hr/>
+                </div>
+            </div>
             <div class="form">
                 <form>
                     <div class="name">
@@ -43,7 +57,7 @@
                         </label>
                     </div>
                     <div>
-                        <input type="submit" value="Sign Up"/>
+                        <input type="submit" value="Sign Up" class="bg-btn-green cursor-pointer"/>
                     </div>
                 </form>
             </div>
@@ -76,7 +90,48 @@
 .auth {
     display: flex;
     justify-content: space-between;
+    max-width: 400px;
+    margin: 20px auto;
+}
+.auth button {
+    border: 1px solid;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 5px 25px 5px 4px;
+    font-size: 12px;
+}
+.auth button img {
+    height: 25px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 2px;
+    margin-right: 7px;
+}
+#apple-btn{
+    background-color: #414040;
+    color: white;
+}
+#google-btn{
+    background-color: #4172D1;
+    color: white;
+}
+.or-demarcation{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-gap: 10px;
+}
+.hr {
+    height: 1.5px;
+    margin-top: 12px;
     margin-bottom: 20px;
+    background-color: #cbcaca;
+}
+.or-text {
+    margin: 0 10px;
+    font-weight: 600;
+    color: #6E6E6E;
 }
 .form {
     display: flex;
