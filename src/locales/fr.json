@@ -7,7 +7,17 @@
     "about": "À propos de nous",
     "categories": "Catégories",
     "signIn": "S'identifier",
-    "getStarted": "Commencer"
+    "signUp":"s'inscrire",
+    "getStarted": "Commencer",
+    "learnMore": "Apprendre plus",
+    "commute": "déplacez-vous",
+    "title-1": "Connectez-vous, évoluez et",
+    "title-2": "dans un espace adapté pour vous aider",
+    "title-3": "vos besoins",
+
+    "intro": "Notre plateforme vous met en relation avec des professionnels sélectionnés et adaptés à vos besoins. Une communication transparente et une assistance efficace sont notre priorité absolue",
+    "personelle": "Des professionnels incroyables",
+    "activeUSer": "Utilisateurs actifs"
   },
   "footer": {}
 }
