@@ -10,13 +10,13 @@
             <div class="form">
                 <form>
                     <div class="name">
-                        <div class="">
+                        <div>
                             <label>
                                 First Name
                             </label>
                             <input />
                         </div>
-                        <div class="">
+                        <div>
                             <label>
                                 Last Name
                             </label>
@@ -73,7 +73,7 @@
     font-size: 20px;
     font-weight: 500;
 }
-.auth{
+.auth {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
@@ -85,9 +85,6 @@
 .name {
     display: flex;
     justify-content: space-between;
-}
-.name > div {
-    flex: 1;
 }
 .name > div:first-child{
     margin-right: 10px;
@@ -118,5 +115,8 @@ input {
     .name {
         flex-direction: column;
     }
+    .name > div:first-child{
+    margin-right: 0;
+}
 }
 </style>
