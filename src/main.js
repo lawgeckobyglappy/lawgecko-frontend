@@ -4,6 +4,19 @@ import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
 
+import { Row, Column, Hidden } from 'vue-grid-responsive';
+
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
 //components
 import TheButton from "@/components/buttons/TheButton.vue";
 import NavBar from "@/components/layouts/NavBar.vue";
@@ -20,6 +33,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
+import './assets/tailwind.css'
 
 //add free icon styles to SVG core
 library.add(fas, far, fab);
@@ -29,8 +43,14 @@ app.use(i18n);
 
 app.use(store);
 app.use(router);
+app.use(vuetify); // vuetify
 app.mount("#app");
 app.component("TheButton", TheButton);
+app.component("fa-icon", FontAwesomeIcon);
 app.component("NavBar", NavBar);
 app.component("TheFooter", TheFooter);
-app.component("fa-icon", FontAwesomeIcon);
+
+//grid responsive
+app.component("TheRow", Row);
+app.component("TheColumn", Column);
+app.component("TheHidden", Hidden);
