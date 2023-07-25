@@ -6,8 +6,8 @@ import "./assets/tailwind.css";
 
 //components
 import TheButton from "@/components/buttons/TheButton.vue";
-import NavBar from "@/components/Layouts/NavBar.vue"
-import TheFooter from "@/components/Layouts/TheFooter.vue";
+import NavBar from "@/components/layouts/NavBar.vue";
+import TheFooter from "@/components/layouts/TheFooter.vue";
 import i18n from "./i18n";
 
 /* import the fontawesome core */
@@ -26,7 +26,6 @@ library.add(fas,far,fab)
 
 const app = createApp(App);
 app.use(i18n);
-
 
 
 app.use(store);
