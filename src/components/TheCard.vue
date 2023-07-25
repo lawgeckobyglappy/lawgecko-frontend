@@ -1,6 +1,6 @@
 <template>
     <v-card class="mx-auto" max-width="400" max-height="800">
-        <v-img v-bind:src="cardImage" height="" >
+        <v-img v-bind:src="cardImage" height="">
         </v-img>
 
         <v-card-title class="mt-5">
