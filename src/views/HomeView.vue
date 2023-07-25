@@ -21,21 +21,19 @@
         <TheColumn :xs="12" :md="6" :lg="6" class="flex justify-center items-center">
           <div class="mt-15">
             <div class="mt-10">
-              <span class="text-2xl ml-4">ABOUT US</span>
+              <span class="text-2xl ml-4">{{$t('about.aboutus')}}</span>
                 <div class="divide-x-4 divide-secondary-color mt-6">
                   <a class="mx-2"></a>
-                  <a href="#" class="px-4 py-1 text-3xl font-bold">Access professional<span class="text-secondary-color text-3xl"> help</span> at your fingertip</a>
+                  <a href="#" class="px-4 py-1 text-3xl font-bold">{{$t('about.heading1')}} <span class="text-secondary-color text-3xl">{{$t('about.heading2')}}</span> {{$t('about.heading3')}}</a>
                 </div>
-                <p class="text-xl mt-6 whitespace-normal ml-4 text-gray-500">Our platform connects you to vetted professionals tailored to your need seamless 
-                  communication and effective assistance are our top priority
-                </p>
+                <p class="text-xl mt-6 whitespace-normal ml-4 text-gray-500">{{$t('about.paragraph')}}</p>
                 <div class="flex items-center mt-8">
                   <img class="rounded h-15 w-15 mr-2 ml-3" src="/images/Anxiety.png" alt="">
-                  <span class="text-md text-gray-500">Your Mental Health is our Priority</span>
+                  <span class="text-md text-gray-500">{{$t('about.list1')}}</span>
                 </div>
                 <div class="flex items-center mt-3">
                   <img class="rounded h-15 w-15 mr-2 ml-3" src="/images/Advice.png" alt="">
-                  <span class="text-md text-gray-500">Providing advice from top professionals</span>
+                  <span class="text-md text-gray-500">{{$t('about.list2')}}</span>
                 </div>
             </div> 
           </div>
@@ -69,12 +67,11 @@
 
       <div class="mt-10 mb-12">
         <div class="divide-y-4 divide-secondary-color mt-8 text-center">
-          <h3 class="px-4 py-4 text-2xl ml-1 font-bold">TESTIMONIALS</h3>
+          <h3 class="px-4 py-4 text-2xl ml-1 font-bold">{{$t('testimonials.head')}}</h3>
           <a href="#" class="px-12 py-1 text-xl"></a>
         </div>
-        <p class="mr-6 sm:mr-3 md:text-xl text-center sm:text-left text-light-dark-text text-xl sm:text-lg">We beleive that everyone deserves access to the help they need regardless <br>
-          of their background or abilities. We are committed to providing <br>
-          accesible, affordable services to help you overcome challenges
+        <p class="mr-6 sm:mr-3 md:text-xl text-center sm:text-left text-light-dark-text text-xl sm:text-lg">{{$t('testimonials.paragraph1')}} <br>
+          {{$t('testimonials.paragraph2')}} <br>{{$t('testimonials.paragraph3')}}
         </p>
       </div>
 
@@ -91,19 +88,18 @@
             <div class="mt-10">
                 <div class="divide-x-4 h-16 divide-secondary-color mt-3">
                   <a class="mx-2"></a>
-                  <a href="#" class="px-4 py-1 text-3xl font-bold">Ready For This Life Changing Adventure?</a>
+                  <a href="#" class="px-4 py-1 text-3xl font-bold">{{$t("section.heading")}}</a>
                 </div>
-                <p class="text-xl mt-6 ml-3 text-gray-500">
-                  Join us today and get access to our refined community <br>
-                  feature structured towards helping you become better
+                <p class="text-xl mt-10 whitespace-normal ml-4 text-gray-500">
+                  {{$t("section.paragraph1")}} <br>{{$t("section.paragraph2")}}
                 </p>
 
                 <div class="mt-10 flex items-center sm:flex-row flex-col sm:justify-start gap-5">
                   <button class="bg-primary-color w-5/6 sm:w-52 border-2 hover:-translate-y-1 transition-all border-gray-800 py-4 shadow-lg move" id="create-account">
-                    <router-link :to="{ name: 'sign-up' }">{{$t("header.getStarted")}}</router-link>
+                    <router-link :to="{ name: 'sign-up' }">{{$t("section.button1")}}</router-link>
                   </button>
                   <button class="bg-transparent border-2 w-5/6 sm:w-52 shadow-lg hover:-translate-y-1 transition-all border-primary-color py-4" id="sign-inn">
-                    <router-link :to="{ name: '' }">{{$t("header.learnMore")}}</router-link>
+                    <router-link :to="{ name: '' }">{{$t("section.button2")}}</router-link>
                   </button>
                 </div>
             </div> 
