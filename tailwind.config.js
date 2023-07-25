@@ -9,9 +9,9 @@ module.exports = {
         "heading-text": "#323145",
         "light-dark-text": "#6E6E6E",
         "btn-hover": "#16a57a",
+        "btn-green": "#6cdfbd",
       },
     },
   },
   plugins: [],
 };
-

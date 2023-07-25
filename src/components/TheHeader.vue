@@ -30,7 +30,7 @@
           </button>
           <button id="get-started" class="move">
             <router-link :to="{ name: 'sign-up', path:'/signup' }">{{
-              $t("header.signUp")
+              $t("header.getStarted")
             }}</router-link>
           </button>
         </div>
@@ -85,7 +85,7 @@
             <button
               class="bg-primary-color w-5/6 sm:w-52 border-2 hover:-translate-y-1 transition-all border-gray-800 py-4 shadow-lg"
             >
-              <router-link :to="{ name: '' }">{{
+              <router-link :to="{ name: 'sign-up' }">{{
                 $t("header.getStarted")
               }}</router-link>
             </button>
@@ -147,7 +147,6 @@ export default {
 
     checkScreen() {
       this.windowWidth = window.innerWidth;
-      console.log(this.windowWidth);
       if (this.windowWidth <= 850) {
         this.mobile = true;
         return;
@@ -167,11 +166,9 @@ export default {
 }
 .header {
   background-color: transparent;
-  /* position: fixed; */
   transition: 0.5s ease all;
 }
 nav {
-  /* position: relative; */
   display: flex;
   flex-direction: row;
   padding: 10px;

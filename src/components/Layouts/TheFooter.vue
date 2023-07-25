@@ -5,29 +5,13 @@
           <div class="w-full sm:w-auto mb-4 sm:mb-0">
             <h3 class="text-white text-lg font-bold mb-4">Lawgeck<span class="text-orange-500">o</span></h3>
             <p class="text-sm">Lawgecko is here for all your id fugiamcepturi ipsam? <br>hddhbbihjfbbf <br>uibfjv</p>
-            <div class="flex justify-center space-x-6 mb-4">
-              <a href="#"><img src="/path/to/twitter-logo.png" alt="Twitter"></a>
-              <a href="#"><img src="/path/to/facebook-logo.png" alt="Facebook"></a>
-              <font-awesome-icon :icon="['fab', 'facebook']" />
-              <a href="#"><img src="/path/to/instagram-logo.png" alt="Instagram"></a>
-              <a href="#">
-                <font-awesome-icon :icon="['fab', 'twitter']" />
-              </a>
-              <a href="#">
-                <i class="fab fa-twitter text-orange-500 text-xl"></i>
-              </a>
-              <div class="icon">
-                
-              </div>
-              <!-- <a href="#">
-                <i class="fab fa-facebook-f text-orange-500 text-xl"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-twitter text-orange-500 text-xl"></i>
-              </a>
-              <a href="#">
-                <i class="fab fa-instagram text-orange-500 text-xl"></i>
-              </a> -->
+            <div class="flex justify-start space-x-6 mb-4">
+              <!-- Twitter Icon -->
+              <a href="#"><font-awesome-icon :icon="['fab', 'twitter']"  /></a>
+              <!-- Facebook icon -->
+              <a href="#"><font-awesome-icon :icon="['fab', 'facebook-f']"  /></a>
+              <!-- Instagram Icon -->
+              <a href="#"><font-awesome-icon :icon="['fab', 'instagram']" /></a>
           </div>
           </div>
           <div class="w-full sm:w-auto">
@@ -58,7 +42,7 @@
         </div>
         <div class="mt-8 border-t border-orange-500 pt-4">
           <div class="flex justify-between items-center">
-            <div class="flex space-x-20">
+            <div class="flex space-x-10">
               <div class="text-xs text-gray-400">Copyright &copy;, 2023.</div>
               <div class="text-xs text-gray-400">All Rights Reserved.</div>
             </div>
@@ -73,12 +57,21 @@
   </template>
   
   <script>
+  import { faFacebookF, faTwitter, faInstagram } from '@fortawesome/fontawesome-free';
+  import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+  import { library } from '@fortawesome/fontawesome-free';
+
   export default {
     name: 'TheFooter.vue',
+    components: {FontAwesomeIcon,},
+    
+    mounted() {
+      
+      library.add(faFacebookF, faTwitter, faInstagram);
+    },
   }
   </script>
   
   <style scoped>
   /* Add any necessary styles here */
   </style>
-  
