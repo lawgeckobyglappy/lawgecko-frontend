@@ -63,12 +63,23 @@
                         <input type="submit" value="Sign Up" class="bg-btn-green cursor-pointer"/>
                     </div>
                 </form>
+                <PopUp v-if="popupTrigger">
+                    <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
+                    <h2 class="text-lg font-bold mb-1">Check your email</h2>
+                    <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.form.emailAddress }} some.com</span></p>
+                    <a href="https://gmail.com"><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
+                </PopUp>
             </div>
         </div>
     </div>
 </template>
 <script>
+import PopUp from '@/components/PopUp.vue'
 export default {
+    components: {
+        PopUp
+    },
+
     data() {
         return {
             form : {
@@ -85,7 +96,8 @@ export default {
             }, 
             usernameExists: false,
             emailExists: false,
-            emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            popupTrigger: true
         }
     },
 
@@ -93,8 +105,14 @@ export default {
         async submit(){
             this.validateUserData()
             if(this.isAllValidated){
+                // call signup api
                 console.log("Submitted", this.form.emailAddress)
-                this.resetForm()
+
+                this.popupTrigger = true
+                await this.resetForm()
+                setTimeout(() => {
+                    this.popupTrigger = false
+                }, 5000)
             }
         },
 
