@@ -75,7 +75,7 @@
       
 
       <section class= "md:page-margin w-full justify-center items-center page-lineheight mb-16">
-        <TheRow container :gutter="80" class="p-5 gap-">
+        <TheRow container :gutter="80" class="p-5">
           <TheColumn :xs="12" :md="6" :lg="6" class=" pa-6">
             <div class="flex justify-center items-center">
               <img class="object-fill h-50 w-96" src="/images/image.png" alt="alternative" />
