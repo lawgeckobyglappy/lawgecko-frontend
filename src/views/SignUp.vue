@@ -67,7 +67,7 @@
                     <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
                     <h2 class="text-lg font-bold mb-1">Check your email</h2>
                     <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.form.emailAddress }} some.com</span></p>
-                    <a href="https://gmail.com"><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
+                    <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
                 </PopUp>
             </div>
         </div>
@@ -92,6 +92,7 @@ export default {
                 lastNameError: "",
                 usernameError: "",
                 emailAddressError: "",
+                emailProvider: ""
 
             }, 
             usernameExists: false,
@@ -107,7 +108,7 @@ export default {
             if(this.isAllValidated){
                 // call signup api
                 console.log("Submitted", this.form.emailAddress)
-
+                this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
                 this.popupTrigger = true
                 await this.resetForm()
                 setTimeout(() => {
