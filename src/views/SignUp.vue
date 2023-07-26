@@ -97,7 +97,7 @@ export default {
             usernameExists: false,
             emailExists: false,
             emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            popupTrigger: true
+            popupTrigger: false
         }
     },
 
@@ -143,7 +143,6 @@ export default {
 </script>
 <style scoped>
 .signup-container{
-    /* max-width: 600px; */
     background-image: url("../assets/images/backgroundImage.png");
     background-size: cover;
     background-position: center;
@@ -151,8 +150,6 @@ export default {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* margin: 0 auto;
-    padding: 20px; */
 }
 .signup-inner-container{
     max-width: 500px;
