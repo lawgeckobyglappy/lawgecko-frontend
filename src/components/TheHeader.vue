@@ -30,7 +30,7 @@
           </button>
           <button id="get-started" class="move">
             <router-link :to="{ name: 'sign-up', path:'/signup' }">{{
-              $t("header.getStarted")
+              $t("header.signUp")
             }}</router-link>
           </button>
         </div>
