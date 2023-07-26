@@ -31,6 +31,6 @@ app.use(store);
 app.use(router);
 app.mount("#app");
 app.component("TheButton", TheButton);
-app.component("fa-icon", FontAwesomeIcon);
 app.component("NavBar", NavBar);
 app.component("TheFooter", TheFooter);
+app.component("fa-icon", FontAwesomeIcon);
