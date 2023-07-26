@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-  import TheFooter from '@/components/Layouts/TheFooter.vue';
+  import TheFooter from '@/components/layouts/TheFooter.vue';
   export default {
     components: {
       TheFooter,
