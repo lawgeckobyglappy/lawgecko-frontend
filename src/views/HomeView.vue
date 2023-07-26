@@ -37,7 +37,7 @@
       </section>
       
       
-      <section class=" md:page-margin w-full justify-center items-center page-lineheight">
+      <section class="md:page-margin w-full justify-center items-center page-lineheight">
         <div class="mb-10 mt-24">
         <SectionHeader />
 
