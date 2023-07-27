@@ -52,5 +52,12 @@
     "paragraph2": "fonctionnalité structurée pour vous aider à devenir meilleur",
     "button1": "Créer un compte",
     "button2": "S'identifier"
+  },
+
+  "signup": {
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "emailAddress": "Adresse e-mail",
+    "username": "Nom d'utilisateur"
   }
 }

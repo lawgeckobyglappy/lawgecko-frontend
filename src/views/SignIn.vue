@@ -79,7 +79,7 @@
     display: flex;
     justify-content: space-between;
     max-width: 150px;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 .auth button {
     border: 1px solid gray;
