@@ -82,7 +82,7 @@
             </div>
           </TheColumn>
           <TheColumn :xs="12" :md="6" :lg="6" class=" pa-5">
-            <div class="">
+            <div class="flex justify-between items-center">
               <div class=" items-start justify-evenly flex-col-reverse md:flex-row">
                 <div class="flex flex-1 mt-4">
                   <div class="inline-block h-[70px] min-h-[1em] w-1.5 bg-secondary-color rounded-lg"></div>
@@ -138,11 +138,11 @@ export default {
 
 <style scoped>
 .about-container{
-    background-image: url("/public//images/circles.png");
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-image: url("/public//images/circles.png");
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button {
