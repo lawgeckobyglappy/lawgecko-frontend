@@ -46,3 +46,17 @@
   align-items: center;
   justify-content: center;
 }
+
+
+
+/* tailwind styles */
+
+.signup{
+  @apply ml-4 2xl:text-2xl 2xl:py-3 2xl:w-52 bg-primary-color px-8 border-2 hover:-translate-y-1 transition-all border-gray-800 py-2 rounded-full arrange shadow-lg move
+}
+.roundedBtn-full{
+  @apply 2xl:text-2xl 2xl:py-4 2xl:w-64 whitespace-nowrap bg-primary-color w-5/6 sm:w-52 border-2 hover:-translate-y-1 transition-all border-gray-800 py-2 rounded-full arrange shadow-lg
+}
+.roundedBtn-outline{
+  @apply 2xl:text-2xl 2xl:py-4 2xl:w-64 bg-transparent border-2 w-5/6 sm:w-52 shadow-lg hover:-translate-y-1 transition-all border-primary-color py-2 rounded-full arrange
+}

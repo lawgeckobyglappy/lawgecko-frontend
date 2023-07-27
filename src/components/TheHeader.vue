@@ -23,16 +23,13 @@
           </li>
         </ul>
         <div v-show="!mobile" class="authorization">
-          <button>
             <router-link class="" :to="{ name: '' }">{{
               $t("header.signIn")
             }}</router-link>
-          </button>
-          <button id="get-started" class="move">
-            <router-link :to="{ name: 'sign-up', path:'/signup' }">{{
+            <router-link :to="{ name: 'sign-up', path:'/signup' }" class="signup">{{
               $t("header.signUp")
             }}</router-link>
-          </button>
+
         </div>
         <LanguageSwitcher />
         <Transition name="mobile-nav">
@@ -64,49 +61,44 @@
       </nav>
     </div>
     <section
-      class="smscreen-margin md:page-margin w-full flex justify-center items-center page-lineheight"
+      class="smscreen-margin md:page-margin mb-10 w-full flex justify-center items-center page-lineheight"
     >
-      <div class="flex items-start justify-evenly flex-col-reverse md:flex-row">
+      <div class="flex items-center justify-evenly flex-col-reverse md:flex-row">
         <div class="md:w-2/5">
           <i18n path="" tag="label" for="header.title">
               <h1
-                class="text-center sm:text-left text-heading-text text-2xl mr-5 sm:mr-2 sm:text-4xl font-bold mb-10"
+                class="text-center sm:text-left text-heading-text text-2xl 2xl:text-6xl mr-5 sm:mr-2 sm:text-4xl font-bold mb-10"
               > {{$t('header.title-1')}} <span class='text-secondary-color'> {{$t('header.commute')}}</span> {{ $t('header.title-2') }} <span class="text-secondary-color">{{ $t('header.title-3') }}</span>
             </h1>
             </i18n>
           <p
-            class="mr-6 sm:mr-3 md:text-xl text-center sm:text-left text-light-dark-text text-xl sm:text-lg"
+            class="mr-6 sm:mr-3 md:text-xl 2xl:text-3xl  text-center sm:text-left text-light-dark-text text-xl sm:text-lg"
           >
             {{ $t("header.intro") }}
           </p>
           <div
             class="mt-10 flex items-center sm:flex-row flex-col sm:justify-start gap-5"
           >
-            <button
-              class="bg-primary-color w-5/6 sm:w-52 border-2 hover:-translate-y-1 transition-all border-gray-800 py-4 shadow-lg"
-            >
-              <router-link :to="{ name: 'sign-up' }">{{
+          
+              <router-link :to="{ name: 'sign-up' }" class="roundedBtn-full">{{
                 $t("header.getStarted")
               }}</router-link>
-            </button>
-            <button
-              class="bg-transparent border-2 w-5/6 sm:w-52 shadow-lg hover:-translate-y-1 transition-all border-primary-color py-8"
-            >
-              <router-link :to="{ name: '' }">{{
+          
+              <router-link :to="{ name: '' }" class="roundedBtn-outline">{{
                 $t("header.learnMore")
               }}</router-link>
-            </button>
+            
           </div>
           <div
-            class="mr-4 flex justify-center sm:justify-start items-center mt-5 gap-8"
+            class="mr-4 flex justify-center sm:justify-start items-center mt-5 gap-24"
           >
             <div class="text-center">
-              <h3 class="font-bold text-lg sm:text-2xl text-heading-text">600+</h3>
-              <p>{{ $t("header.personelle") }}</p>
+              <h3 class="2xl:text-3xl font-bold text-lg sm:text-2xl text-heading-text">600+</h3>
+              <p class="2xl:text-2xl ">{{ $t("header.personelle") }}</p>
             </div>
             <div class="text-center">
-              <h3 class="font-bold text-lg sm:text-2xl text-heading-text">15K</h3>
-              <p>{{ $t("header.activeUSer") }}</p>
+              <h3 class="2xl:text-3xl font-bold text-lg sm:text-2xl text-heading-text">15K</h3>
+              <p class="2xl:text-2xl ">{{ $t("header.activeUSer") }}</p>
             </div>
           </div>
         </div>
