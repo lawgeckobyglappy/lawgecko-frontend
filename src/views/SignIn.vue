@@ -7,7 +7,7 @@
                 <form>
                     <div>
                         <label >Email Address</label>
-                        <input class="w-full mt-3" />
+                        <input class="w-full mt-3 " />
                     </div>
                     <input type="submit" value="Sign In" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer"/>
                 </form>
