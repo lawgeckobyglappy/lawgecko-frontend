@@ -63,55 +63,6 @@
         </div>
       </nav>
     </div>
-    <!-- <section
-      class="smscreen-margin md:page-margin w-full flex justify-center items-center page-lineheight"
-    >
-      <div class="flex items-start justify-evenly flex-col-reverse md:flex-row">
-        <div class="md:w-2/5">
-          <i18n path="" tag="label" for="header.title">
-              <h1
-                class="text-center sm:text-left text-heading-text text-2xl mr-5 sm:mr-2 sm:text-4xl font-bold mb-10"
-              > {{$t('header.title-1')}} <span class='text-secondary-color'> {{$t('header.commute')}}</span> {{ $t('header.title-2') }} <span class="text-secondary-color">{{ $t('header.title-3') }}</span>
-            </h1>
-            </i18n>
-          <p
-            class="mr-6 sm:mr-3 md:text-xl text-center sm:text-left text-light-dark-text text-xl sm:text-lg"
-          >
-            {{ $t("header.intro") }}
-          </p>
-          <div
-            class="mt-10 flex items-center sm:flex-row flex-col sm:justify-start gap-5"
-          >
-            <router-link :to="{ name: 'sign-up' }" class="roundedBtn-full">{{
-                $t("header.getStarted")
-              }}</router-link>
-          
-              <router-link :to="{ name: '' }" class="roundedBtn-outline">{{
-                $t("header.learnMore")
-              }}</router-link>
-          </div>
-          <div
-            class="mr-4 flex justify-center sm:justify-start items-center mt-5 gap-8"
-          >
-            <div class="text-center">
-              <h3 class="2xl:text-3xl font-bold text-lg sm:text-2xl text-heading-text">600+</h3>
-              <p class="2xl:text-2xl ">{{ $t("header.personelle") }}</p>
-            </div>
-            <div class="text-center">
-              <h3 class="2xl:text-3xl font-bold text-lg sm:text-2xl text-heading-text">15K</h3>
-              <p class="2xl:text-2xl ">{{ $t("header.activeUSer") }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="md:w-1/2 w-full arrange sm:inherit mb-7">
-          <img
-            class="md:w-4/6 w-3/6"
-            src="../assets/images/header-img.png"
-            alt="image on the header of people holding hands"
-          />
-        </div>
-      </div>
-    </section> -->
     <section
       class="smscreen-margin md:page-margin mb-10 w-full flex justify-center items-center page-lineheight"
     >
