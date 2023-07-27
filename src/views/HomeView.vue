@@ -66,10 +66,46 @@
         </p>
         </div>
 
-        <TestimonialSlide />
+        <div>
+          <v-sheet class="" max-width="">
+            <v-slide-group v-model="model" class="pa-4" show-arrows :icon="['fab', 'arrow-left']">
+              <v-slide-group-item :key="n" v-slot="{ toggle}" >
+                <v-card class="hover:translate-y-1 mx-4" height="300" width="400"  :style=" 'border: 1px solid black;'" @click="toggle">
+                  <v-card-title>
+
+                    <div class="flex mt-5 items-center font-bold">
+                        <img class="rounded h-15 w-15 mr-2" src="/images/user3.png" alt="">
+                        Michel Johnson
+                    </div>
+                      
+                  </v-card-title>
+                  <v-card-text class="mt-5">
+                    <span class="text-xl text-gray-500">
+                      I was feeling lost and alone. But Lawgecko gave me the help
+                      and support i needed to get through it.
+                    </span>
+                  </v-card-text>
+
+                  <v-card-footer class="mt-8 ml-16">
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color mr-2"/>
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color mr-2"/>
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color mr-2"/>
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color mr-2"/>
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color"/>
+                  </v-card-footer>
+                </v-card>
+              
+              </v-slide-group-item>
+              <TestimonialCard cardProfile="/images/user1.png" ProfileName="Patricia Themba" TestimonyText="I also found a therapist who helped me to understand my own thoughts and develop coping mechanisms"/>
+              <TestimonialCard cardProfile="/images/user2.png" ProfileName="Rebecca Ajose" TestimonyText="I was feeling lost and alone. But lawgecko gave me the help and support I needed to get through it."/>
+              <TestimonialCard cardProfile="/images/user3.png" ProfileName="Rita Nchang" TestimonyText=" I was feeling lost and alone. But Lawgecko gave me the help and support i needed to get through it."/>
+              <TestimonialCard cardProfile="/images/user1.png" ProfileName="Jane Doe" TestimonyText="I also found a therapist who helped me to understand my own thoughts and develop coping mechanisms"/>
+            </v-slide-group>
+          </v-sheet>
+        </div>
       </section>
       
-      <section class= "md:page-margin w-full justify-center items-center page-lineheight mb-16">
+      <section class= "md:page-margin w-full justify-center items-center page-lineheight mb-16 mt-40">
         <TheRow container :gutter="80" class="p-5">
           <TheColumn :xs="12" :md="6" :lg="6" class=" pa-6">
             <div class="flex justify-center items-center">
@@ -115,7 +151,7 @@ import TheCard from '@/components/TheCard.vue';
 import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/layouts/TheFooter.vue';
 import SectionHeader from '@/components/SectionHeader.vue';
-import TestimonialSlide from '@/components/TestimonialSlide.vue';
+import TestimonialCard from '@/components/TestimonialCard.vue';
 
 export default {
   name: 'App',
@@ -125,7 +161,7 @@ export default {
     TheFooter,
     TheCard,
     SectionHeader,
-    TestimonialSlide
+    TestimonialCard
   }
 };
 </script>
