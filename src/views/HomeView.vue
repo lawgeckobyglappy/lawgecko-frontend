@@ -1,7 +1,5 @@
 <template>
   <TheHeader />
-  <router-view/>
-
   <div class="mx-" elevation="" max-width="">
     <div class="col-md-12 p-5">
       <section class=" md:page-margin w-full flex justify-center items-center page-lineheight">
@@ -36,7 +34,6 @@
         </TheRow>
       </section>
       
-      
       <section class="md:page-margin w-full justify-center items-center page-lineheight">
         <div class="mb-10 mt-24">
         <SectionHeader />
@@ -57,8 +54,7 @@
         </TheRow>
         </div>
       </section>
-      
-
+    
       <section class= "md:page-margin w-full justify-center items-center page-lineheight">
         <div class="mb-10 mt-24">
         <div class="divide-y-4 divide-secondary-color mt-8 text-center">
@@ -73,7 +69,6 @@
         <TestimonialSlide />
       </section>
       
-
       <section class= "md:page-margin w-full justify-center items-center page-lineheight mb-16">
         <TheRow container :gutter="80" class="p-5">
           <TheColumn :xs="12" :md="6" :lg="6" class=" pa-6">
@@ -108,19 +103,17 @@
           </TheColumn>
         </TheRow>
       </section>
-      
-
     </div>
   </div>
-
-  
+  <TheFooter/> 
 </template>
 
 
 
 <script>
-import TheHeader from '@/components/TheHeader.vue';
 import TheCard from '@/components/TheCard.vue';
+import TheHeader from '@/components/TheHeader.vue';
+import TheFooter from '@/components/layouts/TheFooter.vue';
 import SectionHeader from '@/components/SectionHeader.vue';
 import TestimonialSlide from '@/components/TestimonialSlide.vue';
 
@@ -129,6 +122,7 @@ export default {
   
   components:{
     TheHeader,
+    TheFooter,
     TheCard,
     SectionHeader,
     TestimonialSlide
