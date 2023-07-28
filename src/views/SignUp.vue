@@ -97,28 +97,33 @@ export default {
                 emailAddressError: "",
             }, 
             emailProvider: "",
-            usernameExists: false,
-            emailExists: false,
             emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
             popupTrigger: false,
-            emailAddress: ""
+            emailAddress: "",
+            emailExists: "",
+            usernameExists: "",
         }
     },
 
     methods: {
         async submit(){
             this.validateUserData()
-            if(this.isAllValidated){
-                const registerRequest = this.createRegisterRequest
-                this.emailAddress = registerRequest.email
-                // include a loader
-                await axios.post(`${API_URL}/auth/register`, registerRequest)
-                this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
-                this.popupTrigger = true
-                setTimeout(() => {
-                    this.popupTrigger = false
-                }, 20000)
-                this.resetForm()
+            try{
+                if(this.isAllValidated){
+                    const registerRequest = this.createRegisterRequest
+                    this.emailAddress = registerRequest.email
+                    // include a loader
+                    await axios.post(`${API_URL}/auth/register`, registerRequest)
+                    this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
+                    this.popupTrigger = true
+                    setTimeout(() => {
+                        this.popupTrigger = false
+                    }, 20000)
+                    this.resetForm()
+                }
+            } catch(error){
+                this.emailExists = error.response.data.error.payload.email?.[0]
+                this.usernameExists = error.response.data.error.payload.username?.[0]
             }
         },
 
