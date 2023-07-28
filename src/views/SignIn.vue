@@ -4,13 +4,19 @@
             <h1 class="mb-2 text-heading-text font-bold text-2xl">Sign In</h1>
             <p class=" text-center text-md mb-8 text-light-dark-text">Enter your email address to login</p>
             <div class="form">
-                <form>
-                    <div>
-                        <label >Email Address</label>
-                        <input class="w-full mt-3 " />
+                <form @submit.prevent="submit">
+                    <div :class="{ 'error': form.emailAddressError }">
+                        <label>Email Address</label>
+                        <input v-model="form.emailAddress" class="w-full mt-3 " />
                     </div>
                     <input type="submit" value="Sign In" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer"/>
                 </form>
+                <PopUp v-if="popupTrigger">
+                    <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
+                    <h2 class="text-lg font-bold mb-1">Check your email</h2>
+                    <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.emailAddress }}</span></p>
+                    <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
+                </PopUp>
             </div>
             <div class="or-demarcation">
                 <div class="hr">
@@ -32,6 +38,70 @@
         </div>
     </div>
 </template>
+<script>
+import { API_URL } from '@/constant'
+import axios from 'axios'
+import PopUp from '@/components/PopUp.vue'
+
+export default {
+    components: {
+        PopUp
+    },
+
+    data(){
+        return {
+            form : {
+                emailAddress: "",
+                emailAddressError: "",
+            },
+            emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            popupTrigger: false,
+        }
+    },
+
+    methods: {
+        async submit(){
+            this.validateUserEmail()
+            try{
+                if(this.isEmailValidated){
+                    const signInRequest = this.createSignInRequest
+                    this.emailAddress = signInRequest.email
+                    // include a loader
+                    await axios.post(`${API_URL}/auth/request-login-link`, signInRequest)
+                    this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
+                    this.popupTrigger = true
+                    setTimeout(() => {
+                        this.popupTrigger = false
+                    }, 20000)
+                    this.resetForm()
+                }
+            } catch(error){
+                console.log(error)
+            }
+        },
+
+        validateUserEmail(){
+            this.form.emailAddressError = this.form.emailAddress === "" || !this.emailRegex.test(this.form.emailAddress)
+        },
+
+        resetForm(){
+            this.form.emailAddress = ""
+        },
+    },
+
+    computed: {
+        isEmailValidated(){
+            return !this.form.emailAddressError
+        },
+
+        createSignInRequest(){
+            return {
+                "email": this.form.emailAddress,
+            }
+        }
+    }
+}
+</script>
 <style scoped>
 .signin-container{
     background-image: url("../assets/images/backgroundImage.png");
@@ -45,13 +115,10 @@
 .signin-inner-container{
     min-width: 400px;
     padding: 20px;
-    /* border: 1px solid black; */
 }
 .signin-inner-container h1 {
     text-align: center;
     margin-bottom: 3vh;
-    /* font-size: 20px; */
-    /* font-weight: 500; */
 }
 .or-demarcation{
     display: grid;
@@ -92,5 +159,8 @@
     height: 30px;
     width: 30px;
     padding: 5px;
+}
+.error input{
+    border-color: red;
 }
 </style>
