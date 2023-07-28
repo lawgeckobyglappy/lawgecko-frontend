@@ -33,6 +33,9 @@
     </div>
 </template>
 <script>
+import { API_URL } from '@/constant'
+import axios from 'axios'
+
 export default {
     data(){
         return {
@@ -49,16 +52,19 @@ export default {
             this.validateUserEmail()
             try{
                 if(this.isEmailValidated){
-                    console.log("hello")
-                    // const registerRequest = this.createSignInRequest
-                    // this.emailAddress = registerRequest.email
+                    const signInRequest = this.createSignInRequest
+                    this.emailAddress = signInRequest.email
                     // include a loader
-                    // await axios.post(`${API_URL}/auth/register`, registerRequest)
+                    const response = await axios.post(`${API_URL}/auth/request-login-link`, signInRequest)
                     // this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
                     // this.popupTrigger = true
                     // setTimeout(() => {
                     //     this.popupTrigger = false
                     // }, 20000)
+                    if(response.status === 200){
+                        // call the getUserEndpoint
+                        console.log(response.data.data)
+                    }
                     this.resetForm()
                 }
             } catch(error){
