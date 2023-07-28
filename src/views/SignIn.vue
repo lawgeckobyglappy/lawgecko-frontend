@@ -11,6 +11,12 @@
                     </div>
                     <input type="submit" value="Sign In" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer"/>
                 </form>
+                <PopUp v-if="popupTrigger">
+                    <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
+                    <h2 class="text-lg font-bold mb-1">Check your email</h2>
+                    <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.emailAddress }}</span></p>
+                    <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
+                </PopUp>
             </div>
             <div class="or-demarcation">
                 <div class="hr">
@@ -35,8 +41,13 @@
 <script>
 import { API_URL } from '@/constant'
 import axios from 'axios'
+import PopUp from '@/components/PopUp.vue'
 
 export default {
+    components: {
+        PopUp
+    },
+
     data(){
         return {
             form : {
@@ -44,6 +55,7 @@ export default {
                 emailAddressError: "",
             },
             emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            popupTrigger: false,
         }
     },
 
@@ -55,22 +67,16 @@ export default {
                     const signInRequest = this.createSignInRequest
                     this.emailAddress = signInRequest.email
                     // include a loader
-                    const response = await axios.post(`${API_URL}/auth/request-login-link`, signInRequest)
-                    // this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
-                    // this.popupTrigger = true
-                    // setTimeout(() => {
-                    //     this.popupTrigger = false
-                    // }, 20000)
-                    if(response.status === 200){
-                        // call the getUserEndpoint
-                        console.log(response)
-                    }
+                    await axios.post(`${API_URL}/auth/request-login-link`, signInRequest)
+                    this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
+                    this.popupTrigger = true
+                    setTimeout(() => {
+                        this.popupTrigger = false
+                    }, 20000)
                     this.resetForm()
                 }
             } catch(error){
                 console.log(error)
-                // this.emailExists = error.response.data.error.payload.email?.[0]
-                // this.usernameExists = error.response.data.error.payload.username?.[0]
             }
         },
 
