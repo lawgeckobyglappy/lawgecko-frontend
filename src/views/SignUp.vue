@@ -60,7 +60,7 @@
                         </label>
                     </div>
                     <div>
-                        <input type="submit" value="Sign Up" class="bg-btn-green cursor-pointer"/>
+                        <input type="submit" :value="$t('header.signUp')" class="bg-btn-green cursor-pointer"/>
                     </div>
                 </form>
                 <PopUp v-if="popupTrigger">
