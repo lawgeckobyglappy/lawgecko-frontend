@@ -29,10 +29,6 @@
         
       </v-slide-group-item>
     </v-slide-group>
-    <div class="flex items-center justify-center mt-5 mb-40 text-2xl">
-      <fa-icon :icon="['fa', 'arrow-left']" class="text-secondary-color mr-8"/>
-      <fa-icon :icon="['fa', 'arrow-right']" class="text-secondary-color"/>
-    </div>
   </v-sheet>
 </template>
 
