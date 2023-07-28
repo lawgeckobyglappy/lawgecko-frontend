@@ -1,7 +1,7 @@
 <template>
     <div class="signup-container">
         <div class="signup-inner-container">
-            <h1>Sign up to Lawgecko</h1>
+            <h1 class="mb-4 text-heading-text font-bold text-2xl">Sign up to Lawgecko</h1>
             <div class="auth">
                 <button id="google-btn">
                     <img src="../assets/images/google.png"/>
@@ -26,27 +26,27 @@
                     <div class="name">
                         <div :class="{ 'error': form.firstNameError }">
                             <label>
-                                First Name
+                                {{ $t('signup.firstName') }}
                             </label>
                             <input v-model="form.firstName" />
                         </div>
                         <div :class="{ 'error': form.lastNameError }">
                             <label>
-                                Last Name
+                                {{ $t('signup.lastName') }}
                             </label>
                             <input v-model="form.lastName" />
                         </div>
                     </div>
                     <div :class="{ 'error': form.usernameError }">
                         <label>
-                            Username
+                            {{ $t('signup.username') }}
                         </label>
                         <p v-if="usernameExists" class="text-red-500 text-xs">* Username Already Exists</p>
                         <input v-model="form.username" />
                     </div>
                     <div :class="{ 'error': form.emailAddressError }">
                         <label>
-                            Email Address
+                            {{ $t('signup.emailAddress') }}
                         </label>
                         <p v-if="emailExists" class="text-red-500 text-xs">* Email Already Exists</p>
                         <input v-model="form.emailAddress" />
@@ -172,9 +172,7 @@ export default {
 }
 .signup-inner-container h1{
     text-align: center;
-    margin-bottom: 3vh;
-    font-size: 20px;
-    font-weight: 500;
+    color: black;
 }
 .auth {
     display: flex;
