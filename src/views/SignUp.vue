@@ -66,7 +66,7 @@
                 <PopUp v-if="popupTrigger">
                     <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
                     <h2 class="text-lg font-bold mb-1">Check your email</h2>
-                    <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.form.emailAddress }} some.com</span></p>
+                    <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.emailAddress }}</span></p>
                     <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
                 </PopUp>
             </div>
@@ -75,6 +75,9 @@
 </template>
 <script>
 import PopUp from '@/components/PopUp.vue'
+import { API_URL } from '@/constant'
+import axios from 'axios'
+
 export default {
     components: {
         PopUp
@@ -92,13 +95,13 @@ export default {
                 lastNameError: "",
                 usernameError: "",
                 emailAddressError: "",
-                emailProvider: ""
-
             }, 
+            emailProvider: "",
             usernameExists: false,
             emailExists: false,
             emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            popupTrigger: false
+            popupTrigger: false,
+            emailAddress: ""
         }
     },
 
@@ -106,14 +109,16 @@ export default {
         async submit(){
             this.validateUserData()
             if(this.isAllValidated){
-                // call signup api
-                console.log("Submitted", this.form.emailAddress)
+                const registerRequest = this.createRegisterRequest
+                this.emailAddress = registerRequest.email
+                // include a loader
+                await axios.post(`${API_URL}/auth/register`, registerRequest)
                 this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
                 this.popupTrigger = true
-                await this.resetForm()
                 setTimeout(() => {
                     this.popupTrigger = false
-                }, 5000)
+                }, 20000)
+                this.resetForm()
             }
         },
 
@@ -131,13 +136,22 @@ export default {
             this.form.username = "",
             this.form.policySigned = null
             this.form.emailAddress = ""
-        }
+        },
     },
 
     computed: {
         isAllValidated(){
             return !this.form.firstNameError && !this.form.lastNameError && !this.form.usernameError
             && !this.form.emailAddressError && this.form.policySigned
+        },
+
+        createRegisterRequest(){
+            return {
+                "email": this.form.emailAddress,
+                "firstName": this.form.firstName,
+                "lastName": this.form.lastName,
+                "username": this.form.username
+            }
         }
     }
 }
