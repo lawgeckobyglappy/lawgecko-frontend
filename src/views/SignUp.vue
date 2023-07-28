@@ -1,7 +1,7 @@
 <template>
     <div class="signup-container">
         <div class="signup-inner-container">
-            <h1>Sign up to Lawgecko</h1>
+            <h1 class="mb-4 text-heading-text font-bold text-2xl">Sign up to Lawgecko</h1>
             <div class="auth">
                 <button id="google-btn">
                     <img src="../assets/images/google.png"/>
@@ -26,27 +26,27 @@
                     <div class="name">
                         <div :class="{ 'error': form.firstNameError }">
                             <label>
-                                First Name
+                                {{ $t('signup.firstName') }}
                             </label>
                             <input v-model="form.firstName" />
                         </div>
                         <div :class="{ 'error': form.lastNameError }">
                             <label>
-                                Last Name
+                                {{ $t('signup.lastName') }}
                             </label>
                             <input v-model="form.lastName" />
                         </div>
                     </div>
                     <div :class="{ 'error': form.usernameError }">
                         <label>
-                            Username
+                            {{ $t('signup.username') }}
                         </label>
                         <p v-if="usernameExists" class="text-red-500 text-xs">* Username Already Exists</p>
                         <input v-model="form.username" />
                     </div>
                     <div :class="{ 'error': form.emailAddressError }">
                         <label>
-                            Email Address
+                            {{ $t('signup.emailAddress') }}
                         </label>
                         <p v-if="emailExists" class="text-red-500 text-xs">* Email Already Exists</p>
                         <input v-model="form.emailAddress" />
@@ -60,7 +60,7 @@
                         </label>
                     </div>
                     <div>
-                        <input type="submit" value="Sign Up" class="bg-btn-green cursor-pointer"/>
+                        <input type="submit" :value="$t('header.signUp')" class="bg-btn-green cursor-pointer"/>
                     </div>
                 </form>
                 <PopUp v-if="popupTrigger">
@@ -97,28 +97,33 @@ export default {
                 emailAddressError: "",
             }, 
             emailProvider: "",
-            usernameExists: false,
-            emailExists: false,
             emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
             popupTrigger: false,
-            emailAddress: ""
+            emailAddress: "",
+            emailExists: "",
+            usernameExists: "",
         }
     },
 
     methods: {
         async submit(){
             this.validateUserData()
-            if(this.isAllValidated){
-                const registerRequest = this.createRegisterRequest
-                this.emailAddress = registerRequest.email
-                // include a loader
-                await axios.post(`${API_URL}/auth/register`, registerRequest)
-                this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
-                this.popupTrigger = true
-                setTimeout(() => {
-                    this.popupTrigger = false
-                }, 20000)
-                this.resetForm()
+            try{
+                if(this.isAllValidated){
+                    const registerRequest = this.createRegisterRequest
+                    this.emailAddress = registerRequest.email
+                    // include a loader
+                    await axios.post(`${API_URL}/auth/register`, registerRequest)
+                    this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
+                    this.popupTrigger = true
+                    setTimeout(() => {
+                        this.popupTrigger = false
+                    }, 20000)
+                    this.resetForm()
+                }
+            } catch(error){
+                this.emailExists = error.response.data.error.payload.email?.[0]
+                this.usernameExists = error.response.data.error.payload.username?.[0]
             }
         },
 
@@ -134,7 +139,7 @@ export default {
             this.form.firstName = "",
             this.form.lastName = "",
             this.form.username = "",
-            this.form.policySigned = null
+            this.form.policySigned = null,
             this.form.emailAddress = ""
         },
     },
@@ -172,9 +177,7 @@ export default {
 }
 .signup-inner-container h1{
     text-align: center;
-    margin-bottom: 3vh;
-    font-size: 20px;
-    font-weight: 500;
+    color: black;
 }
 .auth {
     display: flex;
