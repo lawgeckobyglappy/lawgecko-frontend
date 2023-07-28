@@ -1,5 +1,5 @@
 <template>
-  <header class="back-gd w-full h-screen overflow-x-hidden">
+  <header class="back-gd w-full overflow-x-hidden">
     <div class="header z-99 w-full">
       <nav>
         <div class="logo">
@@ -23,16 +23,13 @@
           </li>
         </ul>
         <div v-show="!mobile" class="authorization">
-          <button>
-            <router-link class="" :to="{ name: 'sign-in', path: '/signin' }">{{
+            <router-link class="" :to="{ name: '' }">{{
               $t("header.signIn")
             }}</router-link>
-          </button>
-          <button id="get-started" class="move">
-            <router-link :to="{ name: 'sign-up', path:'/signup' }">{{
+            <router-link :to="{ name: 'sign-up', path:'/signup' }" class="signup">{{
               $t("header.signUp")
             }}</router-link>
-          </button>
+
         </div>
         <LanguageSwitcher />
         <Transition name="mobile-nav">
@@ -70,7 +67,7 @@
         <div class="md:w-2/5">
           <i18n path="" tag="label" for="header.title">
               <h1
-                class="text-left sm:text-left text-heading-text text-2xl 2xl:text-6xl mr-5 sm:mr-2 sm:text-4xl font-bold mb-10"
+                class="text-center sm:text-left text-heading-text text-2xl mr-5 sm:mr-2 sm:text-4xl font-bold mb-10"
               > {{$t('header.title-1')}} <span class='text-secondary-color'> {{$t('header.commute')}}</span> {{ $t('header.title-2') }} <span class="text-secondary-color">{{ $t('header.title-3') }}</span>
             </h1>
             </i18n>
@@ -93,7 +90,7 @@
             
           </div>
           <div
-            class="mr-4 flex justify-left sm:justify-start items-center mt-5 gap-24"
+            class="mr-4 flex justify-center sm:justify-start items-center mt-5 gap-8"
           >
             <div class="text-center">
               <h3 class="2xl:text-3xl font-bold text-lg sm:text-2xl text-heading-text">600+</h3>

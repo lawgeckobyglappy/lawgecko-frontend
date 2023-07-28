@@ -1,14 +1,15 @@
 <template>
     <div class="signin-container">
         <div class="signin-inner-container">
-            <h1>Sign In</h1>
+            <h1 class="mb-2 text-heading-text font-bold text-2xl">Sign In</h1>
+            <p class=" text-center text-md mb-8 text-light-dark-text">Enter your email address to login</p>
             <div class="form">
                 <form>
                     <div>
-                        <label>Email Address</label>
-                        <input class="w-full" />
+                        <label >Email Address</label>
+                        <input class="w-full mt-3 " />
                     </div>
-                    <input type="submit" value="Sign In" class="bg-btn-green cursor-pointer"/>
+                    <input type="submit" value="Sign In" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer"/>
                 </form>
             </div>
             <div class="or-demarcation">
@@ -49,8 +50,8 @@
 .signin-inner-container h1 {
     text-align: center;
     margin-bottom: 3vh;
-    font-size: 20px;
-    font-weight: 500;
+    /* font-size: 20px; */
+    /* font-weight: 500; */
 }
 .or-demarcation{
     display: grid;
