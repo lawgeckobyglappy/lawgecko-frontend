@@ -49,6 +49,7 @@ export default {
             this.validateUserEmail()
             try{
                 if(this.isEmailValidated){
+                    console.log("hello")
                     // const registerRequest = this.createSignInRequest
                     // this.emailAddress = registerRequest.email
                     // include a loader
