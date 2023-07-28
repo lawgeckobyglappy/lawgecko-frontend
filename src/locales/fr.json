@@ -7,7 +7,7 @@
     "about": "À propos de nous",
     "categories": "Catégories",
     "signIn": "S'identifier",
-    "signUp":"s'inscrire",
+    "signUp":"S'inscrire",
     "getStarted": "Commencer",
     "learnMore": "Apprendre plus",
     "commute": "déplacez-vous",
@@ -52,5 +52,12 @@
     "paragraph2": "fonctionnalité structurée pour vous aider à devenir meilleur",
     "button1": "Créer un compte",
     "button2": "S'identifier"
+  },
+
+  "signup": {
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "emailAddress": "Adresse e-mail",
+    "username": "Nom d'utilisateur"
   }
 }

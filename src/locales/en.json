@@ -51,5 +51,12 @@
     "paragraph2": "feature structured towards helping you become better",
     "button1": "Create account",
     "button2": "Sign in"
+  },
+
+  "signup": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "emailAddress": "Email Address",
+    "username": "Username"
   }
 }
