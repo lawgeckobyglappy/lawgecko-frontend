@@ -45,13 +45,10 @@
 .signin-inner-container{
     min-width: 400px;
     padding: 20px;
-    /* border: 1px solid black; */
 }
 .signin-inner-container h1 {
     text-align: center;
     margin-bottom: 3vh;
-    /* font-size: 20px; */
-    /* font-weight: 500; */
 }
 .or-demarcation{
     display: grid;
