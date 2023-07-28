@@ -23,7 +23,7 @@
           </li>
         </ul>
         <div v-show="!mobile" class="authorization">
-            <router-link class="" :to="{ name: '' }">{{
+            <router-link class="" :to="{ name: 'sign-in', path: '/signin' }">{{
               $t("header.signIn")
             }}</router-link>
             <router-link :to="{ name: 'sign-up', path:'/signup' }" class="signup">{{
