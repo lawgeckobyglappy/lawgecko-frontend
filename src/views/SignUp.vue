@@ -139,7 +139,7 @@ export default {
             this.form.firstName = "",
             this.form.lastName = "",
             this.form.username = "",
-            this.form.policySigned = null
+            this.form.policySigned = null,
             this.form.emailAddress = ""
         },
     },
