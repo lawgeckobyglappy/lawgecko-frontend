@@ -9,6 +9,7 @@
   <img :src="`/flag_${$i18n.locale}.png`" alt="flag" class="w-8 h-8 mr-3">
     {{$i18n.locale.toUpperCase()}}
     <svg
+      id="svg-rot"
       class="w-2.5 h-2.5 ml-2.5"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
@@ -78,10 +79,14 @@ export default {
       .getElementById("dropdownDefaultButton")
       .addEventListener("click", () => {
         document.getElementById("dropdown").classList.toggle("hidden");
-        // document.getElementById("dropdown").classList.toggle('block')
+        document.getElementById("svg-rot").classList.toggle("arrow")
       });
   },
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.arrow{
+  transform:rotate(180deg)
+}
+</style>
