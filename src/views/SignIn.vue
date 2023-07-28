@@ -4,8 +4,8 @@
             <h1 class="mb-2 text-heading-text font-bold text-2xl">Sign In</h1>
             <p class=" text-center text-md mb-8 text-light-dark-text">Enter your email address to login</p>
             <div class="form">
-                <form>
-                    <div>
+                <form @submit.prevent="submit">
+                    <div :class="{ 'error': form.emailAddressError }">
                         <label >Email Address</label>
                         <input class="w-full mt-3 " />
                     </div>
@@ -32,6 +32,64 @@
         </div>
     </div>
 </template>
+<script>
+export default {
+    data(){
+        return {
+            form : {
+                emailAddress: "",
+                emailAddressError: "",
+            },
+            emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        }
+    },
+
+    methods: {
+        async submit(){
+            this.validateUserEmail()
+            try{
+                if(this.isAllValidated){
+                    const registerRequest = this.createSignInRequest
+                    this.emailAddress = registerRequest.email
+                    // include a loader
+                    // await axios.post(`${API_URL}/auth/register`, registerRequest)
+                    this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
+                    // this.popupTrigger = true
+                    // setTimeout(() => {
+                    //     this.popupTrigger = false
+                    // }, 20000)
+
+                    this.resetForm()
+                }
+            } catch(error){
+                console.log(error)
+                // this.emailExists = error.response.data.error.payload.email?.[0]
+                // this.usernameExists = error.response.data.error.payload.username?.[0]
+            }
+        },
+
+        validateUserEmail(){
+            this.form.emailAddressError = this.form.emailAddress === "" || !this.emailRegex.test(this.form.emailAddress)
+        },
+
+        resetForm(){
+            this.form.emailAddress = ""
+        },
+    },
+
+    computed: {
+        isEmailValidated(){
+            return !this.form.emailAddressError
+        },
+
+        createSignInRequest(){
+            return {
+                "email": this.form.emailAddress,
+            }
+        }
+    }
+}
+</script>
 <style scoped>
 .signin-container{
     background-image: url("../assets/images/backgroundImage.png");
