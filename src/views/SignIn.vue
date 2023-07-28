@@ -6,8 +6,8 @@
             <div class="form">
                 <form @submit.prevent="submit">
                     <div :class="{ 'error': form.emailAddressError }">
-                        <label >Email Address</label>
-                        <input class="w-full mt-3 " />
+                        <label>Email Address</label>
+                        <input v-model="form.emailAddress" class="w-full mt-3 " />
                     </div>
                     <input type="submit" value="Sign In" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer"/>
                 </form>
@@ -48,17 +48,16 @@ export default {
         async submit(){
             this.validateUserEmail()
             try{
-                if(this.isAllValidated){
-                    const registerRequest = this.createSignInRequest
-                    this.emailAddress = registerRequest.email
+                if(this.isEmailValidated){
+                    // const registerRequest = this.createSignInRequest
+                    // this.emailAddress = registerRequest.email
                     // include a loader
                     // await axios.post(`${API_URL}/auth/register`, registerRequest)
-                    this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
+                    // this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
                     // this.popupTrigger = true
                     // setTimeout(() => {
                     //     this.popupTrigger = false
                     // }, 20000)
-
                     this.resetForm()
                 }
             } catch(error){
@@ -147,5 +146,8 @@ export default {
     height: 30px;
     width: 30px;
     padding: 5px;
+}
+.error input{
+    border-color: red;
 }
 </style>
