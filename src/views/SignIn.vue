@@ -63,7 +63,7 @@ export default {
                     // }, 20000)
                     if(response.status === 200){
                         // call the getUserEndpoint
-                        console.log(response.data.data)
+                        console.log(response)
                     }
                     this.resetForm()
                 }
