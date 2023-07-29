@@ -9,7 +9,10 @@
                         <label>Email Address</label>
                         <input v-model="form.emailAddress" class="w-full mt-3 " />
                     </div>
-                    <input type="submit" value="Sign In" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer"/>
+                    <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
+                        <p v-if="!loading">Sign In</p>
+                        <ButtonSpinner v-else />
+                    </button>
                 </form>
                 <PopUp v-if="popupTrigger">
                     <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
@@ -42,10 +45,12 @@
 import { API_URL } from '@/constant'
 import axios from 'axios'
 import PopUp from '@/components/PopUp.vue'
+import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
 
 export default {
     components: {
-        PopUp
+        PopUp,
+        ButtonSpinner
     },
 
     data(){
@@ -54,6 +59,7 @@ export default {
                 emailAddress: "",
                 emailAddressError: "",
             },
+            loading: false,
             emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
             popupTrigger: false,
         }
@@ -64,9 +70,9 @@ export default {
             this.validateUserEmail()
             try{
                 if(this.isEmailValidated){
+                    this.loading = true
                     const signInRequest = this.createSignInRequest
                     this.emailAddress = signInRequest.email
-                    // include a loader
                     await axios.post(`${API_URL}/auth/request-login-link`, signInRequest)
                     this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
                     this.popupTrigger = true
@@ -77,7 +83,10 @@ export default {
                 }
             } catch(error){
                 console.log(error)
+                this.resetForm()
             }
+
+            this.resetForm()
         },
 
         validateUserEmail(){
@@ -85,6 +94,7 @@ export default {
         },
 
         resetForm(){
+            this.loading = false
             this.form.emailAddress = ""
         },
     },
@@ -142,6 +152,16 @@ export default {
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
+}
+.form button{
+    width: 100%;
+    height: 47px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .auth {
     display: flex;
