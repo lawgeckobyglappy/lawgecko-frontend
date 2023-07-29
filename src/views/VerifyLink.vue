@@ -17,7 +17,7 @@ export default{
                 const response = await axios.post(`${API_URL}/auth/verify-login-link`, {id: linkId})
                 const jwtToken = response.data.data
                 await this.getCurrentUser(jwtToken)
-                router.push("/signin")
+                router.push("/forum")
             } catch(error){
                 console.log(error)
             }

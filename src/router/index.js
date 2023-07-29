@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import SignUp from "../views/SignUp.vue";
 import SignIn from "../views/SignIn.vue";
 import VerifyLink from "../views/VerifyLink.vue";
+import ForumView from "../views/ForumView.vue";
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     name: "verify-link",
     component: VerifyLink,
     props: (route) => ({ id: route.query.id }),
+  },
+  {
+    path: "/forum",
+    name: "forum",
+    component: ForumView,
   },
 ];
 
