@@ -32,6 +32,7 @@ const routes = [
     path: "/forum",
     name: "forum",
     component: ForumView,
+    meta: { requiresAuth: true },
   },
 ];
 
@@ -42,14 +43,7 @@ const router = createRouter({
 
 router.beforeEach(async (to) => {
   const isAuthenticated = store.state.isAuthenticated;
-  if (!isAuthenticated && to.name === "forum") {
-    return { name: "sign-in" };
-  }
-});
-
-router.beforeEach((to) => {
-  const confirmedEmail = store.state.confirmedEmail;
-  if (!confirmedEmail && to.name === "verify-link") {
+  if (!isAuthenticated && to.meta.requiresAuth) {
     return { name: "sign-in" };
   }
 });
