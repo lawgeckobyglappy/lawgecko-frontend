@@ -6,7 +6,6 @@ import router from "@/router/index";
 export default createStore({
   state: {
     isAuthenticated: false,
-    confirmedEmail: false,
   },
 
   getters: {},
@@ -15,16 +14,11 @@ export default createStore({
     isAuthenticated(state, value) {
       state.isAuthenticated = value;
     },
-
-    confirmedEmail(state, value) {
-      state.confirmedEmail = value;
-    },
   },
 
   actions: {
     async verifyLoginLink({ commit }, linkId) {
       try {
-        commit("confirmedEmail", true);
         const response = await axios.post(`${API_URL}/auth/verify-login-link`, {
           id: linkId,
         });
