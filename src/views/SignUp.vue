@@ -60,7 +60,10 @@
                         </label>
                     </div>
                     <div>
-                        <input type="submit" :value="$t('header.signUp')" class="bg-btn-green cursor-pointer"/>
+                        <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
+                        <p v-if="!loading">Sign Up</p>
+                        <ButtonSpinner v-else />
+                    </button>
                     </div>
                 </form>
                 <PopUp v-if="popupTrigger">
@@ -76,11 +79,13 @@
 <script>
 import PopUp from '@/components/PopUp.vue'
 import { API_URL } from '@/constant'
+import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
 import axios from 'axios'
 
 export default {
     components: {
-        PopUp
+        PopUp,
+        ButtonSpinner
     },
 
     data() {
@@ -96,6 +101,7 @@ export default {
                 usernameError: "",
                 emailAddressError: "",
             }, 
+            loading: false,
             emailProvider: "",
             emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
             popupTrigger: false,
@@ -228,6 +234,16 @@ export default {
 .form {
     display: flex;
     flex-direction: column;
+}
+.form button{
+    width: 100%;
+    height: 47px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .name {
     display: flex;
