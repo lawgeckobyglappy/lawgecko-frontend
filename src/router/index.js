@@ -4,6 +4,7 @@ import SignUp from "../views/SignUp.vue";
 import SignIn from "../views/SignIn.vue";
 import VerifyLink from "../views/VerifyLink.vue";
 import ForumView from "../views/ForumView.vue";
+import store from "@/store/index";
 
 const routes = [
   {
@@ -37,6 +38,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach(async (to) => {
+  const isAuthenticated = store.state.isAuthenticated;
+  if (!isAuthenticated && to.name === "forum") {
+    return { name: "sign-in" };
+  }
+});
+
+router.beforeEach((to) => {
+  const confirmedEmail = store.state.confirmedEmail;
+  if (!confirmedEmail && to.name === "verify-link") {
+    return { name: "sign-in" };
+  }
 });
 
 export default router;
