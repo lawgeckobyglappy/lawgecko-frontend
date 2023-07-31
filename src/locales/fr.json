@@ -7,7 +7,7 @@
     "about": "À propos de nous",
     "categories": "Catégories",
     "signIn": "S'identifier",
-    "signUp":"s'inscrire",
+    "signUp":"S'inscrire",
     "getStarted": "Commencer",
     "learnMore": "Apprendre plus",
     "commute": "déplacez-vous",
@@ -19,5 +19,45 @@
     "personelle": "Des professionnels incroyables",
     "activeUSer": "Utilisateurs actifs"
   },
-  "footer": {}
+  "footer": {},
+
+  "about": {
+    "aboutus": "À PROPOS DE NOUS",
+    "heading1": "Accès professionnel",
+    "heading2": "aide",
+    "heading3": "à portée de main",
+    "paragraph": "Notre plateforme vous met en contact avec des professionnels sélectionnés et adaptés à vos besoins. Une communication transparente et une assistance efficace sont notre priorité absolue.",
+    "list1": "Votre santé mentale est notre priorité",
+    "list2": "Conseils des meilleurs professionnels"
+  },
+
+  "goal": {
+    "ourgoal": "NOS OBJECTIFS",
+    "paragraph1": "Nous croyons que tout le monde mérite d'avoir accès à l'aide dont il a besoin, peu importe",
+    "paragraph2": "de leurs antécédents ou de leurs capacités. Nous nous engageons à fournir",
+    "paragraph3": "des services accessibles et abordables pour vous aider à surmonter les défis",
+    "cardtitle1": "Autonomisation"
+  },
+
+  "testimonials": {
+    "head": "TÉMOIGNAGES",
+    "paragraph1": "Nous croyons que tout le monde mérite d'avoir accès à l'aide dont il a besoin, peu importe",
+    "paragraph2": "de leurs antécédents ou de leurs capacités. Nous nous engageons à fournir",
+    "paragraph3": "des services accessibles et abordables pour vous aider à surmonter les défis"
+  },
+
+  "section": {
+    "heading": "Prêt pour cette aventure qui change la vie ?",
+    "paragraph1": "Rejoignez-nous aujourd'hui et accédez à notre communauté raffinée",
+    "paragraph2": "fonctionnalité structurée pour vous aider à devenir meilleur",
+    "button1": "Créer un compte",
+    "button2": "S'identifier"
+  },
+
+  "signup": {
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "emailAddress": "Adresse e-mail",
+    "username": "Nom d'utilisateur"
+  }
 }
