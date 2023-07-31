@@ -18,5 +18,45 @@
     "personelle":"Incredible professionals",
     "activeUSer":"Active Users"
     },
-  "footer":{}
+  "footer":{},
+
+  "about": {
+    "aboutus": "ABOUT US",
+    "heading1": "Access professional",
+    "heading2": "help",
+    "heading3": "at your fingertip",
+    "paragraph": "Our platform connects you to vetted professionals tailored to your need seamless communication and effective assistance are our top priority",
+    "list1": "Your Mental Health is our Priority",
+    "list2": "Providing advice from top professionals"
+  },
+
+  "goal": {
+    "ourgoal": "OUR GOAL",
+    "paragraph1": "We believe that everyone deserves access to the help they need regardless",
+    "paragraph2": "of their background or abilities. We are committed to providing",
+    "paragraph3": "accessible, affordable services to help you overcome challenges",
+    "cardtitle1": "Empowerment"
+  },
+
+  "testimonials": {
+    "head": "TESTIMONIALS",
+    "paragraph1": "We believe that everyone deserves access to the help they need regardless",
+    "paragraph2": "of their background or abilities. We are committed to providing",
+    "paragraph3": "accessible, affordable services to help you overcome challenges"
+  },
+
+  "section": {
+    "heading": "Ready For This Life Changing Adventure?",
+    "paragraph1": "Join us today and get access to our refined community",
+    "paragraph2": "feature structured towards helping you become better",
+    "button1": "Create account",
+    "button2": "Sign in"
+  },
+
+  "signup": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "emailAddress": "Email Address",
+    "username": "Username"
+  }
 }
