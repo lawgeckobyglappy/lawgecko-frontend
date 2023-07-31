@@ -1,5 +1,5 @@
 <template>
-  <v-card class="hover:translate-y-1 mx-4" height="300" width="400"  :style=" 'border: 1px solid black;'" @click="toggle">
+  <v-card class="hover:translate-y mx-4" height="300" width="400"  :style=" 'border: 1px solid black;'" @click="toggle">
     <v-card-title>
 
       <div class="flex mt-5 items-center font-bold">
