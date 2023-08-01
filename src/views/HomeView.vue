@@ -40,15 +40,15 @@
 
         <TheRow :gutter="50" class="mt-16">
           <TheColumn :xs="12" :lg="4">
-            <TheCard cardTitle="Empowerment" cardText="With our platform we ensure our users get to feel empowered to take control of their lives and their sanity" cardImage="/images/goal.png" />
+            <TheCard :cardTitle="$t('goal.cardtitle1')" :cardText="$t('goal.platformDescription')" cardImage="/images/goal.png" />
           </TheColumn>
 
           <TheColumn :xs="12" :lg="4">
-            <TheCard  cardTitle="Community" cardText="A safe space for our users to communicate, commute, share experiences, get feedbacks and gain insigts on related subject" cardImage="/images/goal2.png" />
+            <TheCard  :cardTitle="$t('goal.community')" :cardText="$t('goal.safeSpace')" cardImage="/images/goal2.png" />
           </TheColumn>
 
           <TheColumn :xs="12" :lg="4">
-            <TheCard cardTitle="Anonymity" cardText="With us your Identity is secure and safe, Considered and this enables trust between our users and us" cardImage="/images/goal3.png" />
+            <TheCard :cardTitle="$t('goal.anonymity')" :cardText="$t('goal.identitySecurity')" cardImage="/images/goal3.png" />
           </TheColumn>
 
         </TheRow>
@@ -81,8 +81,7 @@
                   </v-card-title>
                   <v-card-text class="mt-5">
                     <span class="text-xl text-gray-500">
-                      I was feeling lost and alone. But Lawgecko gave me the help
-                      and support i needed to get through it.
+                      {{ $t('testimonials.testimonial5') }}
                     </span>
                   </v-card-text>
 
@@ -96,10 +95,10 @@
                 </v-card>
               
               </v-slide-group-item>
-              <TestimonialCard cardProfile="/images/user1.png" ProfileName="Patricia Themba" TestimonyText="I also found a therapist who helped me to understand my own thoughts and develop coping mechanisms"/>
-              <TestimonialCard cardProfile="/images/user2.png" ProfileName="Rebecca Ajose" TestimonyText="I was feeling lost and alone. But lawgecko gave me the help and support I needed to get through it."/>
-              <TestimonialCard cardProfile="/images/user3.png" ProfileName="Rita Nchang" TestimonyText=" I was feeling lost and alone. But Lawgecko gave me the help and support i needed to get through it."/>
-              <TestimonialCard cardProfile="/images/user1.png" ProfileName="Jane Doe" TestimonyText="I also found a therapist who helped me to understand my own thoughts and develop coping mechanisms"/>
+              <TestimonialCard cardProfile="/images/user1.png" ProfileName="Patricia Themba" :TestimonyText="$t('testimonials.testimonial1')"/>
+              <TestimonialCard cardProfile="/images/user2.png" ProfileName="Rebecca Ajose" :TestimonyText="$t('testimonials.testimonial2')"/>
+              <TestimonialCard cardProfile="/images/user3.png" ProfileName="Rita Nchang" :TestimonyText="$t('testimonials.testimonial3')"/>
+              <TestimonialCard cardProfile="/images/user1.png" ProfileName="Jane Doe" :TestimonyText="$t('testimonials.testimonial4')"/>
             </v-slide-group>
           </v-sheet>
         </div>
