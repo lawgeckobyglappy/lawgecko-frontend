@@ -55,8 +55,7 @@
                         <input type="checkbox" id="checkboxInput" v-model="form.policySigned"/>
                         <label for="termsCheckbox">
                             <p class="text-xs text-red-500" v-if="form.policySigned === false">* Required</p>
-                            By signing up, you agree to our Terms of Service and Privacy Policy,
-                            including Cookie Use
+                            {{$t('signup.terms')}}
                         </label>
                     </div>
                     <div>
