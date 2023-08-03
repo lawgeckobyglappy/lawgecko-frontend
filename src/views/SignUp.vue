@@ -1,12 +1,13 @@
 <template>
     <div class="signup-container">
+        <!-- <GoogleLogin :callback="oAuthCallBack"/> -->
         <div class="signup-inner-container">
             <h1 class="mb-4 text-heading-text font-bold text-2xl">Sign up to Lawgecko</h1>
             <div class="auth">
-                <button id="google-btn">
-                    <img src="../assets/images/google.png"/>
-                    Sign up with Google
-                </button>
+                        <button id="google-btn" @click="oAuthCallBack">
+                            <img src="../assets/images/google.png"/>
+                            Sign up with Google
+                        </button>
                 <button id="apple-btn">
                     <img src="../assets/images/apple.png"/>
                     Sign up with Apple
@@ -80,12 +81,13 @@ import PopUp from '@/components/PopUp.vue'
 import { API_URL } from '@/constant'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
 import axios from 'axios'
+import { googleAuthCodeLogin } from "vue3-google-login"
 
 export default {
     components: {
-        PopUp,
-        ButtonSpinner
-    },
+    PopUp,
+    ButtonSpinner,
+},
 
     data() {
         return {
@@ -147,6 +149,12 @@ export default {
             this.form.policySigned = null,
             this.form.emailAddress = ""
         },
+
+        oAuthCallBack(){
+            googleAuthCodeLogin().then((response) => {
+                console.log("Handle the response", response)
+            })
+        }
     },
 
     computed: {
