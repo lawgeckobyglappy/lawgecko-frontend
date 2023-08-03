@@ -1,7 +1,7 @@
 <template>
     <div class="signup-container">
         <div class="signup-inner-container">
-            <h1>Sign up to Lawgecko</h1>
+            <h1 class="mb-4 text-heading-text font-bold text-2xl">Sign up to Lawgecko</h1>
             <div class="auth">
                 <button id="google-btn">
                     <img src="../assets/images/google.png"/>
@@ -26,27 +26,27 @@
                     <div class="name">
                         <div :class="{ 'error': form.firstNameError }">
                             <label>
-                                First Name
+                                {{ $t('signup.firstName') }}
                             </label>
                             <input v-model="form.firstName" />
                         </div>
                         <div :class="{ 'error': form.lastNameError }">
                             <label>
-                                Last Name
+                                {{ $t('signup.lastName') }}
                             </label>
                             <input v-model="form.lastName" />
                         </div>
                     </div>
                     <div :class="{ 'error': form.usernameError }">
                         <label>
-                            Username
+                            {{ $t('signup.username') }}
                         </label>
                         <p v-if="usernameExists" class="text-red-500 text-xs">* Username Already Exists</p>
                         <input v-model="form.username" />
                     </div>
                     <div :class="{ 'error': form.emailAddressError }">
                         <label>
-                            Email Address
+                            {{ $t('signup.emailAddress') }}
                         </label>
                         <p v-if="emailExists" class="text-red-500 text-xs">* Email Already Exists</p>
                         <input v-model="form.emailAddress" />
@@ -55,18 +55,20 @@
                         <input type="checkbox" id="checkboxInput" v-model="form.policySigned"/>
                         <label for="termsCheckbox">
                             <p class="text-xs text-red-500" v-if="form.policySigned === false">* Required</p>
-                            By signing up, you agree to our Terms of Service and Privacy Policy,
-                            including Cookie Use
+                            {{$t('signup.terms')}}
                         </label>
                     </div>
                     <div>
-                        <input type="submit" value="Sign Up" class="bg-btn-green cursor-pointer"/>
+                        <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
+                        <p v-if="!loading">{{ $t("header.signUp") }}</p>
+                        <ButtonSpinner v-else />
+                    </button>
                     </div>
                 </form>
                 <PopUp v-if="popupTrigger">
                     <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
                     <h2 class="text-lg font-bold mb-1">Check your email</h2>
-                    <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.form.emailAddress }} some.com</span></p>
+                    <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.emailAddress }}</span></p>
                     <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
                 </PopUp>
             </div>
@@ -75,9 +77,14 @@
 </template>
 <script>
 import PopUp from '@/components/PopUp.vue'
+import { API_URL } from '@/constant'
+import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
+import axios from 'axios'
+
 export default {
     components: {
-        PopUp
+        PopUp,
+        ButtonSpinner
     },
 
     data() {
@@ -92,28 +99,36 @@ export default {
                 lastNameError: "",
                 usernameError: "",
                 emailAddressError: "",
-                emailProvider: ""
-
             }, 
-            usernameExists: false,
-            emailExists: false,
+            loading: false,
+            emailProvider: "",
             emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-            popupTrigger: false
+            popupTrigger: false,
+            emailAddress: "",
+            emailExists: "",
+            usernameExists: "",
         }
     },
 
     methods: {
         async submit(){
             this.validateUserData()
-            if(this.isAllValidated){
-                // call signup api
-                console.log("Submitted", this.form.emailAddress)
-                this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
-                this.popupTrigger = true
-                await this.resetForm()
-                setTimeout(() => {
-                    this.popupTrigger = false
-                }, 5000)
+            try{
+                if(this.isAllValidated){
+                    const registerRequest = this.createRegisterRequest
+                    this.emailAddress = registerRequest.email
+                    // include a loader
+                    await axios.post(`${API_URL}/auth/register`, registerRequest)
+                    this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
+                    this.popupTrigger = true
+                    setTimeout(() => {
+                        this.popupTrigger = false
+                    }, 20000)
+                    this.resetForm()
+                }
+            } catch(error){
+                this.emailExists = error.response.data.error.payload.email?.[0]
+                this.usernameExists = error.response.data.error.payload.username?.[0]
             }
         },
 
@@ -129,15 +144,24 @@ export default {
             this.form.firstName = "",
             this.form.lastName = "",
             this.form.username = "",
-            this.form.policySigned = null
+            this.form.policySigned = null,
             this.form.emailAddress = ""
-        }
+        },
     },
 
     computed: {
         isAllValidated(){
             return !this.form.firstNameError && !this.form.lastNameError && !this.form.usernameError
             && !this.form.emailAddressError && this.form.policySigned
+        },
+
+        createRegisterRequest(){
+            return {
+                "email": this.form.emailAddress,
+                "firstName": this.form.firstName,
+                "lastName": this.form.lastName,
+                "username": this.form.username
+            }
         }
     }
 }
@@ -158,9 +182,7 @@ export default {
 }
 .signup-inner-container h1{
     text-align: center;
-    margin-bottom: 3vh;
-    font-size: 20px;
-    font-weight: 500;
+    color: black;
 }
 .auth {
     display: flex;
@@ -211,6 +233,16 @@ export default {
 .form {
     display: flex;
     flex-direction: column;
+}
+.form button{
+    width: 100%;
+    height: 47px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .name {
     display: flex;

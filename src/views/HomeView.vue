@@ -40,15 +40,15 @@
 
         <TheRow :gutter="50" class="mt-16">
           <TheColumn :xs="12" :lg="4">
-            <TheCard cardTitle="Empowerment" cardText="With our platform we ensure our users get to feel empowered to take control of their lives and their sanity" cardImage="/images/goal.png" />
+            <TheCard :cardTitle="$t('goal.cardtitle1')" :cardText="$t('goal.platformDescription')" cardImage="/images/goal.png" />
           </TheColumn>
 
           <TheColumn :xs="12" :lg="4">
-            <TheCard  cardTitle="Community" cardText="A safe space for our users to communicate, commute, share experiences, get feedbacks and gain insigts on related subject" cardImage="/images/goal2.png" />
+            <TheCard  :cardTitle="$t('goal.community')" :cardText="$t('goal.safeSpace')" cardImage="/images/goal2.png" />
           </TheColumn>
 
           <TheColumn :xs="12" :lg="4">
-            <TheCard cardTitle="Anonymity" cardText="With us your Identity is secure and safe, Considered and this enables trust between our users and us" cardImage="/images/goal3.png" />
+            <TheCard :cardTitle="$t('goal.anonymity')" :cardText="$t('goal.identitySecurity')" cardImage="/images/goal3.png" />
           </TheColumn>
 
         </TheRow>
@@ -66,10 +66,45 @@
         </p>
         </div>
 
-        <TestimonialSlide />
+        <div>
+          <v-sheet class="" max-width="">
+            <v-slide-group v-model="model" class="pa-4 text-lg" show-arrows>
+              <v-slide-group-item :key="n" v-slot="{ toggle }" >
+                <v-card class="hover:translate-y-1 mx-4" height="300" width="400"  :style=" 'border: 1px solid black;'" @click="toggle">
+                  <v-card-title>
+
+                    <div class="flex mt-5 items-center font-bold">
+                        <img class="rounded h-15 w-15 mr-2" src="/images/user3.png" alt="">
+                        Michel Johnson
+                    </div>
+                      
+                  </v-card-title>
+                  <v-card-text class="mt-5">
+                    <span class="text-xl text-gray-500">
+                      {{ $t('testimonials.testimonial5') }}
+                    </span>
+                  </v-card-text>
+
+                  <v-card-footer class="mt-8 ml-16">
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color mr-2"/>
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color mr-2"/>
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color mr-2"/>
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color mr-2"/>
+                    <fa-icon :icon="['fas', 'star']" class="text-secondary-color"/>
+                  </v-card-footer>
+                </v-card>
+              
+              </v-slide-group-item>
+              <TestimonialCard cardProfile="/images/user1.png" ProfileName="Patricia Themba" :TestimonyText="$t('testimonials.testimonial1')"/>
+              <TestimonialCard cardProfile="/images/user2.png" ProfileName="Rebecca Ajose" :TestimonyText="$t('testimonials.testimonial2')"/>
+              <TestimonialCard cardProfile="/images/user3.png" ProfileName="Rita Nchang" :TestimonyText="$t('testimonials.testimonial3')"/>
+              <TestimonialCard cardProfile="/images/user1.png" ProfileName="Jane Doe" :TestimonyText="$t('testimonials.testimonial4')"/>
+            </v-slide-group>
+          </v-sheet>
+        </div>
       </section>
       
-      <section class= "md:page-margin w-full justify-center items-center page-lineheight mb-16">
+      <section class= "md:page-margin w-full justify-center items-center page-lineheight mb-16 mt-40">
         <TheRow container :gutter="80" class="p-5">
           <TheColumn :xs="12" :md="6" :lg="6" class=" pa-6">
             <div class="flex justify-center items-center">
@@ -77,7 +112,7 @@
             </div>
           </TheColumn>
           <TheColumn :xs="12" :md="6" :lg="6" class=" pa-5">
-            <div class="">
+            <div class="flex justify-between items-center">
               <div class=" items-start justify-evenly flex-col-reverse md:flex-row">
                 <div class="flex flex-1 mt-4">
                   <div class="inline-block h-[70px] min-h-[1em] w-1.5 bg-secondary-color rounded-lg"></div>
@@ -115,7 +150,7 @@ import TheCard from '@/components/TheCard.vue';
 import TheHeader from '@/components/TheHeader.vue';
 import TheFooter from '@/components/layouts/TheFooter.vue';
 import SectionHeader from '@/components/SectionHeader.vue';
-import TestimonialSlide from '@/components/TestimonialSlide.vue';
+import TestimonialCard from '@/components/TestimonialCard.vue';
 
 export default {
   name: 'App',
@@ -125,18 +160,18 @@ export default {
     TheFooter,
     TheCard,
     SectionHeader,
-    TestimonialSlide
+    TestimonialCard
   }
 };
 </script>
 
 <style scoped>
 .about-container{
-    background-image: url("/public//images/circles.png");
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  background-image: url("/public//images/circles.png");
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 button {

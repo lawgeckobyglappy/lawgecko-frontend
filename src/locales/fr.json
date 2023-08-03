@@ -7,7 +7,7 @@
     "about": "À propos de nous",
     "categories": "Catégories",
     "signIn": "S'identifier",
-    "signUp":"s'inscrire",
+    "signUp":"S'inscrire",
     "getStarted": "Commencer",
     "learnMore": "Apprendre plus",
     "commute": "déplacez-vous",
@@ -19,7 +19,28 @@
     "personelle": "Des professionnels incroyables",
     "activeUSer": "Utilisateurs actifs"
   },
-  "footer": {},
+
+  "footer": {
+    "home": "Accueil",
+    "menu": "Menu",
+    "about": "À propos de nous",
+    "categories": "Catégories",
+    "family": "Famille",
+    "criminalLaw": "Droit pénal",
+    "mentalHealth": "Santé mentale",
+    "finance": "Finance",
+    "contact": "Contactez-nous",
+    "faq": "FAQ",
+    "help": "Aide",
+    "copyright": "Droit d'auteur © 2023.",
+    "allRightsReserved": "Tous droits réservés.",
+    "termsOfService": "Conditions d'utilisation",
+    "privacyPolicy": "Politique de confidentialité",
+    "text1": "Lawgecko est là pour vous mettre en relation",
+    "text2": "avec des professionnels qualifiés adaptés à vos besoins.",
+    "text3": "Une communication fluide et une assistance efficace ",
+    "text4": "sont notre priorité absolue."
+  },
 
   "about": {
     "aboutus": "À PROPOS DE NOUS",
@@ -36,14 +57,25 @@
     "paragraph1": "Nous croyons que tout le monde mérite d'avoir accès à l'aide dont il a besoin, peu importe",
     "paragraph2": "de leurs antécédents ou de leurs capacités. Nous nous engageons à fournir",
     "paragraph3": "des services accessibles et abordables pour vous aider à surmonter les défis",
-    "cardtitle1": "Autonomisation"
+    "cardtitle1": "Autonomisation",
+    "empowerment": "Autonomisation",
+    "community": "Communauté",
+    "anonymity": "Anonymat",
+    "platformDescription": "Avec notre plateforme, nous garantissons à nos utilisateurs de se sentir autonomisés pour prendre le contrôle de leur vie et de leur bien-être.",
+    "safeSpace": "Un espace sûr pour nos utilisateurs pour communiquer, se connecter, partager des expériences, recevoir des commentaires et acquérir des connaissances sur des sujets connexes.",
+    "identitySecurity": "Avec nous, votre identité est sécurisée et protégée, favorisant la confiance entre nos utilisateurs et nous."
   },
 
   "testimonials": {
     "head": "TÉMOIGNAGES",
     "paragraph1": "Nous croyons que tout le monde mérite d'avoir accès à l'aide dont il a besoin, peu importe",
     "paragraph2": "de leurs antécédents ou de leurs capacités. Nous nous engageons à fournir",
-    "paragraph3": "des services accessibles et abordables pour vous aider à surmonter les défis"
+    "paragraph3": "des services accessibles et abordables pour vous aider à surmonter les défis",
+    "testimonial1": "J'ai également trouvé un thérapeute qui m'a aidé à comprendre mes propres pensées et à développer des mécanismes d'adaptation.",
+    "testimonial2": "Je me sentais perdu et seul. Mais Lawgecko m'a apporté l'aide et le soutien dont j'avais besoin pour m'en sortir.",
+    "testimonial3": "Je me sentais perdu et seul. Mais Lawgecko m'a apporté l'aide et le soutien dont j'avais besoin pour m'en sortir.",
+    "testimonial4": "J'ai également trouvé un thérapeute qui m'a aidé à comprendre mes propres pensées et à développer des mécanismes d'adaptation.",
+    "testimonial5": "Je me sentais perdu(e) et seul(e). Mais Lawgecko m'a donné l'aide et le soutien dont j'avais besoin pour m'en sortir."
   },
 
   "section": {
@@ -52,5 +84,17 @@
     "paragraph2": "fonctionnalité structurée pour vous aider à devenir meilleur",
     "button1": "Créer un compte",
     "button2": "S'identifier"
+  },
+
+  "signup": {
+    "firstName": "Prénom",
+    "lastName": "Nom de famille",
+    "emailAddress": "Adresse e-mail",
+    "username": "Nom d'utilisateur",
+    "terms":"En vous inscrivant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité, y compris l'utilisation des cookies,"
+  },
+  "signin":{
+    "paragraph":"Entrez votre adresse e-mail pour vous connecter",
+    "emailAddress": "Adresse e-mail"
   }
 }

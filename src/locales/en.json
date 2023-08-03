@@ -18,7 +18,27 @@
     "personelle":"Incredible professionals",
     "activeUSer":"Active Users"
     },
-  "footer":{},
+  "footer":{
+    "home": "Home",
+    "menu": "Menu",
+    "about": "About Us",
+    "categories": "Categories",
+    "family": "Family",
+    "criminalLaw": "Criminal Law",
+    "mentalHealth": "Mental Health",
+    "finance": "Finance",
+    "contact": "Contact Us",
+    "faq": "FAQ",
+    "help": "Help",
+    "copyright": "Copyright © 2023.",
+    "allRightsReserved": "All Rights Reserved.",
+    "termsOfService": "Terms of Service",
+    "privacyPolicy": "Privacy Policy",
+    "text1": "Lawgecko is here to connect you to vetted",
+    "text2":"professionals tailored to your need. Seamless",
+    "text3": "communication and effective assistance are our",
+    "text4": "top priority"
+  },
 
   "about": {
     "aboutus": "ABOUT US",
@@ -35,14 +55,25 @@
     "paragraph1": "We believe that everyone deserves access to the help they need regardless",
     "paragraph2": "of their background or abilities. We are committed to providing",
     "paragraph3": "accessible, affordable services to help you overcome challenges",
-    "cardtitle1": "Empowerment"
+    "cardtitle1": "Empowerment",
+    "community": "Community",
+    "anonymity": "Anonymity",
+    "platformDescription": "With our platform we ensure our users get to feel empowered to take control of their lives and their sanity.",
+    "safeSpace": "A safe space for our users to communicate, commute, share experiences, get feedbacks and gain insigts on related subject.",
+    "identitySecurity": "With us your Identity is secure and safe, Considered and this enables trust between our users and us"
+    
   },
 
   "testimonials": {
     "head": "TESTIMONIALS",
     "paragraph1": "We believe that everyone deserves access to the help they need regardless",
     "paragraph2": "of their background or abilities. We are committed to providing",
-    "paragraph3": "accessible, affordable services to help you overcome challenges"
+    "paragraph3": "accessible, affordable services to help you overcome challenges",
+    "testimonial1": "I also found a therapist who helped me to understand my own thoughts and develop coping mechanisms.",
+    "testimonial2": "I was feeling lost and alone. But lawgecko gave me the help and support I needed to get through it.",
+    "testimonial3": "I was feeling lost and alone. But Lawgecko gave me the help and support I needed to get through it.",
+    "testimonial4": "I also found a therapist who helped me to understand my own thoughts and develop coping mechanisms.",
+    "testimonial5": "I was feeling lost and alone. But Lawgecko gave me the help and support i needed to get through it."
   },
 
   "section": {
@@ -51,5 +82,18 @@
     "paragraph2": "feature structured towards helping you become better",
     "button1": "Create account",
     "button2": "Sign in"
+  },
+
+  "signup": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "emailAddress": "Email Address",
+    "username": "Username",
+    "terms":"By signing up, you agree to our Terms of Service and Privacy Policy, including Cookie Use"
+  },
+
+  "signin":{
+    "paragraph":"Enter your email address to login",
+    "emailAddress": "Email Address"
   }
 }
