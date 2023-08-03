@@ -1,13 +1,13 @@
 <template>
   <v-sheet class="" max-width="">
-    <v-slide-group v-model="model" class="pa-4" show-arrows :icon="['fa', 'arrow-left']">
+    <v-slide-group v-model="model" class="pa-4 text-3xl" selected-class="bg-primary" show-arrows>
       <v-slide-group-item v-for="n in 6" :key="n" v-slot="{ toggle}" >
         <v-card :class="['ma-4']" height="300" width="400"  :style=" 'border: 1px solid black;'" @click="toggle">
           <v-card-title>
 
             <div class="flex mt-5 items-center font-bold">
-                <img class="rounded h-15 w-15 mr-2" src="/images/user3.png" alt="">
-                Michel Johnson
+              <img class="rounded h-15 w-15 mr-2" src="/images/user3.png" alt="">
+              Michel Johnson
             </div>
               
           </v-card-title>
