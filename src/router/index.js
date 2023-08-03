@@ -23,7 +23,7 @@ const routes = [
     component: SignIn,
   },
   {
-    path: "/verifylink",
+    path: "/verify-link",
     name: "verify-link",
     component: VerifyLink,
     props: (route) => ({ id: route.query.id }),
