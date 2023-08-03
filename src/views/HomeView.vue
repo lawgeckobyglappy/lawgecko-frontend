@@ -69,7 +69,7 @@
         <div>
           <v-sheet class="" max-width="">
             <v-slide-group v-model="model" class="pa-4 text-lg" show-arrows>
-              <v-slide-group-item :key="n" v-slot="{ toggle}" >
+              <v-slide-group-item :key="n" v-slot="{ toggle }" >
                 <v-card class="hover:translate-y-1 mx-4" height="300" width="400"  :style=" 'border: 1px solid black;'" @click="toggle">
                   <v-card-title>
 

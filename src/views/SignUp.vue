@@ -60,7 +60,7 @@
                     </div>
                     <div>
                         <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
-                        <p v-if="!loading">Sign Up</p>
+                        <p v-if="!loading">{{ $t("header.signUp") }}</p>
                         <ButtonSpinner v-else />
                     </button>
                     </div>
