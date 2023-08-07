@@ -78,9 +78,8 @@
 </template>
 <script>
 import PopUp from '@/components/PopUp.vue'
-import { API_URL } from '@/constant'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
-import axios from 'axios'
+import { fetcher } from "@/utils/fetcher"
 import { googleAuthCodeLogin } from "vue3-google-login"
 
 export default {
@@ -119,19 +118,26 @@ export default {
                 if(this.isAllValidated){
                     const registerRequest = this.createRegisterRequest
                     this.emailAddress = registerRequest.email
-                    // include a loader
-                    await axios.post(`${API_URL}/auth/register`, registerRequest)
+
+                    await fetcher.post('/auth/register', registerRequest)
+
                     this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
                     this.popupTrigger = true
+
                     setTimeout(() => {
                         this.popupTrigger = false
                     }, 20000)
+
                     this.resetForm()
                 }
             } catch(error){
-                this.emailExists = error.response.data.error.payload.email?.[0]
-                this.usernameExists = error.response.data.error.payload.username?.[0]
+                this.handleRegistrationError(error)
             }
+        },
+
+        handleRegistrationError(error){
+            this.emailExists = error.message === 'Email already taken' ? error.message : ''
+            this.usernameExists = error.message === 'Username already taken' ? error.message : ''
         },
 
         validateUserData(){
