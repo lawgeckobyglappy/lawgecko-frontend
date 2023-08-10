@@ -4,10 +4,10 @@
         <div class="signup-inner-container">
             <h1 class="mb-4 text-heading-text font-bold text-2xl">Sign up to Lawgecko</h1>
             <div class="auth">
-                        <button id="google-btn" @click="oAuthCallBack">
-                            <img src="../assets/images/google.png"/>
-                            Sign up with Google
-                        </button>
+                <button id="google-btn" @click="googleAuth">
+                    <img src="../assets/images/google.png"/>
+                    Sign up with Google
+                </button>
                 <button id="apple-btn">
                     <img src="../assets/images/apple.png"/>
                     Sign up with Apple
@@ -116,6 +116,7 @@ export default {
             this.validateUserData()
             try{
                 if(this.isAllValidated){
+                    this.loading = true
                     const registerRequest = this.createRegisterRequest
                     this.emailAddress = registerRequest.email
 
@@ -154,12 +155,17 @@ export default {
             this.form.username = "",
             this.form.policySigned = null,
             this.form.emailAddress = ""
+            this.loading = false
         },
 
-        oAuthCallBack(){
-            googleAuthCodeLogin().then((response) => {
-                console.log("Handle the response", response)
-            })
+        async googleAuth() {
+            try {
+                const response = await googleAuthCodeLogin();
+                const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+                await this.$store.dispatch('verifyToken', token.data);
+            } catch (error) {
+                console.error("Error:", error);
+            }
         }
     },
 
@@ -212,6 +218,7 @@ export default {
     align-items: center;
     padding: 5px 25px 5px 4px;
     font-size: 12px;
+    white-space: nowrap;
 }
 .auth button img {
     height: 25px;
@@ -219,6 +226,7 @@ export default {
     background-color: white;
     border-radius: 2px;
     margin-right: 7px;
+    white-space: nowrap
 }
 #apple-btn{
     background-color: #414040;
