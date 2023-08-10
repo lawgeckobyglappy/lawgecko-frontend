@@ -4,7 +4,7 @@
         <div class="signup-inner-container">
             <h1 class="mb-4 text-heading-text font-bold text-2xl">Sign up to Lawgecko</h1>
             <div class="auth">
-                <button id="google-btn" @click="oAuthCallBack">
+                <button id="google-btn" @click="googleAuth">
                     <img src="../assets/images/google.png"/>
                     Sign up with Google
                 </button>
@@ -158,7 +158,7 @@ export default {
             this.loading = false
         },
 
-        async oAuthCallBack() {
+        async googleAuth() {
             try {
                 const response = await googleAuthCodeLogin();
                 const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });

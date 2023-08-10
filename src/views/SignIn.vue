@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="auth">
-                <button id="google-btn">
+                <button id="google-btn" @click="googleAuth">
                     <img src="../assets/images/google.png"/>
                 </button>
                 <button id="apple-btn">
@@ -46,6 +46,8 @@ import { API_URL } from '@/constant'
 import axios from 'axios'
 import PopUp from '@/components/PopUp.vue'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
+import { googleAuthCodeLogin } from "vue3-google-login"
+import { fetcher } from "@/utils/fetcher"
 
 export default {
     components: {
@@ -95,6 +97,16 @@ export default {
             this.loading = false
             this.form.emailAddress = ""
         },
+
+        async googleAuth() {
+            try {
+                const response = await googleAuthCodeLogin();
+                const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+                await this.$store.dispatch('verifyToken', token.data);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
     },
 
     computed: {
