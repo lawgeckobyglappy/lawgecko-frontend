@@ -116,6 +116,7 @@ export default {
             this.validateUserData()
             try{
                 if(this.isAllValidated){
+                    this.loading = true
                     const registerRequest = this.createRegisterRequest
                     this.emailAddress = registerRequest.email
 
@@ -154,6 +155,7 @@ export default {
             this.form.username = "",
             this.form.policySigned = null,
             this.form.emailAddress = ""
+            this.loading = false
         },
 
         async oAuthCallBack() {
