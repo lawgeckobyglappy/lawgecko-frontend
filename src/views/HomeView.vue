@@ -7,8 +7,7 @@
         <TheRow container :gutter="30" class="p-5 mt-2">
         <TheColumn :xs="12" :md="6" :lg="6" class="flex justify-center items-center pa-6">
           <div class="flex justify-center about-container">
-            
-            <img class="object-fill max-w-full h-auto " src="/images/about.png" alt="image on the header of people holding hands"/>
+            <img class="object-fill max-w-full h-auto" data-src="/images/about.png" alt="image on the header of people holding hands" @load="lazyLoadImage($event.target)" />
           </div>
         </TheColumn>
         <TheColumn :xs="12" :md="6" :lg="6" class="flex justify-center items-center">
@@ -21,11 +20,11 @@
                 </div>
                 <p class="text-xl mt-6 whitespace-normal ml- text-gray-500">{{$t('about.paragraph')}}</p>
                 <div class="flex items-center mt-8">
-                  <img class="rounded h-15 w-15 mr-2" src="/images/Anxiety.png" alt="">
+                  <img class="rounded h-15 w-15 mr-2" data-src="/images/Anxiety.png"  alt="" @load="lazyLoadImage($event.target)">
                   <span class="text-md text-gray-500">{{$t('about.list1')}}</span>
                 </div>
                 <div class="flex items-center mt-3">
-                  <img class="rounded h-15 w-15 mr-2" src="/images/Advice.png" alt="">
+                  <img class="rounded h-15 w-15 mr-2" data-src="/images/Advice.png"  alt="" @load="lazyLoadImage($event.target)">
                   <span class="text-md text-gray-500">{{$t('about.list2')}}</span>
                 </div>
             </div> 
@@ -74,7 +73,7 @@
                   <v-card-title>
 
                     <div class="flex mt-5 items-center font-bold">
-                        <img class="rounded h-15 w-15 mr-2" src="/images/user3.png" alt="">
+                        <img class="rounded h-15 w-15 mr-2" data-src="/images/user3.png" alt="" @load="lazyLoadImage($event.target)">
                         Michel Johnson
                     </div>
                       
@@ -108,7 +107,7 @@
         <TheRow container :gutter="80" class="p-5">
           <TheColumn :xs="12" :md="6" :lg="6" class=" pa-6">
             <div class="flex justify-center items-center">
-              <img class="object-fill h-50 w-96" src="/images/image.png" alt="alternative" />
+              <img class="object-fill h-50 w-96" data-src="/images/image.png" alt="alternative" @load="lazyLoadImage($event.target)"/>
             </div>
           </TheColumn>
           <TheColumn :xs="12" :md="6" :lg="6" class=" pa-5">
@@ -154,13 +153,33 @@ import TestimonialCard from '@/components/TestimonialCard.vue';
 
 export default {
   name: 'App',
-  
-  components:{
+  components: {
     TheHeader,
     TheFooter,
     TheCard,
     SectionHeader,
     TestimonialCard
+  },
+  methods: {
+    lazyLoadImage(img) {
+      const dataSrc = img.getAttribute('data-src');
+      if (dataSrc) {
+        img.src = dataSrc;
+        img.removeAttribute('data-src');
+      }
+    }
+  },
+  mounted() {
+    const images = document.querySelectorAll('img[data-src]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.lazyLoadImage(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px', threshold: 0.1 });
+    images.forEach((img) => observer.observe(img));
   }
 };
 </script>
