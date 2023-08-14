@@ -3,7 +3,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
-
+import "animate.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import vue3GoogleLogin from "vue3-google-login";
 import { Row, Column, Hidden } from "vue-grid-responsive";
 
 // Vuetify
@@ -12,10 +15,10 @@ import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 
-// import { fa } from "vuetify/iconsets/fa";
+import { fa } from "vuetify/iconsets/fa";
 import { aliases, mdi } from "vuetify/lib/iconsets/mdi";
 
-// import "@mdi/font/css/materialdesignicons.css";
+import "@mdi/font/css/materialdesignicons.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 
 const vuetify = createVuetify({
@@ -24,7 +27,7 @@ const vuetify = createVuetify({
     aliases,
     sets: {
       mdi,
-      // fa,
+      fa,
     },
   },
   components,
@@ -57,7 +60,9 @@ app.use(i18n);
 
 app.use(store);
 app.use(router);
-app.use(vuetify); // vuetify
+app.use(vuetify);
+AOS.init()
+app.use(vue3GoogleLogin, { clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID });
 app.mount("#app");
 app.component("TheButton", TheButton);
 app.component("fa-icon", FontAwesomeIcon);

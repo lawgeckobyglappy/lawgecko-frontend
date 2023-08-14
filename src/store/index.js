@@ -23,16 +23,30 @@ export default createStore({
           id: linkId,
         });
         const jwtToken = response.data.data;
-        await this.dispatch("getCurrentUser", jwtToken);
-        commit("isAuthenticated", true);
-        router.push("/forum");
+        await this.dispatch("verifyToken", jwtToken);
       } catch (error) {
         commit("isAuthenticated", false);
-        console.log(error);
+        router.push('/signin');
       }
     },
 
-    async getCurrentUser(jwtToken) {
+    async verifyToken({ commit, dispatch }, jwtToken){
+      try {
+        const userData = await dispatch("getCurrentUser", jwtToken);
+      
+        if (userData) {
+          commit('isAuthenticated', true);
+          router.push('/forum');
+        } else {
+          commit('isAuthenticated', false);
+        }
+      } catch (error) {
+        commit("isAuthenticated", false);
+        console.log("VerifyTokenError", error);
+      }
+    },
+
+    async getCurrentUser(context, jwtToken) {
       try {
         const config = {
           headers: {
@@ -43,9 +57,9 @@ export default createStore({
           `${API_URL}/auth/current-user`,
           config
         );
-        console.log(response.data);
+        return response.data;
       } catch (error) {
-        console.log(error.response);
+        throw error.response
       }
     },
   },
