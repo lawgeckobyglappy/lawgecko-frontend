@@ -1,10 +1,10 @@
 <template>
-    <h1>Verifying Link...</h1>
-    <!-- <GoogleLogin :callback="callback"/> -->
+    <div class="outer-container">
+        <ButtonSpinner />
+    </div>
 </template>
 <script>
-// import { GoogleLogin } from 'vue3-google-login';
-// import { decodeCredential } from 'vue3-google-login'
+import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue';
 
 export default{
     created() {
@@ -15,14 +15,21 @@ export default{
         async verifyLoginLink(linkId) {
             await this.$store.dispatch('verifyLoginLink', linkId);
         },
-
-        // callback(response){
-        //     // This callback will be triggered when the user selects or login to
-        //     // his Google account from the popup
-        //     // const userData = decodeCredential(response.credential)
-        //     // console.log("Handle the userData", userData)
-        // }
     },
-    // components: { GoogleLogin }
+    components: {
+        ButtonSpinner
+    }
 }
 </script>
+<style scoped>
+.outer-container{
+    background-image: url("../assets/images/backgroundImage.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    filter: brightness(70%);
+}
+</style>

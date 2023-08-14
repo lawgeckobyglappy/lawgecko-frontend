@@ -26,7 +26,7 @@ export default createStore({
         await this.dispatch("verifyToken", jwtToken);
       } catch (error) {
         commit("isAuthenticated", false);
-        console.log(error);
+        router.push('/signin');
       }
     },
 

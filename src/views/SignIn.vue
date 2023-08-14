@@ -101,7 +101,7 @@ export default {
         async googleAuth() {
             try {
                 const response = await googleAuthCodeLogin();
-                const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+                const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code, "isLogin": true });
                 await this.$store.dispatch('verifyToken', token.data);
             } catch (error) {
                 console.error("Error:", error);

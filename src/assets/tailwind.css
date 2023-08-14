@@ -12,20 +12,7 @@
   width: 100%;
   height: 100%;
 }
-.move {
-  animation: bounce 0.6s infinite;
-}
-@keyframes bounce {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.04);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+
 
 /* large screen  */
 .page-margin {
@@ -48,7 +35,7 @@
 /* tailwind styles */
 
 .signup {
-  @apply ml-4 2xl:text-2xl 2xl:py-3 2xl:w-52 bg-primary-color px-8 border-2 hover:-translate-y-1 transition-all border-gray-800 py-2 rounded-full arrange shadow-lg move;
+  @apply ml-4 2xl:text-2xl 2xl:py-3 2xl:w-52 bg-primary-color px-8 border-2 hover:-translate-y-1 transition-all border-gray-800 py-2 rounded-full arrange shadow-lg;
 }
 .roundedBtn-full {
   @apply 2xl:text-2xl 2xl:py-4 2xl:w-64 whitespace-nowrap bg-primary-color w-5/6 sm:w-52 border-2 hover:-translate-y-1 transition-all border-gray-800 py-4 rounded-full arrange shadow-lg;
