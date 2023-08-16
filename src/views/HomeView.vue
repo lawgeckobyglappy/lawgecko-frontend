@@ -302,7 +302,7 @@
                     class="bg-transparent border-2 w-5/6 sm:w-52 shadow-lg hover:-translate-y-1 transition-all border-primary-color py-4"
                     id="sign-inn"
                   >
-                    <router-link :to="{ name: '' }">{{
+                    <router-link :to="{ name: 'sign-in' }">{{
                       $t("section.button2")
                     }}</router-link>
                   </button>
