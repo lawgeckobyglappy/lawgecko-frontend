@@ -56,6 +56,7 @@ library.add(fas, far, fab);
 const app = createApp(App);
 app.use(i18n);
 
+
 app.use(store);
 app.use(router);
 app.use(vuetify); // vuetify

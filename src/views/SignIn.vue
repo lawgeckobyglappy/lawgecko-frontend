@@ -2,11 +2,11 @@
     <div class="signin-container">
         <div class="signin-inner-container">
             <h1 class="mb-2 text-heading-text font-bold text-2xl">Sign In</h1>
-            <p class=" text-center text-md mb-8 text-light-dark-text">Enter your email address to login</p>
+            <p class=" text-center text-md mb-8 text-light-dark-text">{{$t('signin.paragraph')}}</p>
             <div class="form">
                 <form @submit.prevent="submit">
                     <div :class="{ 'error': form.emailAddressError }">
-                        <label>Email Address</label>
+                        <label>{{$t('signin.emailAddress')}}</label>
                         <input v-model="form.emailAddress" class="w-full mt-3 " />
                     </div>
                     <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
