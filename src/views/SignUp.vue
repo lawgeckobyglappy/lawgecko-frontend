@@ -3,11 +3,11 @@
         <div class="signup-inner-container">
             <h1 class="mb-4 text-heading-text font-bold text-2xl">Sign up to Lawgecko</h1>
             <div class="auth">
-                <button id="facebook-btn">
+                <button id="facebook-btn" class="mr-2">
                     <img src="../assets/images/facebook.png"/>
                     Sign up with Facebook
                 </button>
-                <button id="google-btn">
+                <button id="google-btn" class="mr-2">
                     <img src="../assets/images/google.png"/>
                     Sign up with Google
                 </button>
@@ -191,7 +191,7 @@ export default {
 .auth {
     display: flex;
     justify-content: space-between;
-    max-width: 400px;
+    max-width: 450px;
     margin: 20px auto;
 }
 .auth button {
