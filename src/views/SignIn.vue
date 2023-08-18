@@ -31,6 +31,9 @@
                 </div>
             </div>
             <div class="auth">
+                <button id="facebook-btn">
+                    <img src="../assets/images/facebook.png"/>
+                </button>
                 <button id="google-btn">
                     <img src="../assets/images/google.png"/>
                 </button>

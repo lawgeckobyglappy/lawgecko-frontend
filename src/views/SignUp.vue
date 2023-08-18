@@ -3,6 +3,10 @@
         <div class="signup-inner-container">
             <h1 class="mb-4 text-heading-text font-bold text-2xl">Sign up to Lawgecko</h1>
             <div class="auth">
+                <button id="facebook-btn">
+                    <img src="../assets/images/facebook.png"/>
+                    Sign up with Facebook
+                </button>
                 <button id="google-btn">
                     <img src="../assets/images/google.png"/>
                     Sign up with Google
@@ -212,6 +216,10 @@ export default {
     color: white;
 }
 #google-btn{
+    background-color: #e4e7ec;
+    color: black;
+}
+#facebook-btn{
     background-color: #4172D1;
     color: white;
 }
