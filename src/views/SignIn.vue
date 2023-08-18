@@ -10,7 +10,7 @@
                         <input v-model="form.emailAddress" class="w-full mt-3 " />
                     </div>
                     <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
-                        <p v-if="!loading">Sign In</p>
+                        <p v-if="!loading">{{ $t("header.signUp") }}</p>
                         <ButtonSpinner v-else />
                     </button>
                 </form>
@@ -31,9 +31,6 @@
                 </div>
             </div>
             <div class="auth">
-                <button id="facebook-btn">
-                    <img src="../assets/images/facebook.png"/>
-                </button>
                 <button id="google-btn">
                     <img src="../assets/images/google.png"/>
                 </button>
@@ -49,6 +46,8 @@ import { API_URL } from '@/constant'
 import axios from 'axios'
 import PopUp from '@/components/PopUp.vue'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
+import { googleAuthCodeLogin } from "vue3-google-login"
+import { fetcher } from "@/utils/fetcher"
 
 export default {
     components: {
@@ -98,6 +97,16 @@ export default {
             this.loading = false
             this.form.emailAddress = ""
         },
+
+        async googleAuth() {
+            try {
+                const response = await googleAuthCodeLogin();
+                const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code, "isLogin": true });
+                await this.$store.dispatch('verifyToken', token.data);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
     },
 
     computed: {

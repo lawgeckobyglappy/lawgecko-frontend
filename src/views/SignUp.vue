@@ -1,13 +1,10 @@
 <template>
     <div class="signup-container">
+        <!-- <GoogleLogin :callback="oAuthCallBack"/> -->
         <div class="signup-inner-container">
             <h1 class="mb-4 text-heading-text font-bold text-2xl">Sign up to Lawgecko</h1>
             <div class="auth">
-                <button id="facebook-btn" class="mr-2">
-                    <img src="../assets/images/facebook.png"/>
-                    Sign up with Facebook.
-                </button>
-                <button id="google-btn" class="mr-2">
+                <button id="google-btn">
                     <img src="../assets/images/google.png"/>
                     Sign up with Google
                 </button>
@@ -64,7 +61,7 @@
                     </div>
                     <div>
                         <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
-                        <p v-if="!loading">Sign Up</p>
+                        <p v-if="!loading">{{ $t("header.signUp") }}</p>
                         <ButtonSpinner v-else />
                     </button>
                     </div>
@@ -81,15 +78,15 @@
 </template>
 <script>
 import PopUp from '@/components/PopUp.vue'
-import { API_URL } from '@/constant'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
-import axios from 'axios'
+import { fetcher } from "@/utils/fetcher"
+import { googleAuthCodeLogin } from "vue3-google-login"
 
 export default {
     components: {
-        PopUp,
-        ButtonSpinner
-    },
+    PopUp,
+    ButtonSpinner,
+},
 
     data() {
         return {
@@ -119,21 +116,29 @@ export default {
             this.validateUserData()
             try{
                 if(this.isAllValidated){
+                    this.loading = true
                     const registerRequest = this.createRegisterRequest
                     this.emailAddress = registerRequest.email
-                    // include a loader
-                    await axios.post(`${API_URL}/auth/register`, registerRequest)
+
+                    await fetcher.post('/auth/register', registerRequest)
+
                     this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
                     this.popupTrigger = true
+
                     setTimeout(() => {
                         this.popupTrigger = false
                     }, 20000)
+
                     this.resetForm()
                 }
             } catch(error){
-                this.emailExists = error.response.data.error.payload.email?.[0]
-                this.usernameExists = error.response.data.error.payload.username?.[0]
+                this.handleRegistrationError(error)
             }
+        },
+
+        handleRegistrationError(error){
+            this.emailExists = error.message === 'Email already taken' ? error.message : ''
+            this.usernameExists = error.message === 'Username already taken' ? error.message : ''
         },
 
         validateUserData(){
@@ -150,7 +155,18 @@ export default {
             this.form.username = "",
             this.form.policySigned = null,
             this.form.emailAddress = ""
+            this.loading = false
         },
+
+        async googleAuth() {
+            try {
+                const response = await googleAuthCodeLogin();
+                const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+                await this.$store.dispatch('verifyToken', token.data);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
     },
 
     computed: {
@@ -202,6 +218,7 @@ export default {
     align-items: center;
     padding: 5px 25px 5px 4px;
     font-size: 12px;
+    white-space: nowrap;
 }
 .auth button img {
     height: 25px;
@@ -209,6 +226,7 @@ export default {
     background-color: white;
     border-radius: 2px;
     margin-right: 7px;
+    white-space: nowrap
 }
 #apple-btn{
     background-color: #414040;
