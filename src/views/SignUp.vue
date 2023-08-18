@@ -5,7 +5,7 @@
             <div class="auth">
                 <button id="facebook-btn" class="mr-2">
                     <img src="../assets/images/facebook.png"/>
-                    Sign up with Facebook
+                    Sign up with Facebook.
                 </button>
                 <button id="google-btn" class="mr-2">
                     <img src="../assets/images/google.png"/>
