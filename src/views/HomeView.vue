@@ -19,8 +19,9 @@
             <div class="flex justify-center about-container">
               <img
                 class="object-fill max-w-full h-auto"
-                src="/images/about.png"
+                data-src="/images/about.png"
                 alt="image on the header of people holding hands"
+                @load="lazyLoadImage($event.target)"
               />
             </div>
           </TheColumn>
@@ -56,24 +57,12 @@
                   {{ $t("about.paragraph") }}
                 </p>
                 <div class="flex items-center mt-8">
-                  <img
-                    class="rounded h-15 w-15 mr-2"
-                    src="/images/Anxiety.png"
-                    alt=""
-                  />
-                  <span class="text-md text-gray-500">{{
-                    $t("about.list1")
-                  }}</span>
+                  <img class="rounded h-15 w-15 mr-2" data-src="/images/Anxiety.png"  alt="" @load="lazyLoadImage($event.target)">
+                  <span class="text-md text-gray-500">{{$t('about.list1')}}</span>
                 </div>
                 <div class="flex items-center mt-3">
-                  <img
-                    class="rounded h-15 w-15 mr-2"
-                    src="/images/Advice.png"
-                    alt=""
-                  />
-                  <span class="text-md text-gray-500">{{
-                    $t("about.list2")
-                  }}</span>
+                  <img class="rounded h-15 w-15 mr-2" data-src="/images/Advice.png"  alt="" @load="lazyLoadImage($event.target)">
+                  <span class="text-md text-gray-500">{{$t('about.list2')}}</span>
                 </div>
               </div>
             </div>
@@ -169,12 +158,8 @@
                 >
                   <v-card-title>
                     <div class="flex mt-5 items-center font-bold">
-                      <img
-                        class="rounded h-15 w-15 mr-2"
-                        src="/images/user3.png"
-                        alt=""
-                      />
-                      Michel Johnson
+                        <img class="rounded h-15 w-15 mr-2" data-src="/images/user3.png" alt="" @load="lazyLoadImage($event.target)">
+                        Michel Johnson
                     </div>
                   </v-card-title>
                   <v-card-text class="mt-5">
@@ -247,11 +232,7 @@
             class="pa-6"
           >
             <div class="flex justify-center items-center">
-              <img
-                class="object-fill h-50 w-96"
-                src="/images/image.png"
-                alt="alternative"
-              />
+              <img class="object-fill h-50 w-96" data-src="/images/image.png" alt="alternative" @load="lazyLoadImage($event.target)"/>
             </div>
           </TheColumn>
           <TheColumn
@@ -333,8 +314,29 @@ export default {
     TheFooter,
     TheCard,
     SectionHeader,
-    TestimonialCard,
+    TestimonialCard
   },
+  methods: {
+    lazyLoadImage(img) {
+      const dataSrc = img.getAttribute('data-src');
+      if (dataSrc) {
+        img.src = dataSrc;
+        img.removeAttribute('data-src');
+      }
+    }
+  },
+  mounted() {
+    const images = document.querySelectorAll('img[data-src]');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          this.lazyLoadImage(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px', threshold: 0.1 });
+    images.forEach((img) => observer.observe(img));
+  }
 };
 </script>
 
