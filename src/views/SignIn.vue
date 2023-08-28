@@ -7,7 +7,7 @@
                 <form @submit.prevent="submit">
                     <div :class="{ 'error': form.emailAddressError }">
                         <label>{{$t('signin.emailAddress')}}</label>
-                        <input v-model="form.emailAddress" class="w-full mt-3 " />
+                        <input v-model="form.emailAddress" class="w-full mt-3 " @keydown.space.prevent />
                     </div>
                     <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
                         <p v-if="!loading">{{ $t("header.signUp") }}</p>
