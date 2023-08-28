@@ -1,25 +1,26 @@
 <template>
-    <button @click="onClick" class="Button">
-        <slot>Button</slot>
-    </button>
+    <div>
+        <button class="my-button">
+            {{ btnText }}
+        </button>
+    </div>
 </template>
 
 <script>
     export default {
+        name: 'TheButton',
         props: {
-            onClick: {
-                type: Function,
-                required: true
-            }
+            btnText: String
         }
     }
 </script>
 
 <style scoped>
-    button {
+    .my-button {
         padding: 10px 20px;
-        border-radius: 8px;
-        border: 0;
-        background-color: lightgreen;
+        font-weight: bold;
+        border-radius: 20px;
+        justify-content: center;
+        white-space: nowrap;
     }
 </style>
