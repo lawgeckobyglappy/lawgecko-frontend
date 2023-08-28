@@ -29,13 +29,13 @@
                             <label>
                                 {{ $t('signup.firstName') }}
                             </label>
-                            <input v-model="form.firstName" />
+                            <input v-model="form.firstName" @keydown.space.prevent />
                         </div>
                         <div :class="{ 'error': form.lastNameError }">
                             <label>
                                 {{ $t('signup.lastName') }}
                             </label>
-                            <input v-model="form.lastName" />
+                            <input v-model="form.lastName" @keydown.space.prevent />
                         </div>
                     </div>
                     <div :class="{ 'error': form.usernameError }">
@@ -43,7 +43,7 @@
                             {{ $t('signup.username') }}
                         </label>
                         <p v-if="usernameExists" class="text-red-500 text-xs">* Username Already Exists</p>
-                        <input v-model="form.username" />
+                        <input v-model="form.username" @keydown.space.prevent />
                     </div>
                     <div :class="{ 'error': form.emailAddressError }">
                         <label>
