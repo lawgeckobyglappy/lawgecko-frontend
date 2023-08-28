@@ -8,6 +8,8 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import vue3GoogleLogin from "vue3-google-login";
 import { Row, Column, Hidden } from "vue-grid-responsive";
+import 'intersection-observer';
+
 
 // Vuetify
 import "vuetify/styles";
