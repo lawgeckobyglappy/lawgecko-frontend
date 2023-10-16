@@ -112,9 +112,6 @@ export default {
 
 </script>
 <style scoped>
-.auth-image{
-    height: 1000px;
-}
 .logo {
     margin-bottom: 20px;
 }
