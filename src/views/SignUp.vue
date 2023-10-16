@@ -1,11 +1,14 @@
 <template>
     <div class="p-8 flex flex-row">
         <div>
-             <img src="../assets/images/auth.png"  class="h-full" />
+             <img src="../assets/images/auth.png"  class="w-full" />
         </div>
-        <div class="w-4/5 border-solid border-2 flex flex-col align-center">
-            <h1 >Create Account</h1>
-            <div class="form">
+        <div class="w-9/12 border-solid flex flex-col align-center mt-5 mb-10">
+            <div class="logo">
+                <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo" />
+            </div>
+            <p class="mb-14 mt-10 font-bold text-xl">Create An Account</p>
+            <div class="w-8/12 form">
                 <form @submit.prevent="submit">
                         <div class="name">
                             <div :class="{ 'error': form.firstNameError }">
@@ -51,27 +54,27 @@
                             </label>
                         </div>
                         <div>
-                            <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
-                            <p v-if="!loading">{{ $t("header.signUp") }}</p>
+                            <button type="submit" class="hover:-translate-y-1 mb-8 mt-8 transition-all bg-btn-green cursor-pointer">
+                            <p v-if="!loading" class="font-bold">Create Account</p>
                             <ButtonSpinner v-else />
                         </button>
                         </div>
                     </form>
-            </div>
-            <div class="or-demarcation">
-                <div class="hr">
-                    <hr/>
-                </div>
-                <p class="or-text">or Register Using</p>
-                <div class="hr">
-                    <hr/>
-                </div>
-            </div>
-            <div class="auth">
-                <button id="google-btn" @click="googleAuth">
-                    <img src="../assets/images/google.png"/>
-                    Sign up with Google
-                </button>
+                    <div class="or-demarcation">
+                        <div class="hr">
+                            <hr/>
+                        </div>
+                        <p class="or-text">or Register Using</p>
+                        <div class="hr">
+                            <hr/>
+                        </div>
+                    </div>
+                    <div class="auth">
+                        <button id="google-btn" class="bg-btn-blue mt-8 text-white" @click="googleAuth">
+                            <img src="../assets/images/google.png"/>
+                            Sign up with Google
+                        </button>
+                    </div>
             </div>
         </div>
     </div>
@@ -107,7 +110,13 @@ export default {
 }
 
 </script>
-<style>
+<style scoped>
+.auth-image{
+    height: 1000px;
+}
+.logo {
+    margin-bottom: 20px;
+}
 .name {
     display: flex;
     justify-content: space-between;
@@ -119,6 +128,7 @@ export default {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     grid-gap: 10px;
+    
 }
 .hr {
     height: 1.5px;
@@ -134,23 +144,30 @@ export default {
 input {
     width: 100%;
     padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #1a1a1a;
-    color: black;
+    margin-bottom: 24px;
+    border: 2px solid #B9B9B9;
     border-radius: 5px;
 }
 label {
-    margin-bottom: 5px;
+    font-weight: bold; 
 }
 .policy-agreement {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin: 20px 0 10px 0;
 }
-
 #checkboxInput{
     width: 20px;
     height: 20px;
     margin-right: 10px;
+}
+button{
+    width: 100%;
+    height: 47px;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
