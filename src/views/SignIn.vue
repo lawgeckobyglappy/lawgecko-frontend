@@ -1,18 +1,27 @@
 <template>
     <div class="signin-container">
         <div class="signin-inner-container">
-            <h1 class="mb-2 text-heading-text font-bold text-2xl">Sign In</h1>
-            <p class=" text-center text-md mb-8 text-light-dark-text">{{$t('signin.paragraph')}}</p>
+
+            <div class="image-container">
+                <div class="image rounded-top"></div> <!-- First div with rounded top -->
+                <div class="image"></div> <!-- Second div (no rounded borders) -->
+                <div class="image rounded-bottom"></div> <!-- Third div with rounded bottom -->
+            </div>
+
+        <div class="form-content">
+            <h1 class="mb-8 mt-1 text-heading-text font-bold text-2xl">Lawgeck<span class="text-orange-400"><span class="big-o">o</span></span></h1>
+            <p class="mb-10 text-heading-text font-bold text-2xl">{{$t('signin.paragraph')}}</p> 
             <div class="form">
                 <form @submit.prevent="submit">
                     <div :class="{ 'error': form.emailAddressError }">
                         <label>{{$t('signin.emailAddress')}}</label>
-                        <input v-model="form.emailAddress" class="w-full mt-3 " />
+                        <input v-model="form.emailAddress" class="w-full mt-3 " placeholder="CarlJohnson22@yahoo.com" />
                     </div>
-                    <button type="submit" class="hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
+                    <button type="submit" class="mb-5 hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
                         <p v-if="!loading">{{ $t("header.signUp") }}</p>
                         <ButtonSpinner v-else />
                     </button>
+                    
                 </form>
                 <PopUp v-if="popupTrigger">
                     <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
@@ -25,19 +34,18 @@
                 <div class="hr">
                     <hr/>
                 </div>
-                <p class="or-text">or</p>
+                <p class="mb-5 or-text">or Sign in Using</p>
                 <div class="hr">
                     <hr/>
                 </div>
             </div>
-            <div class="auth">
-                <button id="google-btn" @click="googleAuth">
-                    <img src="../assets/images/google.png"/>
-                </button>
-                <button id="apple-btn">
-                    <img src="../assets/images/apple.png"/>
-                </button>
+            <button class="google-button" @click="registerUsingGoogle">
+                Register Using Google
+            </button>
+            <div class="signin-link">
+                <p class="text-center">Don't Have an Account? <a href="SignUp">Sign Up</a></p>
             </div>
+        </div>
         </div>
     </div>
 </template>
@@ -133,8 +141,38 @@ export default {
     min-height: 100vh;
 }
 .signin-inner-container{
-    min-width: 400px;
-    padding: 20px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+.form-content {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+/* Images*/
+.image-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+.image {
+  width: 300px;
+  height: 180px;
+  background-color: #ccc;
+  margin-bottom: 1px;
+}
+
+.rounded-top {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.rounded-bottom {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .signin-inner-container h1 {
     text-align: center;
@@ -192,5 +230,36 @@ export default {
 }
 .error input{
     border-color: red;
+}
+.big-o {
+    font-size: 1.2em;
+  }
+  .google-button {
+    background-color: rgb(49, 69, 179);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 47px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    cursor: pointer;
+  }
+  .signin-link{
+    font-weight: 600;
+    color: #6E6E6E;
+  }
+  @media (max-width: 768px) {
+  .image-container {
+    display: none;
+  }
+  .form-content {
+    display: flex;
+    flex-direction: column;
+    margin-top: -200px; 
+    }
 }
 </style>

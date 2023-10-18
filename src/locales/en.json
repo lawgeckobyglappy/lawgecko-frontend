@@ -93,7 +93,7 @@
   },
 
   "signin":{
-    "paragraph":"Enter your email address to login",
+    "paragraph":"Sign in into your Account",
     "emailAddress": "Email Address"
   }
 }
