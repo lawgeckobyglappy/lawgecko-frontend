@@ -89,10 +89,6 @@ export default {
         firstName: "",
         lastName: "",
         phoneNumber: "",
-        countryCode: [
-          {code: '+234'},
-          {code: '+237'}
-        ],
         emailAddress: "",
         policySigned: null,
         firstNameError: "",
