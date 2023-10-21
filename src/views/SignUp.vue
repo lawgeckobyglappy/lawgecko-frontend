@@ -133,7 +133,7 @@ export default {
 
     handleRegistrationError(error) {
       this.emailExists = error.message === 'Email already taken' ? error.message : ''
-      this.phoneNumberExists = error.message === 'phone number already taken' ? error.message : ''
+      this.phoneNumberExists = error.message === 'Phone number already taken' ? error.message : ''
     },
 
     validateUserData() {

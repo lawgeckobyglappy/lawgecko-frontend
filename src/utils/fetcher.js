@@ -7,9 +7,12 @@ export const fetcher = axios.create({
 });
 
 fetcher.interceptors.response.use(
+  
   (response) => response.data,
   (error) => {
     const errorResponse = error.response;
+
+    console.log(errorResponse)
 
     if (errorResponse) {
       const data = errorResponse.data;
