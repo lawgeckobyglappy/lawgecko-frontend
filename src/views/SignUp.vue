@@ -13,7 +13,7 @@
             <div class="name">
               <div :class="{ 'error': form.firstNameError }">
                 <label>
-                  {{ $t('signup.firstName') }}
+                  {{ $t('signup.firstName') }}  
                 </label>
                 <input v-model="form.firstName" @keydown.space.prevent placeholder="Carl"/>
               </div>
@@ -175,12 +175,18 @@
     .form .policy-agreement label {
       font-size: 12px;
     }
+    .form{
+      width: 100%;
+    }
     button{
         width: 100%;
     }
     .form-content{
         width: 100%;
     }
+    .form input[name="firstName"] {
+    width: 100%;
+  }  
   }
   </style>
   
