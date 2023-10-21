@@ -154,15 +154,16 @@ export default {
   flex-direction: column;
   width: 100%;
   margin: 0 auto;
-  margin-left: 150px;
-  margin-right: 150px;
+  margin-left: 100px;
+  margin-right: 100px;
+
 }
 /* Images */
 .image-container {
   display: flex;
-  flex-direction: column;
   margin-left: 10px;
-  width: 50%;
+  margin: 30px 30px;
+  width: 100%;
 }
 .or-demarcation {
   display: grid;
@@ -222,6 +223,7 @@ button {
     flex-direction: column;
     margin-top: -200px;
     margin: auto;
+    padding: 20px;
   }
 }
 </style>
