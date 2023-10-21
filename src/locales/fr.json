@@ -90,7 +90,7 @@
     "firstName": "Prénom",
     "lastName": "Nom de famille",
     "emailAddress": "Adresse e-mail",
-    "username": "Nom d'utilisateur",
+    "phoneNumber": "Numéro de telephone",
     "terms":"En vous inscrivant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité, y compris l'utilisation des cookies,"
   },
   "signin":{

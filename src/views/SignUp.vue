@@ -11,46 +11,50 @@
         <div class="w-8/12 form">
           <form @submit.prevent="submit">
             <div class="name">
-              <div :class="{ 'error': form.firstNameError }">
+                <div :class="{ 'error': form.firstNameError }">
+                    <label>
+                      {{ $t('signup.firstName') }}  
+                    </label>
+                    <input v-model="form.firstName" @keydown.space.prevent placeholder="Carl"/>
+                </div>
+                <div :class="{ 'error': form.lastNameError }">
+                    <label>
+                      {{ $t('signup.lastName') }}
+                    </label>
+                  <input v-model="form.lastName" @keydown.space.prevent placeholder="Johnson"/>
+                </div>
+            </div>
+            <div :class="{ 'error': form.usernameError }">
                 <label>
-                  {{ $t('signup.firstName') }}  
-                </label>
-                <input v-model="form.firstName" @keydown.space.prevent placeholder="Carl"/>
-              </div>
-              <div :class="{ 'error': form.lastNameError }">
+                  {{ $t('signup.firstName') }}
+                  </label>
+                <input v-model="form.firstName" @keydown.space.prevent placeholder="Carl" />
+            </div>
+            <div :class="{ 'error': form.lastNameError }">
                 <label>
                   {{ $t('signup.lastName') }}
                 </label>
-                <input v-model="form.lastName" @keydown.space.prevent placeholder="Johnson"/>
-              </div>
-            </div>
-            <div :class="{ 'error': form.usernameError }">
-              <label>
-                {{ $t('signup.username') }}
-              </label>
-              <p v-if="usernameExists" class="text-red-500 text-xs">* Username Already Exists</p>
-              <input v-model="form.username" @keydown.space.prevent placeholder="carl_johnson"/>
-            </div>
-            <div :class="{ 'error': form.usernameError }">
-              <label>
-                Phone Number
-                <!-- {{ $t('signup.phoneNumber') }} -->
-              </label>
-              <!-- <p v-if="usernameExists" class="text-red-500 text-xs">* Username Already Exists</p> -->
-              <input placeholder="99808877"/>
+                <input v-model="form.lastName" @keydown.space.prevent placeholder="Johnson" />
             </div>
             <div :class="{ 'error': form.emailAddressError }">
-              <label>
-                {{ $t('signup.emailAddress') }}
-              </label>
+                <label>
+                  {{ $t('signup.emailAddress') }}
+                </label>
               <p v-if="emailExists" class="text-red-500 text-xs">* Email Already Exists</p>
-              <input v-model="form.emailAddress" placeholder="CarlJohnson22@yahoo.com"/>
+              <input v-model="form.emailAddress" @keydown.space.prevent placeholder="CarlJohnson22@yahoo.com" />
+            </div>
+            <div :class="{ 'error': form.phoneNumberError }">
+              <label>
+                {{ $t('signup.phoneNumber') }}
+              </label>
+              <p v-if="phoneNumberExists" class="text-red-500 text-xs">* Phone Number Already Exists</p>
+              <input v-model="form.phoneNumber" @keydown.space.prevent placeholder="99808877" />
             </div>
             <div class="policy-agreement" :class="{ 'error': !form.policySigned }">
               <input type="checkbox" id="checkboxInput" v-model="form.policySigned" />
               <label for="termsCheckbox">
                 <p class="text-xs text-red-500" v-if="form.policySigned === false">* Required</p>
-                {{$t('signup.terms')}}
+                {{ $t('signup.terms') }}
               </label>
             </div>
             <div>
@@ -60,53 +64,136 @@
               </button>
             </div>
           </form>
-          <div class="or-demarcation">
-            <div class="hr">
-              <hr />
-            </div>
-            <p class="or-text">or Register Using</p>
-            <div class="hr">
-              <hr />
-            </div>
+
+        <div class="or-demarcation">
+          <div class="hr">
+            <hr />
           </div>
-          <div class="auth">
-            <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
-                <img src="../assets/images/google.png"/>
-                Sign up with Google
-            </button>
+          <p class="or-text">or Register Using</p>
+          <div class="hr">
+            <hr />
           </div>
         </div>
-        <p>Already Have an Account? <span>Sign In</span></p>
+        <div class="auth">
+          <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
+            <img src="../assets/images/google.png" />
+            Sign up with Google
+          </button>
+        </div>
       </div>
+      <p>Already Have an Account? <a href="/signin"><span>Sign In</span></a> </p>
     </div>
-  </template>
+    </div>
+</template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        form: {
-          firstName: "",
-          lastName: "",
-          username: "",
-          emailAddress: "",
-          policySigned: null,
-          firstNameError: "",
-          lastNameError: "",
-          usernameError: "",
-          emailAddressError: "",
-        },
-        loading: false,
-        emailProvider: "",
-        emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-        popupTrigger: false,
+<script>
+
+import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
+import { fetcher } from "@/utils/fetcher"
+import { googleAuthCodeLogin } from "vue3-google-login"
+
+export default {
+  components: {
+    ButtonSpinner
+  },
+  data() {
+    return {
+      form: {
+        firstName: "",
+        lastName: "",
+        phoneNumber: "",
         emailAddress: "",
-        emailExists: "",
-        usernameExists: "",
-      };
+        policySigned: null,
+        firstNameError: "",
+        lastNameError: "",
+        phoneNumberError: "",
+        emailAddressError: "",
+      },
+      loading: false,
+      emailProvider: "",
+      emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+      popupTrigger: false,
+      emailAddress: "",
+      emailExists: "",
+      phoneNumberExists: "",
+    };
+  },
+
+  methods: {
+    async submit() {
+      this.validateUserData()
+      try {
+        if (this.isAllValidated) {
+          this.loading = true
+          const registerRequest = this.createRegisterRequest
+          this.emailAddress = registerRequest.email
+
+          await fetcher.post('/auth/register', registerRequest)
+
+          this.emailProvider = "https://" + this.form.emailAddress.split("@")[1]
+          this.popupTrigger = true
+
+          setTimeout(() => {
+            this.popupTrigger = false
+          }, 20000)
+
+          this.resetForm()
+        }
+      } catch (error) {
+        this.handleRegistrationError(error)
+      }
     },
-  };
-  </script>
+
+    handleRegistrationError(error) {
+      this.emailExists = error.message === 'Email already taken' ? error.message : ''
+      this.phoneNumberExists = error.message === 'phone number already taken' ? error.message : ''
+    },
+
+    validateUserData() {
+      this.form.firstNameError = this.form.firstName === "";
+      this.form.lastNameError = this.form.lastName === "";
+      this.form.phoneNumberError = this.form.phoneNumber === "";
+      this.form.policySigned = this.form.policySigned === true;
+      this.form.emailAddressError = this.form.emailAddress === "" || !this.emailRegex.test(this.form.emailAddress)
+    },
+
+    resetForm() {
+      this.form.firstName = "",
+        this.form.lastName = "",
+        this.form.phoneNumber = "",
+        this.form.policySigned = null,
+        this.form.emailAddress = ""
+      this.loading = false
+    },
+
+    async googleAuth() {
+      try {
+        const response = await googleAuthCodeLogin();
+        const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+        await this.$store.dispatch('verifyToken', token.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+  },
+
+  computed: {
+    isAllValidated() {
+      return !this.form.firstNameError && !this.form.lastNameError && !this.form.phoneNumberError
+        && !this.form.emailAddressError && this.form.policySigned
+    },
+
+    createRegisterRequest() {
+      return {
+        "email": this.form.emailAddress,
+        "firstName": this.form.firstName,
+        "lastName": this.form.lastName,
+        "phoneNumber": this.form.phoneNumber
+      }
+    }
+  }
+}
+</script>
   
   <style scoped>
   .logo {
@@ -183,10 +270,7 @@
     }
     .form-content{
         width: 100%;
-    }
-    .form input[name="firstName"] {
-    width: 100%;
-  }  
+    } 
   }
   </style>
   
