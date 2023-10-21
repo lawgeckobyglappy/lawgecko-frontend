@@ -1,5 +1,5 @@
 <template>
-    <div class="p-8 flex flex-row">
+    <div class="p-8 flex flex-row signup-container">
       <div class="images">
         <img src="../assets/images/auth.png" class="w-full" />
       </div>
@@ -90,7 +90,7 @@
 
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
 import { fetcher } from "@/utils/fetcher"
-import { googleAuthCodeLogin } from "vue3-google-login"
+// import { googleAuthCodeLogin } from "vue3-google-login"
 
 export default {
   components: {
@@ -146,7 +146,7 @@ export default {
 
     handleRegistrationError(error) {
       this.emailExists = error.message === 'Email already taken' ? error.message : ''
-      this.phoneNumberExists = error.message === 'phone number already taken' ? error.message : ''
+      this.phoneNumberExists = error.message === 'Phone number already taken' ? error.message : ''
     },
 
     validateUserData() {
@@ -166,15 +166,15 @@ export default {
       this.loading = false
     },
 
-    async googleAuth() {
-      try {
-        const response = await googleAuthCodeLogin();
-        const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
-        await this.$store.dispatch('verifyToken', token.data);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    }
+    // async googleAuth() {
+    //   try {
+    //     const response = await googleAuthCodeLogin();
+    //     const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+    //     await this.$store.dispatch('verifyToken', token.data);
+    //   } catch (error) {
+    //     console.error("Error:", error);
+    //   }
+    // }
   },
 
   computed: {
@@ -196,6 +196,11 @@ export default {
 </script>
   
   <style scoped>
+  .signup-container {
+    background-image: url("../assets/images/backgroundImage.png");
+    background-size: cover;
+    background-position: center;
+  }
   .logo {
     margin-bottom: 20px;
   }
