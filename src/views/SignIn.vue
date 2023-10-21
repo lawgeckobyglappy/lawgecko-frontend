@@ -3,50 +3,50 @@
         <div class="signin-inner-container">
 
             <div class="image-container">
-                <img src="../assets/images/auth.png" class="w-full" />
+                <img src="../assets/images/auth.png" />
             </div>
 
-        <div class="form-content">
-            <div class="logo">
-                <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo mb-50" />
-            </div>
-            <p class="mb-10 text-heading-text font-bold text-2xl">{{$t('signin.paragraph')}}</p> 
-            <div class="form">
-                <form @submit.prevent="submit">
-                    <div :class="{ 'error': form.emailAddressError }">
-                        <label>{{$t('signin.emailAddress')}}</label>
-                        <input v-model="form.emailAddress" class="w-full mt-3 " placeholder="CarlJohnson22@yahoo.com" />
+            <div class="form-content">
+                <div class="logo">
+                    <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo mb-50" />
+                </div>
+                <p class="mb-10 text-heading-text font-bold text-2xl">{{$t('signin.paragraph')}}</p> 
+                <div class="form">
+                    <form @submit.prevent="submit">
+                        <div :class="{ 'error': form.emailAddressError }">
+                            <label class="font-bold">{{$t('signin.emailAddress')}}</label>
+                            <input v-model="form.emailAddress" class="w-full mt-3 " placeholder="elliot@lawgecko.com" />
+                        </div>
+                        <button type="submit" class="mb-5 hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
+                            <p v-if="!loading" class="font-bold">{{ $t("header.signIn") }}</p>
+                            <ButtonSpinner v-else />
+                        </button>
+                        
+                    </form>
+                    <PopUp v-if="popupTrigger">
+                        <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
+                        <h2 class="text-lg font-bold mb-1">Check your email</h2>
+                        <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.emailAddress }}</span></p>
+                        <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
+                    </PopUp>
+                </div>
+                <div class="or-demarcation">
+                    <div class="hr">
+                        <hr/>
                     </div>
-                    <button type="submit" class="mb-5 hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
-                        <p v-if="!loading">{{ $t("header.signUp") }}</p>
-                        <ButtonSpinner v-else />
-                    </button>
-                    
-                </form>
-                <PopUp v-if="popupTrigger">
-                    <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
-                    <h2 class="text-lg font-bold mb-1">Check your email</h2>
-                    <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.emailAddress }}</span></p>
-                    <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
-                </PopUp>
-            </div>
-            <div class="or-demarcation">
-                <div class="hr">
-                    <hr/>
+                    <p class="mb-5 or-text">or Sign in Using</p>
+                    <div class="hr">
+                        <hr/>
+                    </div>
                 </div>
-                <p class="mb-5 or-text">or Sign in Using</p>
-                <div class="hr">
-                    <hr/>
+                <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
+                    <img src="../assets/images/google.png"/>
+                    Continue with Google
+                </button>
+                <div class="signin-link">
+                    <p class="text-center">Don't Have an Account? <a href="SignUp">Sign Up</a></p>
                 </div>
             </div>
-            <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
-                <img src="../assets/images/google.png"/>
-                Sign up with Google
-            </button>
-            <div class="signin-link">
-                <p class="text-center">Don't Have an Account? <a href="SignUp">Sign Up</a></p>
-            </div>
-        </div>
         </div>
     </div>
 </template>
@@ -160,10 +160,12 @@ export default {
 }
 /* Images */
 .image-container {
-  display: flex;
-  margin-left: 10px;
-  margin: 30px 30px;
-  width: 100%;
+  margin: 40px 0 40px 100px;
+}
+.image-container img {
+    max-width: 90%;
+    position: relative;
+    height: auto;
 }
 .or-demarcation {
   display: grid;
@@ -181,6 +183,11 @@ export default {
   font-weight: 600;
   color: #6E6E6E;
 }
+/* .form {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+} */
 .form input {
   width: 100%;
   padding: 10px;
@@ -214,16 +221,14 @@ button {
   justify-content: center;
   align-items: center;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .image-container {
     display: none;
   }
   .form-content {
-    display: flex;
-    flex-direction: column;
-    margin-top: -200px;
-    margin: auto;
-    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
   }
 }
 </style>
