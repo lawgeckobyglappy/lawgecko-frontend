@@ -34,7 +34,7 @@
                     <div class="hr">
                         <hr/>
                     </div>
-                    <p class="mb-5 or-text">or Sign in Using</p>
+                    <p class="mb-5 or-text">or</p>
                     <div class="hr">
                         <hr/>
                     </div>
@@ -43,8 +43,8 @@
                     <img src="../assets/images/google.png"/>
                     Continue with Google
                 </button>
-                <div class="signin-link">
-                    <p class="text-center">Don't Have an Account? <a href="SignUp" class="text-[#4172D1]">Sign Up</a></p>
+                <div>
+                    <p class="text-center font-semibold text-[#6E6E6E]">Don't Have an Account? <a href="SignUp" class="text-[#4172D1]">Sign Up</a></p>
                 </div>
             </div>
         </div>
@@ -202,10 +202,6 @@ export default {
 }
 .error input {
   border-color: red;
-}
-.signin-link {
-  font-weight: 600;
-  color: #6E6E6E;
 }
 button {
   width: 100%;

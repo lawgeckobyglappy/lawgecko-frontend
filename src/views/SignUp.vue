@@ -3,19 +3,20 @@
       <div class="images">
         <img src="../assets/images/auth.png" class="w-full" />
       </div>
-      <div class="w-9/12 border-solid flex flex-col align-center mt-5 mb-10 form-content">
+      <div class="w-9/12 mt-5 mb-10 w-full form-content">
+        <!-- align-center -->
         <div class="logo">
-          <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo" />
+          <img src="/logo.svg" alt="lawgecko logo" class="w-40 mx-auto logo" />
         </div>
-        <p class="mb-14 mt-10 font-bold text-xl">Create An Account</p>
-        <div class="w-8/12 form">
+        <div class="w-7/12 mx-auto form">
+          <p class="mb-10 mt-10 font-bold text-2xl">Create An Account</p>
           <form @submit.prevent="submit">
             <div class="name">
                 <div :class="{ 'error': form.firstNameError }">
                     <label>
                       {{ $t('signup.firstName') }}  
                     </label>
-                    <input v-model="form.firstName" @keydown.space.prevent placeholder="Carl"/>
+                    <input v-model="form.firstName" @keydown.space.prevent placeholder="Elliot"/>
                 </div>
                 <div :class="{ 'error': form.lastNameError }">
                     <label>
@@ -24,24 +25,12 @@
                   <input v-model="form.lastName" @keydown.space.prevent placeholder="Johnson"/>
                 </div>
             </div>
-            <div :class="{ 'error': form.usernameError }">
-                <label>
-                  {{ $t('signup.firstName') }}
-                  </label>
-                <input v-model="form.firstName" @keydown.space.prevent placeholder="Carl" />
-            </div>
-            <div :class="{ 'error': form.lastNameError }">
-                <label>
-                  {{ $t('signup.lastName') }}
-                </label>
-                <input v-model="form.lastName" @keydown.space.prevent placeholder="Johnson" />
-            </div>
             <div :class="{ 'error': form.emailAddressError }">
                 <label>
                   {{ $t('signup.emailAddress') }}
                 </label>
               <p v-if="emailExists" class="text-red-500 text-xs">* Email Already Exists</p>
-              <input v-model="form.emailAddress" @keydown.space.prevent placeholder="CarlJohnson22@yahoo.com" />
+              <input v-model="form.emailAddress" @keydown.space.prevent placeholder="e.johnson@lawgecko.com" />
             </div>
             <div :class="{ 'error': form.phoneNumberError }">
               <label>
@@ -69,7 +58,7 @@
           <div class="hr">
             <hr />
           </div>
-          <p class="or-text">or Register Using</p>
+          <p class="or-text">or</p>
           <div class="hr">
             <hr />
           </div>
@@ -80,8 +69,8 @@
             Sign up with Google
           </button>
         </div>
+        <p class="text-center font-semibold text-[#6E6E6E]">Already Have an Account? <a href="/signin" class="text-[#4172D1]"><span>Sign In</span></a> </p>
       </div>
-      <p>Already Have an Account? <a href="/signin"><span>Sign In</span></a> </p>
     </div>
     </div>
 </template>
@@ -200,6 +189,8 @@ export default {
     background-image: url("../assets/images/backgroundImage.png");
     background-size: cover;
     background-position: center;
+    align-items: center;
+    /* min-height: 100vh; */
   }
   .logo {
     margin-bottom: 20px;
@@ -231,7 +222,7 @@ export default {
     width: 100%;
     padding: 10px;
     margin-bottom: 24px;
-    border: 2px solid #B9B9B9;
+    border: 1px solid #ccc;
     border-radius: 5px;
   }
   label {
@@ -256,6 +247,14 @@ export default {
     justify-content: center;
     align-items: center;
   }
+  button img {
+    height:30px;
+    margin-right: 10px;
+  }
+  .form-content{
+      /* width: 100%; */
+      /* border: 1px solid; */
+  }
   @media (max-width: 768px) {
     .images {
       display: none;
@@ -271,11 +270,11 @@ export default {
       width: 100%;
     }
     button{
-        width: 100%;
+      width: 100%;
     }
-    .form-content{
-        width: 100%;
-    } 
+    /* .form-content{
+      width: 70%;
+    }  */
   }
   </style>
   
