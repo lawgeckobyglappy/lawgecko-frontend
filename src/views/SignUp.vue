@@ -3,19 +3,20 @@
       <div class="images">
         <img src="../assets/images/auth.png" class="w-full" />
       </div>
-      <div class="w-9/12 border-solid flex flex-col align-center mt-5 mb-10 form-content">
+      <div class="w-9/12 mt-5 mb-10 w-full form-content">
+        <!-- align-center -->
         <div class="logo">
-          <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo" />
+          <img src="/logo.svg" alt="lawgecko logo" class="w-40 mx-auto logo" />
         </div>
-        <p class="mb-14 mt-10 font-bold text-xl">Create An Account</p>
-        <div class="w-8/12 form">
+        <div class="w-7/12 mx-auto form">
+          <p class="mb-10 mt-10 font-bold text-2xl">Create An Account</p>
           <form @submit.prevent="submit">
             <div class="name">
                 <div :class="{ 'error': form.firstNameError }">
                     <label>
                       {{ $t('signup.firstName') }}  
                     </label>
-                    <input v-model="form.firstName" @keydown.space.prevent placeholder="Carl"/>
+                    <input v-model="form.firstName" @keydown.space.prevent placeholder="Elliot"/>
                 </div>
                 <div :class="{ 'error': form.lastNameError }">
                     <label>
@@ -24,30 +25,18 @@
                   <input v-model="form.lastName" @keydown.space.prevent placeholder="Johnson"/>
                 </div>
             </div>
-            <div :class="{ 'error': form.usernameError }">
-                <label>
-                  {{ $t('signup.firstName') }}
-                  </label>
-                <input v-model="form.firstName" @keydown.space.prevent placeholder="Carl" />
-            </div>
-            <div :class="{ 'error': form.lastNameError }">
-                <label>
-                  {{ $t('signup.lastName') }}
-                </label>
-                <input v-model="form.lastName" @keydown.space.prevent placeholder="Johnson" />
-            </div>
             <div :class="{ 'error': form.emailAddressError }">
-                <label>
-                  {{ $t('signup.emailAddress') }}
-                </label>
-              <p v-if="emailExists" class="text-red-500 text-xs">* Email Already Exists</p>
-              <input v-model="form.emailAddress" @keydown.space.prevent placeholder="CarlJohnson22@yahoo.com" />
+              <label>
+                {{ $t('signup.emailAddress') }}
+              </label>
+              <p v-if="emailExists" class="text-red-500 text-xs">* {{ this.emailAddressError }}</p>
+              <input v-model="form.emailAddress" @keydown.space.prevent placeholder="e.johnson@lawgecko.com" />
             </div>
             <div :class="{ 'error': form.phoneNumberError }">
               <label>
                 {{ $t('signup.phoneNumber') }}
               </label>
-              <p v-if="phoneNumberExists" class="text-red-500 text-xs">* Phone Number Already Exists</p>
+              <p v-if="phoneNumberExists" class="text-red-500 text-xs">* {{ this.phoneNumberError }}</p>
               <input v-model="form.phoneNumber" @keydown.space.prevent placeholder="99808877" />
             </div>
             <div class="policy-agreement" :class="{ 'error': !form.policySigned }">
@@ -64,36 +53,42 @@
               </button>
             </div>
           </form>
-
-        <div class="or-demarcation">
-          <div class="hr">
-            <hr />
+          <PopUp v-if="popupTrigger">
+            <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
+            <h2 class="text-lg font-bold mb-1">Check your email</h2>
+            <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.emailAddress }}</span></p>
+            <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
+          </PopUp>
+          <div class="or-demarcation">
+            <div class="hr">
+              <hr />
+            </div>
+            <p class="or-text">or</p>
+            <div class="hr">
+              <hr />
+            </div>
           </div>
-          <p class="or-text">or Register Using</p>
-          <div class="hr">
-            <hr />
+          <div class="auth">
+            <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
+              <img src="../assets/images/google.png" />
+              Sign up with Google
+            </button>
           </div>
-        </div>
-        <div class="auth">
-          <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
-            <img src="../assets/images/google.png" />
-            Sign up with Google
-          </button>
+          <p class="text-center font-semibold text-[#6E6E6E]">Already Have an Account? <a href="/signin" class="text-[#4172D1]"><span>Sign In</span></a> </p>
         </div>
       </div>
-      <p>Already Have an Account? <a href="/signin"><span>Sign In</span></a> </p>
-    </div>
     </div>
 </template>
   
 <script>
-
+import PopUp from '@/components/PopUp.vue'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
 import { fetcher } from "@/utils/fetcher"
-// import { googleAuthCodeLogin } from "vue3-google-login"
+import { googleAuthCodeLogin } from "vue3-google-login"
 
 export default {
   components: {
+    PopUp,
     ButtonSpinner
   },
   data() {
@@ -140,13 +135,18 @@ export default {
           this.resetForm()
         }
       } catch (error) {
+        this.loading = false;
         this.handleRegistrationError(error)
       }
     },
 
     handleRegistrationError(error) {
-      this.emailExists = error.message === 'Email already taken' ? error.message : ''
-      this.phoneNumberExists = error.message === 'Phone number already taken' ? error.message : ''
+      this.emailAddressError = error.message === "Email already taken" ? error.message : ""; 
+      this.emailExists = !!this.emailAddressError;
+
+      const phoneNumberErrorMessages = ["Invalid phone format", "Phone number already taken"];
+      this.phoneNumberError = phoneNumberErrorMessages.includes(error.message) ? error.message : "";
+      this.phoneNumberExists = !!this.phoneNumberError;
     },
 
     validateUserData() {
@@ -166,15 +166,15 @@ export default {
       this.loading = false
     },
 
-    // async googleAuth() {
-    //   try {
-    //     const response = await googleAuthCodeLogin();
-    //     const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
-    //     await this.$store.dispatch('verifyToken', token.data);
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //   }
-    // }
+    async googleAuth() {
+      try {
+        const response = await googleAuthCodeLogin();
+        const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+        await this.$store.dispatch('verifyToken', token.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
   },
 
   computed: {
@@ -200,6 +200,8 @@ export default {
     background-image: url("../assets/images/backgroundImage.png");
     background-size: cover;
     background-position: center;
+    align-items: center;
+    /* min-height: 100vh; */
   }
   .logo {
     margin-bottom: 20px;
@@ -231,7 +233,7 @@ export default {
     width: 100%;
     padding: 10px;
     margin-bottom: 24px;
-    border: 2px solid #B9B9B9;
+    border: 1px solid #ccc;
     border-radius: 5px;
   }
   label {
@@ -256,6 +258,10 @@ export default {
     justify-content: center;
     align-items: center;
   }
+  button img {
+    height:30px;
+    margin-right: 10px;
+  }
   @media (max-width: 768px) {
     .images {
       display: none;
@@ -271,11 +277,11 @@ export default {
       width: 100%;
     }
     button{
-        width: 100%;
+      width: 100%;
     }
-    .form-content{
-        width: 100%;
-    } 
+    /* .form-content{
+      width: 70%;
+    }  */
   }
   </style>
   
