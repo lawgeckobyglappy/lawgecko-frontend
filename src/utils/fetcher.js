@@ -17,8 +17,8 @@ fetcher.interceptors.response.use(
     if (errorResponse) {
       const data = errorResponse.data;
       const errorMessage =
-        data.error.payload.email?.[0] ||
-        data.error.payload.phoneNumber?.[0] ||
+        data.error.payload.email?.reasons[0] ||
+        data.error.payload.phoneNumber?.reasons[0] ||
         data.error.message;
       ("An error occured");
       throw new Error(errorMessage);
