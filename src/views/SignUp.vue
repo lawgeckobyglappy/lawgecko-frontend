@@ -262,10 +262,6 @@ export default {
     height:30px;
     margin-right: 10px;
   }
-  .form-content{
-      /* width: 100%; */
-      /* border: 1px solid; */
-  }
   @media (max-width: 768px) {
     .images {
       display: none;
