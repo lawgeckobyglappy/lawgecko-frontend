@@ -38,7 +38,7 @@
               </label>
               <p v-if="phoneNumberExists" class="text-red-500 text-xs">* {{ this.phoneNumberError }}</p>
               <div class="flex justify-between">
-                <select v-model="form.countryCode" id="countryCode">
+                <select v-model="form.countryCode" id="countryCode" >
                   <option value="+234" selected>+234</option>
                   <option value="+44">+44</option>
                 </select>
@@ -281,18 +281,20 @@ export default {
       flex-direction: column;
       width: 100%;
     }
+    .name > div:first-child{
+      margin-right: 0;
+    }
     .form .policy-agreement label {
       font-size: 12px;
     }
-    .form{
-      width: 100%;
-    }
-    button{
-      width: 100%;
-    }
-    /* .form-content{
-      width: 70%;
-    }  */
+    select {
+    width: 30%;
+    margin-right: 10px;
+  }
+    .form-content{
+      margin-left: auto;
+      margin-right: auto;
+    } 
   }
   </style>
   
