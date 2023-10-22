@@ -37,7 +37,13 @@
                 {{ $t('signup.phoneNumber') }}
               </label>
               <p v-if="phoneNumberExists" class="text-red-500 text-xs">* {{ this.phoneNumberError }}</p>
-              <input v-model="form.phoneNumber" @keydown.space.prevent placeholder="99808877" />
+              <div class="flex justify-between">
+                <select v-model="form.countryCode" id="countryCode">
+                  <option value="+234" selected>+234</option>
+                  <option value="+44">+44</option>
+                </select>
+                <input v-model="form.phoneNumber" @keydown.space.prevent placeholder="9098088770" />
+              </div>
             </div>
             <div class="policy-agreement" :class="{ 'error': !form.policySigned }">
               <input type="checkbox" id="checkboxInput" v-model="form.policySigned" />
@@ -103,6 +109,7 @@ export default {
         lastNameError: "",
         phoneNumberError: "",
         emailAddressError: "",
+        countryCode: "+234"
       },
       loading: false,
       emailProvider: "",
@@ -188,7 +195,7 @@ export default {
         "email": this.form.emailAddress,
         "firstName": this.form.firstName,
         "lastName": this.form.lastName,
-        "phoneNumber": this.form.phoneNumber
+        "phoneNumber": this.countryCode + this.form.phoneNumber
       }
     }
   }
@@ -229,12 +236,16 @@ export default {
     font-weight: 600;
     color: #6E6E6E;
   }
-  input {
+  input, select {
     width: 100%;
     padding: 10px;
     margin-bottom: 24px;
     border: 1px solid #ccc;
     border-radius: 5px;
+  }
+  select {
+    width: 20%;
+    margin-right: 10px;
   }
   label {
     font-weight: bold;
