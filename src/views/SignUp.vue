@@ -26,17 +26,17 @@
                 </div>
             </div>
             <div :class="{ 'error': form.emailAddressError }">
-                <label>
-                  {{ $t('signup.emailAddress') }}
-                </label>
-              <p v-if="emailExists" class="text-red-500 text-xs">* Email Already Exists</p>
+              <label>
+                {{ $t('signup.emailAddress') }}
+              </label>
+              <p v-if="emailExists" class="text-red-500 text-xs">* {{ this.emailAddressError }}</p>
               <input v-model="form.emailAddress" @keydown.space.prevent placeholder="e.johnson@lawgecko.com" />
             </div>
             <div :class="{ 'error': form.phoneNumberError }">
               <label>
                 {{ $t('signup.phoneNumber') }}
               </label>
-              <p v-if="phoneNumberExists" class="text-red-500 text-xs">* Phone Number Already Exists</p>
+              <p v-if="phoneNumberExists" class="text-red-500 text-xs">* {{ this.phoneNumberError }}</p>
               <input v-model="form.phoneNumber" @keydown.space.prevent placeholder="99808877" />
             </div>
             <div class="policy-agreement" :class="{ 'error': !form.policySigned }">
@@ -53,36 +53,42 @@
               </button>
             </div>
           </form>
-
-        <div class="or-demarcation">
-          <div class="hr">
-            <hr />
+          <PopUp v-if="popupTrigger">
+            <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
+            <h2 class="text-lg font-bold mb-1">Check your email</h2>
+            <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.emailAddress }}</span></p>
+            <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
+          </PopUp>
+          <div class="or-demarcation">
+            <div class="hr">
+              <hr />
+            </div>
+            <p class="or-text">or</p>
+            <div class="hr">
+              <hr />
+            </div>
           </div>
-          <p class="or-text">or</p>
-          <div class="hr">
-            <hr />
+          <div class="auth">
+            <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
+              <img src="../assets/images/google.png" />
+              Sign up with Google
+            </button>
           </div>
+          <p class="text-center font-semibold text-[#6E6E6E]">Already Have an Account? <a href="/signin" class="text-[#4172D1]"><span>Sign In</span></a> </p>
         </div>
-        <div class="auth">
-          <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
-            <img src="../assets/images/google.png" />
-            Sign up with Google
-          </button>
-        </div>
-        <p class="text-center font-semibold text-[#6E6E6E]">Already Have an Account? <a href="/signin" class="text-[#4172D1]"><span>Sign In</span></a> </p>
       </div>
-    </div>
     </div>
 </template>
   
 <script>
-
+import PopUp from '@/components/PopUp.vue'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
 import { fetcher } from "@/utils/fetcher"
-// import { googleAuthCodeLogin } from "vue3-google-login"
+import { googleAuthCodeLogin } from "vue3-google-login"
 
 export default {
   components: {
+    PopUp,
     ButtonSpinner
   },
   data() {
@@ -129,13 +135,18 @@ export default {
           this.resetForm()
         }
       } catch (error) {
+        this.loading = false;
         this.handleRegistrationError(error)
       }
     },
 
     handleRegistrationError(error) {
-      this.emailExists = error.message === 'Email already taken' ? error.message : ''
-      this.phoneNumberExists = error.message === 'Phone number already taken' ? error.message : ''
+      this.emailAddressError = error.message === "Email already taken" ? error.message : ""; 
+      this.emailExists = !!this.emailAddressError;
+
+      const phoneNumberErrorMessages = ["Invalid phone format", "Phone number already taken"];
+      this.phoneNumberError = phoneNumberErrorMessages.includes(error.message) ? error.message : "";
+      this.phoneNumberExists = !!this.phoneNumberError;
     },
 
     validateUserData() {
@@ -155,15 +166,15 @@ export default {
       this.loading = false
     },
 
-    // async googleAuth() {
-    //   try {
-    //     const response = await googleAuthCodeLogin();
-    //     const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
-    //     await this.$store.dispatch('verifyToken', token.data);
-    //   } catch (error) {
-    //     console.error("Error:", error);
-    //   }
-    // }
+    async googleAuth() {
+      try {
+        const response = await googleAuthCodeLogin();
+        const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+        await this.$store.dispatch('verifyToken', token.data);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
   },
 
   computed: {
