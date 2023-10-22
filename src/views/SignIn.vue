@@ -55,8 +55,8 @@ import { API_URL } from '@/constant'
 import axios from 'axios'
 import PopUp from '@/components/PopUp.vue'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
-// import { googleAuthCodeLogin } from "vue3-google-login"
-// import { fetcher } from "@/utils/fetcher"
+import { googleAuthCodeLogin } from "vue3-google-login"
+import { fetcher } from "@/utils/fetcher"
 
 export default {
     components: {
@@ -107,15 +107,15 @@ export default {
             this.form.emailAddress = ""
         },
 
-        // async googleAuth() {
-        //     try {
-        //         const response = await googleAuthCodeLogin();
-        //         const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code, "isLogin": true });
-        //         await this.$store.dispatch('verifyToken', token.data);
-        //     } catch (error) {
-        //         console.error("Error:", error);
-        //     }
-        // }
+        async googleAuth() {
+            try {
+                const response = await googleAuthCodeLogin();
+                const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code, "isLogin": true });
+                await this.$store.dispatch('verifyToken', token.data);
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
     },
 
     computed: {
