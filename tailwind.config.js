@@ -10,6 +10,7 @@ module.exports = {
         "light-dark-text": "#6E6E6E",
         "btn-hover": "#16a57a",
         "btn-green": "#6cdfbd",
+        "btn-blue": "#4172D1"
       },
     },
   },

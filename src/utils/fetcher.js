@@ -7,15 +7,18 @@ export const fetcher = axios.create({
 });
 
 fetcher.interceptors.response.use(
+  
   (response) => response.data,
   (error) => {
     const errorResponse = error.response;
 
+    console.log(errorResponse)
+
     if (errorResponse) {
       const data = errorResponse.data;
       const errorMessage =
-        data.error.payload.email?.[0] ||
-        data.error.payload.username?.[0] ||
+        data.error.payload.email?.reasons[0] ||
+        data.error.payload.phoneNumber?.reasons[0] ||
         data.error.message;
       ("An error occured");
       throw new Error(errorMessage);
