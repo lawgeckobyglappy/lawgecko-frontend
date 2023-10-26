@@ -124,6 +124,7 @@ export default {
   methods: {
     async submit() {
       this.validateUserData()
+      console.log(this.form.phoneNumber)
       try {
         if (this.isAllValidated) {
           this.loading = true
@@ -177,6 +178,7 @@ export default {
       try {
         const response = await googleAuthCodeLogin();
         const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+
         await this.$store.dispatch('verifyToken', token.data);
       } catch (error) {
         console.error("Error:", error);
@@ -195,7 +197,7 @@ export default {
         "email": this.form.emailAddress,
         "firstName": this.form.firstName,
         "lastName": this.form.lastName,
-        "phoneNumber": this.countryCode + this.form.phoneNumber
+        "phoneNumber": this.form.countryCode + this.form.phoneNumber
       }
     }
   }
@@ -208,7 +210,6 @@ export default {
     background-size: cover;
     background-position: center;
     align-items: center;
-    /* min-height: 100vh; */
   }
   .logo {
     margin-bottom: 20px;
