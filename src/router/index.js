@@ -6,6 +6,7 @@ import VerifyLink from "../views/auth/VerifyLink.vue"
 import ForumView from "../views/ForumView.vue";
 import store from "@/store/index";
 import AdminPage from "../views/admin/AdminPage.vue"
+import SubAdmin from "../views/admin/SubAdmin.vue"
 
 const routes = [
   {
@@ -38,7 +39,13 @@ const routes = [
   {
     path: "/admin",
     name: "admin",
-    component: AdminPage
+    component: AdminPage,
+    children: [
+      {
+        path: "subAdmin",
+        component: SubAdmin
+      }
+    ]
   },
 ];
 
