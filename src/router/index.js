@@ -4,7 +4,9 @@ import SignUp from "../views/SignUp.vue";
 import SignIn from "../views/SignIn.vue";
 import VerifyLink from "../views/VerifyLink.vue";
 import ForumView from "../views/ForumView.vue";
+import AdminLogin from "../views/AdminLogin.vue";
 import store from "@/store/index";
+
 
 const routes = [
   {
@@ -21,6 +23,11 @@ const routes = [
     path: "/signin",
     name: "sign-in",
     component: SignIn,
+  },
+  {
+    path: "/adminlogin",
+    name: "admin-login",
+    component: AdminLogin,
   },
   {
     path: "/verify-link",

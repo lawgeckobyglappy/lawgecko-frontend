@@ -95,5 +95,9 @@
   "signin":{
     "paragraph":"Welcome Back!",
     "emailAddress": "Email Address"
+  },
+
+  "adminlogin":{
+    "paragraph":"Admin Login!"
   }
 }
