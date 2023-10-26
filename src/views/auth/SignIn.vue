@@ -2,10 +2,6 @@
     <div class="signin-container">
         <div class="signin-inner-container">
 
-            <!-- <div class="image-container">
-                <img src="../assets/images/auth.png" />
-            </div> -->
-
             <div class="form-content">
                 <div class="logo">
                     <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo mb-50" />
@@ -40,7 +36,7 @@
                     </div>
                 </div>
                 <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
-                    <img src="../assets/images/google.png"/>
+                    <img src="@/assets/images/google.png"/>
                     Continue with Google
                 </button>
                 <div>
@@ -135,7 +131,7 @@ export default {
   margin: 15px auto 10px;
 }
 .signin-container {
-  background-image: url("../assets/images/backgroundImage.png");
+  background-image: url("@/assets/images/backgroundImage.png");
   background-size: cover;
   background-position: center;
   display: flex;

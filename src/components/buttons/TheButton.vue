@@ -1,7 +1,7 @@
 <template>
     <div>
         <button class="my-button">
-            {{ btnText }}
+            {{ text }}
         </button>
     </div>
 </template>
@@ -10,7 +10,7 @@
     export default {
         name: 'TheButton',
         props: {
-            btnText: String
+            text: String
         }
     }
 </script>
