@@ -1,10 +1,12 @@
 <template>
-    <div>The Nav Bar</div>
+    <aside>
+        <h1>Side Bar</h1>
+    </aside>
 </template>
 
 <script>
 export default {
-    name: 'NavBar.vue',
+    
 }
 </script>
 

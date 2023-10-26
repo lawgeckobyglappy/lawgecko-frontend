@@ -38,7 +38,7 @@ const vuetify = createVuetify({
 
 //components
 import TheButton from "@/components/buttons/TheButton.vue";
-import NavBar from "@/components/layouts/NavBar.vue";
+import SideBar from "@/components/layouts/SideBar.vue";
 import TheFooter from "@/components/layouts/TheFooter.vue";
 import i18n from "./i18n";
 
@@ -68,7 +68,7 @@ app.use(vue3GoogleLogin, { clientId: process.env.VUE_APP_GOOGLE_CLIENT_ID });
 app.mount("#app");
 app.component("TheButton", TheButton);
 app.component("fa-icon", FontAwesomeIcon);
-app.component("NavBar", NavBar);
+app.component("SideBar", SideBar);
 app.component("TheFooter", TheFooter);
 
 //grid responsive

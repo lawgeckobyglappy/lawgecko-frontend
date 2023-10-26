@@ -5,7 +5,7 @@ import SignIn from "../views/auth/SignIn.vue";
 import VerifyLink from "../views/auth/VerifyLink.vue"
 import ForumView from "../views/ForumView.vue";
 import store from "@/store/index";
-import SubAdmin from "../views/admin/SubAdmin.vue"
+import AdminPage from "../views/admin/AdminPage.vue"
 
 const routes = [
   {
@@ -36,9 +36,9 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/subadmin",
-    name: "sub-admin",
-    component: SubAdmin
+    path: "/admin",
+    name: "admin",
+    component: AdminPage
   },
 ];
 
