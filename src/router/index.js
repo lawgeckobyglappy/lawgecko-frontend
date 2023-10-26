@@ -1,10 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import SignUp from "../views/SignUp.vue";
-import SignIn from "../views/SignIn.vue";
-import VerifyLink from "../views/VerifyLink.vue";
+import SignUp from "../views/auth/SignUp.vue";
+import SignIn from "../views/auth/SignIn.vue";
+import VerifyLink from "../views/auth/VerifyLink.vue"
 import ForumView from "../views/ForumView.vue";
 import store from "@/store/index";
+import SubAdmin from "../views/admin/SubAdmin.vue"
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
     name: "forum",
     component: ForumView,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/subadmin",
+    name: "sub-admin",
+    component: SubAdmin
   },
 ];
 
