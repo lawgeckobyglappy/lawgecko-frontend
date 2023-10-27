@@ -1,9 +1,11 @@
 <template>
-    <div>
-        <SideBar />
-    </div>
-    <div>
-        <router-view />
+    <div class="flex">
+        <div class="sidebar-left">
+            <SideBar />
+        </div>
+        <div class="main-view">
+            <router-view />
+        </div>
     </div>
 </template>
 <script>
@@ -18,5 +20,14 @@ export default {
 </script>
 
 <style scoped>
+.main-view {
+    /* flex: 1 1 0; */
+    padding: 2rem;
+}
 
+@media (max-width: 768px) {
+    .main-view {
+        padding-left: 6rem;
+    }
+}
 </style>
