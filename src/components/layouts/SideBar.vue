@@ -1,7 +1,8 @@
 <template>
     <aside :class="`${this.isExpanded ? 'isExpanded' : '' }`">
         <div class="logo">
-            <img src="@/assets/images/google.png" alt="Google Icon"/>
+            <img v-if="!isExpanded" src="@/assets/images/lawgeckoIcon.png" alt="Google Icon"/>
+            <img v-else src="@/assets/images/lawgeckoIcon.png" alt="Google Icon"/>
         </div>
 
         <div class="menu-toggle-wrap">
@@ -91,7 +92,7 @@ aside .flex {
 }
 .isExpanded .menu-toggle-wrap {
     justify-content: flex-end;
-    top: -2.7rem;
+    top: -3rem;
 }
 
 .isExpanded .menu-toggle-wrap .menu-toggle {
