@@ -5,27 +5,30 @@
             <TheButton text="Add Sub Admin" @click="openSubAdminForm"/>
         </div>
         <div class="admin-details">
-            <p>Admin Data Bruh!</p>
+            <h1>Admin Data Bruh!</h1>
         </div>
         <PopUp v-if="popupTrigger">
-            <h1>Add New Admin</h1>
-            <form>
-                <div>
-                    <label>First Name</label>
-                    <input />
+            <div class="popup">
+                <div class="mb-10 header">
+                    <h1 class="font-bold text-2xl">Add New Admin</h1>
+                    <button @click="openSubAdminForm"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
                 </div>
-                <div>
-                    <label>Last Name</label>
-                    <input />
-                </div>
-                <div>
-                    <label>Email Address</label>
-                    <input />
-                </div>
-                <div>
-                    
-                </div>
-            </form>
+                <form class="form">
+                    <div>
+                        <label class="font-bold text-left">First Name</label>
+                        <input class="w-full mt-3"/>
+                    </div>
+                    <div>
+                        <label class="font-bold text-left">Last Name</label>
+                        <input class="w-full mt-3"/>
+                    </div>
+                    <div>
+                        <label class="font-bold text-left">Email Address</label>
+                        <input class="w-full mt-3"/>
+                    </div>
+                    <TheButton text="Send Invite" class="mt-5"/>
+                </form>
+            </div>
         </PopUp>
     </div>
 </template>
@@ -43,7 +46,7 @@ export default {
 
     data() {
         return {
-            popupTrigger: false
+            popupTrigger: true
         }
     },
 
@@ -61,4 +64,26 @@ export default {
     border: 1px solid;
 }
 
+.popup {
+    text-align: left;
+    padding: 10px 20px;
+}
+
+.form input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.header button:hover {
+    color: red;
+    transition: 0.2s ease-out;
+}
 </style>

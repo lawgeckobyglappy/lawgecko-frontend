@@ -7,6 +7,8 @@ import ForumView from "../views/ForumView.vue";
 import store from "@/store/index";
 import AdminPage from "../views/admin/AdminPage.vue"
 import SubAdmin from "../views/admin/SubAdmin.vue"
+import Dashboard from "../views/admin/DashboardPage.vue"
+import Resource from "../views/admin/ResourcePage.vue"
 
 const routes = [
   {
@@ -41,6 +43,14 @@ const routes = [
     name: "admin",
     component: AdminPage,
     children: [
+      {
+        path: "",
+        component: Dashboard
+      },
+      {
+        path: "resource",
+        component: Resource
+      },
       {
         path: "subAdmin",
         component: SubAdmin
