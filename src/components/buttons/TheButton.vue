@@ -1,7 +1,7 @@
 <template>
     <div>
-        <button class="my-button">
-            {{ btnText }}
+        <button>
+            {{ text }}
         </button>
     </div>
 </template>
@@ -10,17 +10,18 @@
     export default {
         name: 'TheButton',
         props: {
-            btnText: String
+            text: String
         }
     }
 </script>
 
 <style scoped>
-    .my-button {
+    button {
         padding: 10px 20px;
         font-weight: bold;
-        border-radius: 20px;
         justify-content: center;
         white-space: nowrap;
+        background-color: black;
+        color: white;
     }
 </style>

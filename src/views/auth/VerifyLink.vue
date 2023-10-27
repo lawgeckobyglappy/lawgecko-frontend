@@ -23,7 +23,7 @@ export default{
 </script>
 <style scoped>
 .outer-container{
-    background-image: url("../assets/images/backgroundImage.png");
+    background-image: url("@/assets/images/backgroundImage.png");
     background-size: cover;
     background-position: center;
     display: flex;

@@ -106,7 +106,7 @@ export default {
   margin: 15px auto 10px;
 }
 .signin-container {
-  background-image: url("../assets/images/backgroundImage.png");
+  background-image: url("@/assets/images/backgroundImage.png");
   background-size: cover;
   background-position: center;
   display: flex;
