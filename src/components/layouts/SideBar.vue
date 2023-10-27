@@ -13,7 +13,7 @@
 
         <h3 class="font-bold">Menu</h3>
         <div class="menu">
-            <router-link class="button" to="/admin/dashboard">
+            <router-link class="button" to="/admin">
                 <span class="menu-icon"><fa-icon :icon="['fas', 'house']"/></span>
                 <span class="text">Dashboard</span>
             </router-link>
