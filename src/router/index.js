@@ -9,6 +9,7 @@ import AdminPage from "../views/admin/AdminPage.vue"
 import SubAdmin from "../views/admin/SubAdmin.vue"
 import Dashboard from "../views/admin/DashboardPage.vue"
 import Resource from "../views/admin/ResourcePage.vue"
+import AdminSignUp from "../views/admin/auth/SignUp.vue"
 
 const routes = [
   {
@@ -37,6 +38,11 @@ const routes = [
     name: "forum",
     component: ForumView,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/signUp",
+    name: "forum",
+    component: AdminSignUp,
   },
   {
     path: "/admin",
