@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button class="my-button">
+        <button>
             {{ text }}
         </button>
     </div>
@@ -16,11 +16,12 @@
 </script>
 
 <style scoped>
-    .my-button {
+    button {
         padding: 10px 20px;
         font-weight: bold;
-        border-radius: 20px;
         justify-content: center;
         white-space: nowrap;
+        background-color: black;
+        color: white;
     }
 </style>
