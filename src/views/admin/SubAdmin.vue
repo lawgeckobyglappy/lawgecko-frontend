@@ -8,7 +8,7 @@
             <p>Admin Data Bruh!</p>
         </div>
         <PopUp v-if="popupTrigger">
-            <p>Hello, I'm here</p>
+            <h1>Add New Admin</h1>
             <form>
                 <div>
                     <label>First Name</label>
