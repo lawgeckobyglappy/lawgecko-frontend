@@ -5,7 +5,7 @@
             <TheButton text="Add Sub Admin" @click="openSubAdminForm"/>
         </div>
         <div class="admin-details">
-            <h1>Admin Data Bruh!</h1>
+            <h1>Admin Data:</h1>
         </div>
         <PopUp v-if="popupTrigger">
             <div class="popup">
@@ -46,7 +46,7 @@ export default {
 
     data() {
         return {
-            popupTrigger: true
+            popupTrigger: false
         }
     },
 
