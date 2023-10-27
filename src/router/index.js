@@ -41,7 +41,7 @@ const routes = [
   },
   {
     path: "/admin/signUp",
-    name: "forum",
+    name: "admin-signup",
     component: AdminSignUp,
   },
   {
