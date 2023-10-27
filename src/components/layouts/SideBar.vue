@@ -88,7 +88,6 @@ aside .flex {
     position: relative;
     top: 0;
     transition: 0.2s ease-out;
-    /* border: 1px solid white; */
 }
 .isExpanded .menu-toggle-wrap {
     justify-content: flex-end;
@@ -113,7 +112,6 @@ aside .flex {
     align-items: center;
     padding: 0.5rem 1rem 0.5rem 0.5rem;
     transition: 0.2s ease-out;
-    /* border: 2px solid white; */
 }
 
 .isExpanded h3,
@@ -125,10 +123,6 @@ h3, .button .text {
     opacity: 0;
     transition: 0.3s ease-out;
 }
-/* 
-.menu-toggle:hover {
-    margin: 0;
-} */
 
 .menu-icon {
     margin-right: 0.5rem;
@@ -138,7 +132,6 @@ h3, .button .text {
 .menu-icon .text,
 .router-link-exact-active,
 .button:hover {
-    /* background-color: rgba(187, 186, 186, 0.23); */
     color: brown;
 }
 
