@@ -11,6 +11,7 @@ import SubAdmin from "../views/admin/SubAdmin.vue"
 import Dashboard from "../views/admin/DashboardPage.vue"
 import Resource from "../views/admin/ResourcePage.vue"
 import AdminSignUp from "../views/admin/auth/SignUp.vue"
+import OtpPage from "../views/admin/auth/OtpPage.vue";
 
 
 const routes = [
@@ -55,6 +56,11 @@ const routes = [
     path: "/admin/login",
     name: "admin-login",
     component: AdminLogin,
+  },
+  {
+    path: "/admin/otp",
+    name: "otp",
+    component: OtpPage,
   },
   {
     path: "/admin",
