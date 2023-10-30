@@ -52,6 +52,7 @@ const routes = [
     children: [
       {
         path: "",
+        name: "dashboard",
         component: Dashboard
       },
       {
