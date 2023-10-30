@@ -28,6 +28,7 @@ export default {
 @media (max-width: 768px) {
     .main-view {
         padding-left: 6rem;
+        overflow-x: scroll;
     }
 }
 </style>

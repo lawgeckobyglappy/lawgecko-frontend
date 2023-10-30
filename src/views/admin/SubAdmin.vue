@@ -9,11 +9,21 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email Address</th>
+                        <th>Email</th>
                         <th>Permissions</th>
                         <th>Status</th>
+                        <th></th>
                     </tr>
                 </thead>
+                <tbody>
+                    <tr>
+                        <td>Collins</td>
+                        <td>collins.tito.siyabola@gmail.com</td>
+                        <td>Full Sub-Admin Access</td>
+                        <td>Pending</td>
+                        <td><button>x</button></td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         <PopUp v-if="popupTrigger">
@@ -71,6 +81,8 @@ export default {
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
+  border: 1px solid;
+  padding: 0 100px;
 }
 
 table {
@@ -80,43 +92,23 @@ table {
   margin-top: 20px;
 }
 
+th {
+    border-bottom: 1px solid #ccc;
+}
+
 table, th, td {
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
+  text-align: left;
 }
 
 th, td {
   padding: 10px;
 }
 
-/* .admin-details {
-    margin: 20px 0;
-    display: flex;
-    min-width: 70vw;
-    flex-direction: column;
-    padding: 0 0 0 30px;
-} */
-
-/* table {
-    width: 100%;
-    border-collapse: collapse;
-    flex: 1;
-    border-collapse: collapse;
-    width: 100%;
-    
-}
-
-table, th, td {
-    border: 1px solid #ccc;
-}
-
-th, td {
-    padding: 10px;
-}
-
 .popup {
     text-align: left;
     padding: 10px 20px;
-} */
+}
 
 .form input {
   padding: 10px;
@@ -137,7 +129,8 @@ th, td {
 }
 @media (max-width: 768px) {
     .admin-details {
-        overflow-x: auto;
+        overflow-x: scroll;
+        padding: 0 0px;
     }
 }
 </style>
