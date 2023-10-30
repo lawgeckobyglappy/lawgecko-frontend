@@ -21,7 +21,7 @@ export default {
 
 <style scoped>
 .main-view {
-    /* flex: 1 1 0; */
+    flex: 1; 
     padding: 2rem;
 }
 

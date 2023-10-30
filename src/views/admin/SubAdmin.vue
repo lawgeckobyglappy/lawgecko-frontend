@@ -1,11 +1,20 @@
 <template>
     <div>
         <div class="flex flex-row align-center mb-15">
-            <h1 class="mr-10 text-3xl font-bold">Site Admins</h1>
+            <h1 class="mr-10 text-3xl font-bold">Admins</h1>
             <TheButton text="Add Sub Admin" @click="openSubAdminForm"/>
         </div>
         <div class="admin-details">
-            <h1>Admin Data:</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email Address</th>
+                        <th>Permissions</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
         <PopUp v-if="popupTrigger">
             <div class="popup">
@@ -15,11 +24,7 @@
                 </div>
                 <form class="form">
                     <div>
-                        <label class="font-bold text-left">First Name</label>
-                        <input class="w-full mt-3"/>
-                    </div>
-                    <div>
-                        <label class="font-bold text-left">Last Name</label>
+                        <label class="font-bold text-left">Name</label>
                         <input class="w-full mt-3"/>
                     </div>
                     <div>
@@ -61,13 +66,57 @@ export default {
 
 <style scoped>
 .admin-details {
-    border: 1px solid;
+  display: flex;
+  min-width: 70vw;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+table {
+  flex: 1; /* Allow the table to take up available space */
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+table, th, td {
+  border: 1px solid #ccc;
+}
+
+th, td {
+  padding: 10px;
+}
+
+/* .admin-details {
+    margin: 20px 0;
+    display: flex;
+    min-width: 70vw;
+    flex-direction: column;
+    padding: 0 0 0 30px;
+} */
+
+/* table {
+    width: 100%;
+    border-collapse: collapse;
+    flex: 1;
+    border-collapse: collapse;
+    width: 100%;
+    
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
 }
 
 .popup {
     text-align: left;
     padding: 10px 20px;
-}
+} */
 
 .form input {
   padding: 10px;
@@ -85,5 +134,10 @@ export default {
 .header button:hover {
     color: red;
     transition: 0.2s ease-out;
+}
+@media (max-width: 768px) {
+    .admin-details {
+        overflow-x: auto;
+    }
 }
 </style>

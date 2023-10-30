@@ -9,7 +9,7 @@
                     <form>
                         <div>
                             <label class="font-bold">Bio</label>
-                            <textarea class="w-full mt-3 ">What's your area of interest?</textarea>
+                            <textarea class="w-full mt-3 " placeholder="What's your area of interest?"></textarea>
                         </div>
                         <div>
                             <label class="font-bold">Email Address</label>

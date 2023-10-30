@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="signin-container">
         <div class="signin-inner-container">
             <div class="form-content">
@@ -159,4 +159,4 @@ export default {
   }
 }
 
-</style>
+</style> -->

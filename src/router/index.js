@@ -4,7 +4,6 @@ import SignUp from "../views/auth/SignUp.vue";
 import SignIn from "../views/auth/SignIn.vue";
 import VerifyLink from "../views/auth/VerifyLink.vue"
 import ForumView from "../views/ForumView.vue";
-import AdminLogin from "../views/admin/auth/AdminLogin.vue";
 import store from "@/store/index";
 import AdminPage from "../views/admin/AdminPage.vue"
 import SubAdmin from "../views/admin/SubAdmin.vue"
@@ -45,11 +44,6 @@ const routes = [
     path: "/admin/signUp",
     name: "admin-signup",
     component: AdminSignUp,
-  },
-  {
-    path: "/admin/login",
-    name: "admin-login",
-    component: AdminLogin,
   },
   {
     path: "/admin",
