@@ -5,10 +5,10 @@
                 <div class="logo">
                     <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo mb-50" />
                 </div>
+                <avatar-input v-model="form.avatar"></avatar-input>
                 <div class="form">
                     <form>
                       <div>
-                        <avatar-input v-model="form.avatar"></avatar-input>
                       </div>
                       <div>
                           <label class="font-bold">Bio</label>
@@ -61,7 +61,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .logo {
   margin: 15px auto 10px;
 }

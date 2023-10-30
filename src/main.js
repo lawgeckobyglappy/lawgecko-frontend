@@ -71,6 +71,7 @@ app.component("fa-icon", FontAwesomeIcon);
 app.component("SideBar", SideBar);
 app.component("TheFooter", TheFooter);
 
+
 //grid responsive
 app.component("TheRow", Row);
 app.component("TheColumn", Column);
