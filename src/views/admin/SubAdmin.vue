@@ -9,19 +9,19 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Email</th>
+                        <th>Email Address</th>
                         <th>Permissions</th>
                         <th>Status</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Collins</td>
-                        <td>collins.tito.siyabola@gmail.com</td>
+                    <tr v-for="(admin, index) in admins" :key="index">
+                        <td>{{ admin.name }}</td>
+                        <td>{{ admin.email }}</td>
                         <td>Full Sub-Admin Access</td>
-                        <td>Pending</td>
-                        <td><button>x</button></td>
+                        <td>{{ admin.status }}</td>
+                        <td><button @click="removeAdmin(index)">x</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -61,13 +61,29 @@ export default {
 
     data() {
         return {
-            popupTrigger: false
+            popupTrigger: false,
+            admins: [
+                {
+                    name: "Collins",
+                    email: "collins.tito.siyabola@gmail.com",
+                    status: "Pending"
+                },
+                {
+                    name: "Collins",
+                    email: "collins.tito.siyabola@gmail.com",
+                    status: "Pending"
+                },
+            ]
         }
     },
 
     methods: {
         openSubAdminForm() {
             this.popupTrigger = !this.popupTrigger;
+        },
+
+        removeAdmin(index) {
+            this.admins.splice(index, 1)
         }
     }
 }
@@ -81,12 +97,12 @@ export default {
   align-items: center;
   flex-direction: column;
   margin-top: 20px;
-  border: 1px solid;
+  /* border: 1px solid; */
   padding: 0 100px;
 }
 
 table {
-  flex: 1; /* Allow the table to take up available space */
+  /* flex: 1; */
   border-collapse: collapse;
   width: 100%;
   margin-top: 20px;
@@ -129,8 +145,8 @@ th, td {
 }
 @media (max-width: 768px) {
     .admin-details {
-        overflow-x: scroll;
-        padding: 0 0px;
+        overflow-x: auto;
+        padding: 0 10px;
     }
 }
 </style>

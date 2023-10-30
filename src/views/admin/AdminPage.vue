@@ -25,10 +25,10 @@ export default {
     padding: 2rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .main-view {
+        overflow-x: hidden;
         padding-left: 6rem;
-        overflow-x: scroll;
     }
 }
 </style>
