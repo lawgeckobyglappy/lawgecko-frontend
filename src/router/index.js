@@ -30,6 +30,11 @@ const routes = [
     component: SignIn,
   },
   {
+    path: "/adminlogin",
+    name: "admin-login",
+    component: AdminLogin,
+  },
+  {
     path: "/verify-link",
     name: "verify-link",
     component: VerifyLink,
