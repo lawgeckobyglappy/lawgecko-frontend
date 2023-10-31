@@ -1,10 +1,10 @@
 <template>
     <div class="p-8 flex flex-row signup-container">
       <div class="images">
-        <img src="../assets/images/auth.png" class="w-full" />
+        <img src="@/assets/images/auth.png" class="w-full" />
       </div>
       <div class="w-9/12 mt-5 mb-10 w-full form-content">
-        <!-- align-center -->
+       
         <div class="logo">
           <img src="/logo.svg" alt="lawgecko logo" class="w-40 mx-auto logo" />
         </div>
@@ -76,7 +76,7 @@
           </div>
           <div class="auth">
             <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
-              <img src="../assets/images/google.png" />
+              <img src="@/assets/images/google.png" />
               Sign up with Google
             </button>
           </div>
@@ -124,6 +124,7 @@ export default {
   methods: {
     async submit() {
       this.validateUserData()
+      console.log(this.form.phoneNumber)
       try {
         if (this.isAllValidated) {
           this.loading = true
@@ -177,6 +178,7 @@ export default {
       try {
         const response = await googleAuthCodeLogin();
         const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code });
+
         await this.$store.dispatch('verifyToken', token.data);
       } catch (error) {
         console.error("Error:", error);
@@ -195,7 +197,7 @@ export default {
         "email": this.form.emailAddress,
         "firstName": this.form.firstName,
         "lastName": this.form.lastName,
-        "phoneNumber": this.countryCode + this.form.phoneNumber
+        "phoneNumber": this.form.countryCode + this.form.phoneNumber
       }
     }
   }
@@ -204,11 +206,10 @@ export default {
   
   <style scoped>
   .signup-container {
-    background-image: url("../assets/images/backgroundImage.png");
+    background-image: url("@/assets/images/backgroundImage.png");
     background-size: cover;
     background-position: center;
     align-items: center;
-    /* min-height: 100vh; */
   }
   .logo {
     margin-bottom: 20px;

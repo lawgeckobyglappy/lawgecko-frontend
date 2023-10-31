@@ -1,10 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import SignUp from "../views/SignUp.vue";
-import SignIn from "../views/SignIn.vue";
-import VerifyLink from "../views/VerifyLink.vue";
+import SignUp from "../views/auth/SignUp.vue";
+import SignIn from "../views/auth/SignIn.vue";
+import VerifyLink from "../views/auth/VerifyLink.vue"
 import ForumView from "../views/ForumView.vue";
 import store from "@/store/index";
+import AdminPage from "../views/admin/AdminPage.vue"
+import SubAdmin from "../views/admin/SubAdmin.vue"
+import Dashboard from "../views/admin/DashboardPage.vue"
+import Resource from "../views/admin/ResourcePage.vue"
+import AdminSignUp from "../views/admin/auth/SignUp.vue"
+import OtpPage from "../views/admin/auth/OtpPage.vue";
+
 
 const routes = [
   {
@@ -33,6 +40,36 @@ const routes = [
     name: "forum",
     component: ForumView,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin/signUp",
+    name: "admin-signup",
+    component: AdminSignUp,
+  },
+  {
+    path: "/admin/otp",
+    name: "otp",
+    component: OtpPage,
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: AdminPage,
+    children: [
+      {
+        path: "",
+        name: "dashboard",
+        component: Dashboard
+      },
+      {
+        path: "resource",
+        component: Resource
+      },
+      {
+        path: "subAdmin",
+        component: SubAdmin
+      }
+    ]
   },
 ];
 

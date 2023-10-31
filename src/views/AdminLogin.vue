@@ -1,62 +1,42 @@
 <template>
     <div class="signin-container">
         <div class="signin-inner-container">
-
-            <!-- <div class="image-container">
-                <img src="../assets/images/auth.png" />
-            </div> -->
-
             <div class="form-content">
                 <div class="logo">
                     <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo mb-50" />
                 </div>
-                <p class="mb-10 text-heading-text font-bold text-2xl">{{$t('signin.paragraph')}}</p> 
+                <p class="mb-10 text-heading-text font-bold text-2xl">{{ $t('adminlogin.paragraph') }}</p>
                 <div class="form">
                     <form @submit.prevent="submit">
                         <div :class="{ 'error': form.emailAddressError }">
-                            <label class="font-bold">{{$t('signin.emailAddress')}}</label>
+                            <label class="font-bold">{{ $t('signin.emailAddress') }}</label>
                             <input v-model="form.emailAddress" class="w-full mt-3 " placeholder="elliot@lawgecko.com" />
                         </div>
                         <button type="submit" class="mb-5 hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
                             <p v-if="!loading" class="font-bold">{{ $t("header.signIn") }}</p>
                             <ButtonSpinner v-else />
                         </button>
-                        
                     </form>
                     <PopUp v-if="popupTrigger">
                         <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />
                         <h2 class="text-lg font-bold mb-1">Check your email</h2>
-                        <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{ this.emailAddress }}</span></p>
+                        <p class="text-gray-500">Login with the link sent to <br><span class="font-bold">{{this.emailAddress }}</span></p>
                         <a :href=emailProvider><button class="bg-btn-green cursor-pointer px-10 py-2 mt-6 rounded-md ">Go to email</button></a>
                     </PopUp>
                 </div>
-                <div class="or-demarcation">
-                    <div class="hr">
-                        <hr/>
-                    </div>
-                    <p class="mb-5 or-text">or</p>
-                    <div class="hr">
-                        <hr/>
-                    </div>
-                </div>
-                <button id="google-btn" class="bg-btn-blue mt-8 mb-5 text-white" @click="googleAuth">
-                    <img src="../assets/images/google.png"/>
-                    Continue with Google
-                </button>
-                <div>
-                    <p class="text-center font-semibold text-[#6E6E6E]">Don't Have an Account? <a href="SignUp" class="text-[#4172D1]">Sign Up</a></p>
-                </div>
+
             </div>
+
         </div>
+
     </div>
 </template>
+
 <script>
 import { API_URL } from '@/constant'
 import axios from 'axios'
 import PopUp from '@/components/PopUp.vue'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
-import { googleAuthCodeLogin } from "vue3-google-login"
-import { fetcher } from "@/utils/fetcher"
 
 export default {
     components: {
@@ -104,16 +84,6 @@ export default {
         resetForm(){
             this.loading = false
             this.form.emailAddress = ""
-        },
-
-        async googleAuth() {
-            try {
-                const response = await googleAuthCodeLogin();
-                const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code, "isLogin": true });
-                await this.$store.dispatch('verifyToken', token.data);
-            } catch (error) {
-                console.error("Error:", error);
-            }
         }
     },
 
@@ -130,7 +100,8 @@ export default {
     }
 }
 </script>
-<style scoped>
+
+<style lang="scss" scoped>
 .logo {
   margin: 15px auto 10px;
 }
@@ -147,6 +118,7 @@ export default {
   display: flex;
   align-items: center;
   width: 100%;
+  
 }
 .form-content {
   display: flex;
@@ -155,33 +127,9 @@ export default {
   margin-left: auto;
   margin-right: auto;
   justify-content: center;
+ 
+}
 
-}
-/* Images */
-.image-container {
-  margin: 40px 0 40px 100px;
-}
-.image-container img {
-    max-width: 90%;
-    position: relative;
-    height: auto;
-}
-.or-demarcation {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  grid-gap: 10px;
-}
-.hr {
-  height: 1.5px;
-  margin-top: 12px;
-  margin-bottom: 20px;
-  background-color: #cbcaca;
-}
-.or-text {
-  margin: 0 10px;
-  font-weight: 600;
-  color: #6E6E6E;
-}
 .form input {
   width: 100%;
   padding: 10px;
@@ -202,19 +150,6 @@ export default {
 .error input {
   border-color: red;
 }
-button {
-  width: 100%;
-  height: 47px;
-  padding: 10px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-button img {
-    height:30px;
-    margin-right: 10px;
-}
 @media (max-width: 760px) {
   
   .form-content {
@@ -223,4 +158,5 @@ button img {
     width: 70%;
   }
 }
+
 </style>
