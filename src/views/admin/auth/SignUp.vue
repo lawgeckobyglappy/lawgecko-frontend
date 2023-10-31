@@ -10,26 +10,40 @@
                 </div>
                 <div class="form">
                   <form>
-                      <div>
-                          <label class="font-bold">Bio</label>
-                          <textarea class="w-full mt-3 " placeholder="What's your area of interest?"></textarea>
+                    <div class="name">
+                      <div :class="{ 'error': form.firstNameError }">
+                        <label class="font-bold">
+                          {{ $t('signup.firstName') }}  
+                        </label>
+                        <input v-model="form.firstName" @keydown.space.prevent placeholder="Elliot"/>
                       </div>
-                      <div>
-                          <label class="font-bold">Phone Number</label>
-                          <input type="tel" class="w-full mt-3" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
+                      <div :class="{ 'error': form.lastNameError }">
+                        <label class="font-bold">
+                          {{ $t('signup.lastName') }}
+                        </label>
+                        <input v-model="form.lastName" @keydown.space.prevent placeholder="Johnson"/>
                       </div>
-                      <div>
-                          <label class="font-bold">House Address</label>
-                          <input class="w-full mt-3 " />
-                      </div>
-                      <div>
-                          <label class="font-bold">Government Issued ID</label>
-                          <input type="file" accept="image/*" class="w-full mt-3 " />
-                      </div>
-                      <button type="submit" class="mb-5 hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
-                          <p class="font-bold">Register</p>
-                      </button>
-                    </form>
+                    </div>
+                    <div>
+                        <label class="font-bold">Bio</label>
+                        <textarea class="w-full mt-3 " placeholder="What's your area of interest?"></textarea>
+                    </div>
+                    <div>
+                        <label class="font-bold">Phone Number</label>
+                        <input type="tel" class="w-full mt-3" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
+                    </div>
+                    <div>
+                        <label class="font-bold">House Address</label>
+                        <input class="w-full mt-3 " />
+                    </div>
+                    <div>
+                        <label class="font-bold">Government Issued ID</label>
+                        <input type="file" accept="image/*" class="w-full mt-3 " />
+                    </div>
+                    <button type="submit" class="mb-5 hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
+                        <p class="font-bold">Register</p>
+                    </button>
+                  </form>
                 </div>
 
             </div>
@@ -92,7 +106,7 @@ export default {
 .form input, textarea {
   width: 100%;
   padding: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border: 1px solid #926e0a;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -108,17 +122,34 @@ export default {
   justify-content: center;
   align-items: center;
 }
+.name {
+  display: flex;
+  justify-content: space-between;
+}
+
+.name > div:first-child{
+  margin-right: 10px;
+}
 
 .error input {
   border-color: red;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 768px) {
   .form-content {
     margin-left: auto;
     margin-right: auto;
     width: 70%;
   }
+
+  .name {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    .name > div:first-child{
+      margin-right: 0;
+    }
 }
 
 </style>

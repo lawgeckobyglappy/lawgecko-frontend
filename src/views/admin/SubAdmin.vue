@@ -20,8 +20,42 @@
                         <td>{{ admin.name }}</td>
                         <td>{{ admin.email }}</td>
                         <td>Full Sub-Admin Access</td>
-                        <td>{{ admin.status }}</td>
+                        <td><button @click="setCurrentAdmin(index)">{{ admin.status }}</button></td>
                         <td><button @click="removeAdmin(index)">x</button></td>
+
+                        <PopUp v-if="adminProfilePopup">
+                            <div class="popup">
+                                <div class="mb-5 header">
+                                    <h1 class="font-bold text-2xl">Admin</h1>
+                                    <button @click="adminProfile"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
+                                </div>
+                                <div>
+                                    <div>
+                                        <label class="font-bold text-left">Name</label>
+                                        <p>{{ currentAdmin.name }}</p>
+                                    </div>
+                                    <div>
+                                        <label class="font-bold text-left">Email Address</label>
+                                        <p>{{ currentAdmin.email }}</p>
+                                    </div>
+                                    <hr class="my-5 border-2"/>
+                                    <div class="form">
+                                        <div>
+                                            <label class="font-bold text-left">Lawgecko Email Address</label>
+                                            <input class="w-full mt-3"/>
+                                        </div>
+                                        <div>
+                                            <label class="font-bold text-left">Password</label>
+                                            <input class="w-full mt-3"/>
+                                        </div>
+                                        <div class="flex align-center mt-5">
+                                            <TheButton text="Approve" class="mr-3"/>
+                                            <TheButton text="Reject"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </PopUp>
                     </tr>
                 </tbody>
             </table>
@@ -62,6 +96,7 @@ export default {
     data() {
         return {
             popupTrigger: false,
+            adminProfilePopup: false,
             admins: [
                 {
                     name: "Collins",
@@ -73,7 +108,8 @@ export default {
                     email: "collins.tito.siyabola@gmail.com",
                     status: "Pending"
                 },
-            ]
+            ],
+            currentAdmin: null
         }
     },
 
@@ -84,7 +120,22 @@ export default {
 
         removeAdmin(index) {
             this.admins.splice(index, 1)
+        },
+
+        setCurrentAdmin(index) {
+            this.currentAdmin = this.admins[index]
+            this.adminProfile()
+        },
+
+        adminProfile() {
+            this.adminProfilePopup = !this.adminProfilePopup
+        },
+
+        accept() {
+
         }
+
+
     }
 }
 
@@ -143,6 +194,8 @@ th, td {
     color: red;
     transition: 0.2s ease-out;
 }
+
+
 @media (max-width: 768px) {
     .admin-details {
         overflow-x: auto;
