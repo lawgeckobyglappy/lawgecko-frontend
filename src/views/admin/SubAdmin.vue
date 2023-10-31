@@ -62,6 +62,7 @@
                     </tr>
                 </tbody>
             </table>
+            <DropDown />
         </div>
         <PopUp v-if="popupTrigger">
             <div class="popup">
@@ -89,11 +90,13 @@
 <script>
 import TheButton from '@/components/buttons/TheButton.vue';
 import PopUp from '@/components/PopUp.vue';
+import DropDown from '@/components/DropDown.vue';
 
 export default {
     components: {
         TheButton,
-        PopUp
+        PopUp,
+        DropDown
     }, 
 
     data() {
@@ -112,7 +115,15 @@ export default {
                     status: "Pending"
                 },
             ],
-            currentAdmin: null
+            currentAdmin: null,
+            adminActions: [
+                {
+                    title: "View"
+                }, 
+                {
+                    title: "Delete"
+                }
+            ]
         }
     },
 
