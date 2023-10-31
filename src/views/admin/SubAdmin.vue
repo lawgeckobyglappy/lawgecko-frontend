@@ -12,16 +12,16 @@
                         <th>Email Address</th>
                         <th>Permissions</th>
                         <th>Status</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(admin, index) in admins" :key="index">
+                    <tr v-for="(admin, index) in admins" :key="index" class="">
                         <td>{{ admin.name }}</td>
                         <td>{{ admin.email }}</td>
                         <td>Full Sub-Admin Access</td>
-                        <td><button @click="setCurrentAdmin(index)">{{ admin.status }}</button></td>
-                        <td><button @click="removeAdmin(index)"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button></td>
+                        <!-- @click="removeAdmin(index)" -->
+                        <td>{{ admin.status }}</td>
+                        <td><button @click="setCurrentAdmin(index)"><fa-icon :icon="['fas', 'circle-info']" /></button></td>
 
                         <PopUp v-if="adminProfilePopup">
                             <div class="popup">
