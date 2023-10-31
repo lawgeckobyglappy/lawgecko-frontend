@@ -38,8 +38,8 @@ const vuetify = createVuetify({
 
 //components
 import TheButton from "@/components/buttons/TheButton.vue";
-import SideBar from "@/components/Layouts/SideBar.vue";
-import TheFooter from "@/components/Layouts/TheFooter.vue";
+import SideBar from "@/components/layouts/SideBar.vue";
+import TheFooter from "@/components/layouts/TheFooter.vue";
 import i18n from "./i18n";
 
 /* import the fontawesome core */
@@ -70,6 +70,7 @@ app.component("TheButton", TheButton);
 app.component("fa-icon", FontAwesomeIcon);
 app.component("SideBar", SideBar);
 app.component("TheFooter", TheFooter);
+
 
 //grid responsive
 app.component("TheRow", Row);

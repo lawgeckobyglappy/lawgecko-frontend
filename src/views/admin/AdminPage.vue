@@ -10,7 +10,7 @@
 </template>
 <script>
 
-import SideBar from '@/components/Layouts/SideBar.vue';
+import SideBar from '@/components/layouts/SideBar.vue';
 
 export default {
     components: {
@@ -21,12 +21,13 @@ export default {
 
 <style scoped>
 .main-view {
-    /* flex: 1 1 0; */
+    flex: 1; 
     padding: 2rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
     .main-view {
+        overflow-x: hidden;
         padding-left: 6rem;
     }
 }

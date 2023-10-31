@@ -1,11 +1,30 @@
 <template>
     <div>
         <div class="flex flex-row align-center mb-15">
-            <h1 class="mr-10 text-3xl font-bold">Site Admins</h1>
+            <h1 class="mr-10 text-3xl font-bold">Admins</h1>
             <TheButton text="Add Sub Admin" @click="openSubAdminForm"/>
         </div>
         <div class="admin-details">
-            <h1>Admin Data:</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email Address</th>
+                        <th>Permissions</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(admin, index) in admins" :key="index">
+                        <td>{{ admin.name }}</td>
+                        <td>{{ admin.email }}</td>
+                        <td>Full Sub-Admin Access</td>
+                        <td>{{ admin.status }}</td>
+                        <td><button @click="removeAdmin(index)">x</button></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <PopUp v-if="popupTrigger">
             <div class="popup">
@@ -15,11 +34,7 @@
                 </div>
                 <form class="form">
                     <div>
-                        <label class="font-bold text-left">First Name</label>
-                        <input class="w-full mt-3"/>
-                    </div>
-                    <div>
-                        <label class="font-bold text-left">Last Name</label>
+                        <label class="font-bold text-left">Name</label>
                         <input class="w-full mt-3"/>
                     </div>
                     <div>
@@ -46,13 +61,29 @@ export default {
 
     data() {
         return {
-            popupTrigger: false
+            popupTrigger: false,
+            admins: [
+                {
+                    name: "Collins",
+                    email: "collins.tito.siyabola@gmail.com",
+                    status: "Pending"
+                },
+                {
+                    name: "Collins",
+                    email: "collins.tito.siyabola@gmail.com",
+                    status: "Pending"
+                },
+            ]
         }
     },
 
     methods: {
         openSubAdminForm() {
             this.popupTrigger = !this.popupTrigger;
+        },
+
+        removeAdmin(index) {
+            this.admins.splice(index, 1)
         }
     }
 }
@@ -61,7 +92,33 @@ export default {
 
 <style scoped>
 .admin-details {
-    border: 1px solid;
+  display: flex;
+  min-width: 70vw;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  /* border: 1px solid; */
+  padding: 0 100px;
+}
+
+table {
+  /* flex: 1; */
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+th {
+    border-bottom: 1px solid #ccc;
+}
+
+table, th, td {
+  /* border: 1px solid #ccc; */
+  text-align: left;
+}
+
+th, td {
+  padding: 10px;
 }
 
 .popup {
@@ -85,5 +142,11 @@ export default {
 .header button:hover {
     color: red;
     transition: 0.2s ease-out;
+}
+@media (max-width: 768px) {
+    .admin-details {
+        overflow-x: auto;
+        padding: 0 10px;
+    }
 }
 </style>
