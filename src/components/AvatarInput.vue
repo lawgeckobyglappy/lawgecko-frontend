@@ -1,8 +1,12 @@
 <template>
     <div>
         <input type="file" accept="image/*" class="hidden" ref="file" @change="change" />
-        <img :src="src" alt="Avatar" class="h-24 w-24 rounded-full object-cover"/>
-        <button @click="browse()">Browse</button>
+        <div class="relative inline-block mb-7">
+            <img :src="src" alt="Avatar" class="h-24 w-24 rounded-full object-cover"/>
+            <div class="absolute top-0 h-full w-full bg-green-900 bg-opacity-25 rounded-full flex items-center justify-center">
+                <button @click="browse()"><fa-icon :icon="['fas', 'camera']" style="color: #a1a0a0;" /></button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -12,12 +16,13 @@ export default {
     
     props: {
         value: File,
-
+        defaultSrc: String
     },
 
     data() {
         return {
-            src: null,
+            src: this.defaultSrc,
+            file: null
         }
     },
 
@@ -27,9 +32,10 @@ export default {
         },
 
         change(e) {
-            this.$emit('input', e.target.files[0]);
+            this.file = e.target.files[0]
+            this.$emit('input', this.file);
             let reader = new FileReader();
-            reader.readAsDataURL(e.target.files[0])
+            reader.readAsDataURL(this.file)
 
             reader.onload = e => {
                 this.src = e.target.result;

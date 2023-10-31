@@ -5,19 +5,15 @@
                 <div class="logo">
                     <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo mb-50" />
                 </div>
-                <avatar-input v-model="form.avatar"></avatar-input>
+                <div>
+                  <avatar-input v-model="form.avatar" :default-src="form.defaultImageSrc"></avatar-input>
+                </div>
                 <div class="form">
-                    <form>
-                      <div>
-                      </div>
+                  <form>
                       <div>
                           <label class="font-bold">Bio</label>
                           <textarea class="w-full mt-3 " placeholder="What's your area of interest?"></textarea>
                       </div>
-                      <!-- <div>
-                          <label class="font-bold">Email Address</label>
-                          <input class="w-full mt-3 " />
-                      </div> -->
                       <div>
                           <label class="font-bold">Phone Number</label>
                           <input type="tel" class="w-full mt-3" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
@@ -55,6 +51,7 @@ export default {
      return {
       form: {
         avatar: null,
+        defaultImageSrc: require("@/assets/images/defaultImage.jpeg")
       },
      }
    }
@@ -96,6 +93,7 @@ export default {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
+  border: 1px solid #926e0a;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
