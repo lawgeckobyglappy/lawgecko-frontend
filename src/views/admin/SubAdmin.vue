@@ -21,7 +21,7 @@
                         <td>{{ admin.email }}</td>
                         <td>Full Sub-Admin Access</td>
                         <td><button @click="setCurrentAdmin(index)">{{ admin.status }}</button></td>
-                        <td><button @click="removeAdmin(index)">x</button></td>
+                        <td><button @click="removeAdmin(index)"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button></td>
 
                         <PopUp v-if="adminProfilePopup">
                             <div class="popup">
@@ -42,8 +42,9 @@
                                     </div>
                                     <hr class="my-5 border-2"/>
                                     <div class="form">
+                                        <p class="mb-3">Lawgecko Email Credentials</p>
                                         <div>
-                                            <label class="font-bold text-left">Lawgecko Email Address</label>
+                                            <label class="font-bold text-left">Email Address</label>
                                             <input class="w-full mt-3"/>
                                         </div>
                                         <div>
@@ -106,8 +107,8 @@ export default {
                     status: "Pending"
                 },
                 {
-                    name: "Collins",
-                    email: "collins.tito.siyabola@gmail.com",
+                    name: "Abike",
+                    email: "tolu.abike.similoluwa@gmail.com",
                     status: "Pending"
                 },
             ],
