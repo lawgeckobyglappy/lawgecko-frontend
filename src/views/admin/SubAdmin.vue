@@ -29,14 +29,16 @@
                                     <h1 class="font-bold text-2xl">Admin</h1>
                                     <button @click="adminProfile"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
                                 </div>
-                                <div>
-                                    <div>
-                                        <label class="font-bold text-left">Name</label>
-                                        <p>{{ currentAdmin.name }}</p>
-                                    </div>
-                                    <div>
-                                        <label class="font-bold text-left">Email Address</label>
-                                        <p>{{ currentAdmin.email }}</p>
+                                <div class="popup-content">
+                                    <div class="admin-details-preview">
+                                        <div>
+                                            <label class="font-bold text-left">Name</label>
+                                            <p>{{ currentAdmin.name }}</p>
+                                        </div>
+                                        <div>
+                                            <label class="font-bold text-left">Email Address</label>
+                                            <p>{{ currentAdmin.email }}</p>
+                                        </div>
                                     </div>
                                     <hr class="my-5 border-2"/>
                                     <div class="form">
@@ -193,6 +195,16 @@ th, td {
 .header button:hover {
     color: red;
     transition: 0.2s ease-out;
+}
+
+.popup-content {
+    max-height: 300px;
+    overflow-y: auto; 
+    padding: 20px; 
+}
+
+.admin-details-preview div{
+    margin-bottom: 5px;
 }
 
 
