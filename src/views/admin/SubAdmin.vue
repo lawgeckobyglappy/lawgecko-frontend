@@ -41,6 +41,7 @@
                                                     active ? 'bg-violet-500 text-white' : 'text-gray-900',
                                                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                 ]"
+                                                @click="setCurrentAdmin(index)"
                                                 >
                                                 View
                                                 </button>
@@ -51,6 +52,7 @@
                                                     active ? 'bg-violet-500 text-white' : 'text-gray-900',
                                                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                 ]"
+                                                @click="handleDeleteAdminPopup"
                                                 >
                                                 Delete
                                                 </button>
@@ -59,6 +61,22 @@
                                     </MenuItems>
                             </Menu>
                         </td>
+
+                        <PopUp v-if="deleteAdminPopup">
+                            <div class="popup">
+                                <div class="mb-5 header">
+                                    <h1 class="font-bold text-2xl">Delete</h1>
+                                    <button @click="handleDeleteAdminPopup"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
+                                </div>
+                                <div class="popup-content">
+                                    <h1>Are you sure you want to remove this Admin?</h1>
+                                    <div class="flex align-center mt-5 justify-center">
+                                        <TheButton text="Yes" class="mr-3" @click="removeAdmin(index)"/>
+                                        <TheButton text="No" @click="handleDeleteAdminPopup"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </PopUp>
 
                         <PopUp v-if="adminProfilePopup">
                             <div class="popup">
@@ -143,6 +161,7 @@ export default {
         return {
             popupTrigger: false,
             adminProfilePopup: false,
+            deleteAdminPopup: false,
             admins: [
                 {
                     name: "Collins",
@@ -172,8 +191,14 @@ export default {
             this.popupTrigger = !this.popupTrigger;
         },
 
+        handleDeleteAdminPopup() {
+            this.deleteAdminPopup = !this.deleteAdminPopup;
+            
+        },
+
         removeAdmin(index) {
             this.admins.splice(index, 1)
+            this.handleDeleteAdminPopup()
         },
 
         setCurrentAdmin(index) {
