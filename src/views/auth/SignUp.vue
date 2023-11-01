@@ -131,7 +131,7 @@ export default {
           const registerRequest = this.createRegisterRequest
           this.emailAddress = registerRequest.email
 
-          await fetcher.post('/auth/register', registerRequest)
+          await fetcher.post('/accounts/register', registerRequest)
 
           this.emailProvider = "https://" + this.form.emailAddress.split("@")[1]
           this.popupTrigger = true

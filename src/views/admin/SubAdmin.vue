@@ -12,16 +12,70 @@
                         <th>Email Address</th>
                         <th>Permissions</th>
                         <th>Status</th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(admin, index) in admins" :key="index">
+                    <tr v-for="(admin, index) in admins" :key="index" class="">
                         <td>{{ admin.name }}</td>
                         <td>{{ admin.email }}</td>
                         <td>Full Sub-Admin Access</td>
-                        <td><button @click="setCurrentAdmin(index)">{{ admin.status }}</button></td>
-                        <td><button @click="removeAdmin(index)">x</button></td>
+
+                        <td><button class="bg-yellow-200 rounded-full px-3 py-0.5 text-sm cursor-default">{{ admin.status }}</button></td>
+                        <td>
+                            <Menu as="div" class="relative inline-block text-left">
+                                <div>
+                                    <MenuButton
+                                        class="inline-flex justify-center rounded-md px-4 py-2 z-1"
+                                    >
+                                        <fa-icon :icon="['fas', 'circle-info']" />
+                                    </MenuButton>
+                                </div>
+                                    <MenuItems
+                                        class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 z-50 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+                                    >
+                                        <div class="px-1 py-1">
+                                            <MenuItem v-slot="{ active }">
+                                                <button
+                                                :class="[
+                                                    active ? 'bg-black text-white' : 'text-gray-900',
+                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                ]"
+                                                @click="setCurrentAdmin(index)"
+                                                >
+                                                View
+                                                </button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                                <button
+                                                :class="[
+                                                    active ? 'bg-black text-white' : 'text-gray-900',
+                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                ]"
+                                                @click="handleDeleteAdminPopup"
+                                                >
+                                                Delete
+                                                </button>
+                                            </MenuItem>
+                                        </div>
+                                    </MenuItems>
+                            </Menu>
+                        </td>
+
+                        <PopUp v-if="deleteAdminPopup">
+                            <div class="popup">
+                                <div class="mb-5 header">
+                                    <h1 class="font-bold text-2xl">Delete</h1>
+                                    <button @click="handleDeleteAdminPopup"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
+                                </div>
+                                <div class="popup-content">
+                                    <h1>Are you sure you want to remove this Admin?</h1>
+                                    <div class="flex align-center mt-5 justify-center">
+                                        <TheButton text="Yes" class="mr-3" @click="removeAdmin(index)"/>
+                                        <TheButton text="No" @click="handleDeleteAdminPopup"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </PopUp>
 
                         <PopUp v-if="adminProfilePopup">
                             <div class="popup">
@@ -42,8 +96,9 @@
                                     </div>
                                     <hr class="my-5 border-2"/>
                                     <div class="form">
+                                        <p class="mb-3">Lawgecko Email Credentials</p>
                                         <div>
-                                            <label class="font-bold text-left">Lawgecko Email Address</label>
+                                            <label class="font-bold text-left">Email Address</label>
                                             <input class="w-full mt-3"/>
                                         </div>
                                         <div>
@@ -61,6 +116,7 @@
                     </tr>
                 </tbody>
             </table>
+            
         </div>
         <PopUp v-if="popupTrigger">
             <div class="popup">
@@ -88,17 +144,23 @@
 <script>
 import TheButton from '@/components/buttons/TheButton.vue';
 import PopUp from '@/components/PopUp.vue';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 
 export default {
     components: {
         TheButton,
-        PopUp
+        PopUp,
+        Menu,
+        MenuButton,
+        MenuItems,
+        MenuItem
     }, 
 
     data() {
         return {
             popupTrigger: false,
             adminProfilePopup: false,
+            deleteAdminPopup: false,
             admins: [
                 {
                     name: "Collins",
@@ -106,12 +168,20 @@ export default {
                     status: "Pending"
                 },
                 {
-                    name: "Collins",
-                    email: "collins.tito.siyabola@gmail.com",
+                    name: "Abike",
+                    email: "tolu.abike.similoluwa@gmail.com",
                     status: "Pending"
                 },
             ],
-            currentAdmin: null
+            currentAdmin: null,
+            adminActions: [
+                {
+                    title: "View"
+                }, 
+                {
+                    title: "Delete"
+                }
+            ]
         }
     },
 
@@ -120,8 +190,14 @@ export default {
             this.popupTrigger = !this.popupTrigger;
         },
 
+        handleDeleteAdminPopup() {
+            this.deleteAdminPopup = !this.deleteAdminPopup;
+            
+        },
+
         removeAdmin(index) {
             this.admins.splice(index, 1)
+            this.handleDeleteAdminPopup()
         },
 
         setCurrentAdmin(index) {

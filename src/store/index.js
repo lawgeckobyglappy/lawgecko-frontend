@@ -19,7 +19,7 @@ export default createStore({
   actions: {
     async verifyLoginLink({ commit }, linkId) {
       try {
-        const response = await axios.post(`${API_URL}/auth/verify-login-link`, {
+        const response = await axios.post(`${API_URL}/accounts/verify-login-link`, {
           id: linkId,
         });
         const jwtToken = response.data.data;
@@ -54,7 +54,7 @@ export default createStore({
           },
         };
         const response = await axios.get(
-          `${API_URL}/auth/current-user`,
+          `${API_URL}/accounts/current-user`,
           config
         );
         return response.data;
