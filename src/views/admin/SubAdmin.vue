@@ -21,7 +21,44 @@
                         <td>Full Sub-Admin Access</td>
                         <!-- @click="removeAdmin(index)" -->
                         <td>{{ admin.status }}</td>
-                        <td><button @click="setCurrentAdmin(index)"><fa-icon :icon="['fas', 'circle-info']" /></button></td>
+                        <!-- <td><button @click="setCurrentAdmin(index)"><fa-icon :icon="['fas', 'circle-info']" /></button></td> -->
+                        <td>
+                            <Menu as="div" class="relative inline-block text-left">
+                                <div>
+                                    <MenuButton
+                                        class="inline-flex justify-center rounded-md px-4 py-2 z-1"
+                                    >
+                                        <fa-icon :icon="['fas', 'circle-info']" />
+                                    </MenuButton>
+                                </div>
+                                    <MenuItems
+                                        class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 z-50 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+                                    >
+                                        <div class="px-1 py-1">
+                                            <MenuItem v-slot="{ active }">
+                                                <button
+                                                :class="[
+                                                    active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                ]"
+                                                >
+                                                View
+                                                </button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                                <button
+                                                :class="[
+                                                    active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                ]"
+                                                >
+                                                Delete
+                                                </button>
+                                            </MenuItem>
+                                        </div>
+                                    </MenuItems>
+                            </Menu>
+                        </td>
 
                         <PopUp v-if="adminProfilePopup">
                             <div class="popup">
@@ -62,7 +99,7 @@
                     </tr>
                 </tbody>
             </table>
-            <DropDown />
+            
         </div>
         <PopUp v-if="popupTrigger">
             <div class="popup">
@@ -90,13 +127,16 @@
 <script>
 import TheButton from '@/components/buttons/TheButton.vue';
 import PopUp from '@/components/PopUp.vue';
-import DropDown from '@/components/DropDown.vue';
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 
 export default {
     components: {
         TheButton,
         PopUp,
-        DropDown
+        Menu,
+        MenuButton,
+        MenuItems,
+        MenuItem
     }, 
 
     data() {
