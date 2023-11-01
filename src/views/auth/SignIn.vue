@@ -40,7 +40,7 @@
                     Continue with Google
                 </button>
                 <div>
-                    <p class="text-center font-semibold text-[#6E6E6E]">Don't Have an Account? <a href="SignUp" class="text-[#4172D1]">Sign Up</a></p>
+                    <p class="text-center font-semibold text-[#6E6E6E]">{{$t ('signin.noAccount')}}<a href="SignUp" class="text-[#4172D1]">Sign Up</a></p>
                 </div>
             </div>
         </div>

@@ -9,7 +9,7 @@
           <img src="/logo.svg" alt="lawgecko logo" class="w-40 mx-auto logo" />
         </div>
         <div class="w-7/12 mx-auto form">
-          <p class="mb-10 mt-10 font-bold text-2xl">Create An Account</p>
+          <p class="mb-10 mt-10 font-bold text-2xl">{{$t ('signup.createAccount') }}</p>
           <form @submit.prevent="submit">
             <div class="name">
                 <div :class="{ 'error': form.firstNameError }">
@@ -80,7 +80,7 @@
               Sign up with Google
             </button>
           </div>
-          <p class="text-center font-semibold text-[#6E6E6E]">Already Have an Account? <a href="/signin" class="text-[#4172D1]"><span>Sign In</span></a> </p>
+          <p class="text-center font-semibold text-[#6E6E6E]">{{ $t('signup.preOwnedAccount') }}<a href="/signin" class="text-[#4172D1]"><span>Sign In</span></a> </p>
         </div>
       </div>
     </div>
