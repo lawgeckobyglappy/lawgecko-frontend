@@ -19,8 +19,12 @@
                         <td>{{ admin.name }}</td>
                         <td>{{ admin.email }}</td>
                         <td>Full Sub-Admin Access</td>
-
-                        <td><button class="bg-yellow-200 rounded-full px-3 py-0.5 text-sm cursor-default">{{ admin.status }}</button></td>
+                        <td><button
+                            :class="{
+                            'bg-yellow-200': admin.status === 'Pending',
+                            'bg-green-400': admin.status === 'Active'
+                            }"
+                            class="w-20 rounded-full px-3 py-0.5 text-sm cursor-default">{{ admin.status }}</button></td>
                         <td>
                             <Menu as="div" class="relative inline-block text-left">
                                 <div>
@@ -48,7 +52,7 @@
                                             <MenuItem v-slot="{ active }">
                                                 <button
                                                 :class="[
-                                                    active ? 'bg-black text-white' : 'text-gray-900',
+                                                    active ? 'bg-red text-white' : 'text-gray-900',
                                                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                 ]"
                                                 @click="handleDeleteAdminPopup"
@@ -170,7 +174,7 @@ export default {
                 {
                     name: "Abike",
                     email: "tolu.abike.similoluwa@gmail.com",
-                    status: "Pending"
+                    status: "Active"
                 },
             ],
             currentAdmin: null,
