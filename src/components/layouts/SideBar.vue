@@ -30,7 +30,7 @@
         <div class="flex"></div>
 		
 		<div class="menu">
-			<router-link to="/admin/resource" class="button">
+			<router-link to="/admin/profile" class="button">
 				<span class="menu-icon"><fa-icon :icon="['fas', 'user-gear']" /></span>
 				<span class="text">Settings</span>
 			</router-link>

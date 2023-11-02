@@ -12,7 +12,7 @@ import Resource from "../views/admin/ResourcePage.vue"
 import AdminSignUp from "../views/admin/auth/SignUp.vue"
 import OtpPage from "../views/admin/auth/OtpPage.vue";
 import CaptchaPage from "../views/admin/auth/CaptchaPage.vue";
-
+import ProfileSettings from "../views/admin/ProfileSettings.vue"
 
 const routes = [
   {
@@ -74,6 +74,10 @@ const routes = [
       {
         path: "subAdmin",
         component: SubAdmin
+      },
+      {
+        path: "profile",
+        component: ProfileSettings
       }
     ]
   },

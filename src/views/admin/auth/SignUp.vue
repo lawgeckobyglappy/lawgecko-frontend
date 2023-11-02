@@ -10,35 +10,39 @@
                 </div>
                 <div class="form">
                   <form>
-                    <div class="name">
+                    <div class="name grid grid-cols-2 gap-3">
                       <div :class="{ 'error': form.firstNameError }">
                         <label class="font-bold">
                           {{ $t('signup.firstName') }}  
+                         
                         </label>
-                        <input v-model="form.firstName" @keydown.space.prevent placeholder="Elliot"/>
+                        <input class="font-normal" v-model="form.firstName" @keydown.space.prevent placeholder="Elliot"/>
                       </div>
                       <div :class="{ 'error': form.lastNameError }">
                         <label class="font-bold">
                           {{ $t('signup.lastName') }}
                         </label>
-                        <input v-model="form.lastName" @keydown.space.prevent placeholder="Johnson"/>
+                        <input class="font-normal" v-model="form.lastName" @keydown.space.prevent placeholder="Johnson"/>
                       </div>
                     </div>
+                    <address-field
+                      v-model:street="form.street"
+                      v-model:streetNumber="form.streetNumber"
+                      v-model:postcode="form.postcode"
+                      v-model:city="form.city"
+                      v-model:country="form.country"
+                    ></address-field>
                     <div>
                         <label class="font-bold">Bio</label>
-                        <textarea class="w-full mt-3 " placeholder="What's your area of interest?"></textarea>
+                        <textarea class="font-normal w-full mt-1" placeholder="What's your area of interest?"></textarea>
                     </div>
                     <div>
                         <label class="font-bold">Phone Number</label>
-                        <input type="tel" class="w-full mt-3" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
-                    </div>
-                    <div>
-                        <label class="font-bold">House Address</label>
-                        <input class="w-full mt-3 " />
+                        <input type="tel" class="font-normal w-full mt-1" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
                     </div>
                     <div>
                         <label class="font-bold">Government Issued ID</label>
-                        <input type="file" accept="image/*" class="w-full mt-3 " />
+                        <input type="file" accept="image/*" class="font-normal w-full mt-1" />
                     </div>
                     <button type="submit" class="mb-5 hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
                         <p class="font-bold">Register</p>
@@ -55,20 +59,30 @@
 
 <script>
 import AvatarInput from "@/components/AvatarInput.vue";
+import AddressField from "@/components/layouts/AddressField.vue";
 
 export default {
    components: {
-    AvatarInput
-   },
+    AvatarInput,
+    AddressField,
+},
 
    data() {
      return {
       form: {
         avatar: null,
-        defaultImageSrc: require("@/assets/images/defaultImage.jpeg")
+        defaultImageSrc: require("@/assets/images/defaultImage.jpeg"),
+        firstName: "",
+        lastName: "", 
+        street: "",
+        streetNumber: "",
+        postcode: "",
+        city: "",
+        country: ""
       },
      }
-   }
+   },
+   
 }
 </script>
 
@@ -107,7 +121,6 @@ export default {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
-  border: 1px solid #926e0a;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
@@ -121,10 +134,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.name {
-  display: flex;
-  justify-content: space-between;
 }
 
 .name > div:first-child{
