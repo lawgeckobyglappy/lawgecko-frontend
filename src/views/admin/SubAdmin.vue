@@ -2,7 +2,7 @@
     <div>
         <div class="flex flex-row align-center mb-15">
             <h1 class="mr-10 text-3xl font-bold">Admins</h1>
-            <TheButton text="Add Sub Admin" @click="openSubAdminForm"/>
+            <TheButton text="Add Sub Admin" @click="addSubAdminToggle"/>
         </div>
         <div class="admin-details">
             <table>
@@ -85,7 +85,7 @@
                             <div class="popup">
                                 <div class="mb-5 header">
                                     <h1 class="font-bold text-2xl">Admin</h1>
-                                    <button @click="adminProfile"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
+                                    <button @click="adminProfileToggle"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
                                 </div>
                                 <div class="popup-content">
                                     <div class="admin-details-preview">
@@ -122,20 +122,20 @@
             </table>
             
         </div>
-        <PopUp v-if="popupTrigger">
+        <PopUp v-if="addSubAdminPopup">
             <div class="popup">
                 <div class="mb-10 header">
                     <h1 class="font-bold text-2xl">Add New Admin</h1>
-                    <button @click="openSubAdminForm"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
+                    <button @click="addSubAdminToggle"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
                 </div>
-                <form class="form">
-                    <div>
+                <form class="form" @submit.prevent="addSubAdmin">
+                    <div :class="{ 'error': subAdmin.nameError }">
                         <label class="font-bold text-left">Name</label>
-                        <input class="w-full mt-3"/>
+                        <input v-model="subAdmin.name" class="w-full mt-3"/>
                     </div>
-                    <div>
+                    <div :class="{ 'error': subAdmin.personalEmailError }">
                         <label class="font-bold text-left">Email Address</label>
-                        <input class="w-full mt-3"/>
+                        <input v-model="subAdmin.personalEmail" class="w-full mt-3"/>
                     </div>
                     <TheButton text="Send Invite" class="mt-5"/>
                 </form>
@@ -149,6 +149,7 @@
 import TheButton from '@/components/buttons/TheButton.vue';
 import PopUp from '@/components/PopUp.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+// import { fetcher } from '@/utils/fetcher';
 
 export default {
     components: {
@@ -162,7 +163,7 @@ export default {
 
     data() {
         return {
-            popupTrigger: false,
+            addSubAdminPopup: false,
             adminProfilePopup: false,
             deleteAdminPopup: false,
             admins: [
@@ -185,13 +186,19 @@ export default {
                 {
                     title: "Delete"
                 }
-            ]
+            ],
+            subAdmin: {
+                name: "",
+                personalEmail: "",
+                nameError: false,
+                personalEmailError: false
+            }
         }
     },
 
     methods: {
-        openSubAdminForm() {
-            this.popupTrigger = !this.popupTrigger;
+        addSubAdminToggle() {
+            this.addSubAdminPopup = !this.addSubAdminPopup;
         },
 
         handleDeleteAdminPopup() {
@@ -206,15 +213,41 @@ export default {
 
         setCurrentAdmin(index) {
             this.currentAdmin = this.admins[index]
-            this.adminProfile()
+            this.adminProfileToggle()
         },
 
-        adminProfile() {
+        adminProfileToggle() {
             this.adminProfilePopup = !this.adminProfilePopup
         },
 
-        accept() {
+        validateSubAdminFormData() {
+            this.subAdmin.nameError = this.subAdmin.name === "",
+            this.subAdmin.personalEmailError = this.subAdmin.personalEmail === ""
+        },
 
+        isSubAdminFormDataValidated() {
+            return !this.subAdmin.nameError && !this.subAdmin.personalEmailError;
+        },
+
+        createAddSubAdminRequest() {
+            return {
+                name: this.subAdmin.name,
+                email: this.subAdmin.personalEmail
+            }
+        },
+
+        addSubAdmin() {
+            this.validateSubAdminFormData()
+            try{
+                if(this.isSubAdminFormDataValidated){
+                    let subAdminRequest = this.createAddSubAdminRequest();
+                    // await fetcher.post('/accounts/security-admins/invite', subAdminRequest)
+                    this.addSubAdminToggle();
+                    this.admins.push({ status: "Pending", ...subAdminRequest })
+                }
+            } catch(error){
+                console.log(error);
+            }
         }
 
 
@@ -285,6 +318,10 @@ th, td {
 
 .admin-details-preview div{
     margin-bottom: 5px;
+}
+
+.error input {
+  border-color: red;
 }
 
 
