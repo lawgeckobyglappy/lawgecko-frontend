@@ -190,7 +190,7 @@ export default {
             subAdmin: {
                 name: "",
                 personalEmail: "",
-                nameError: false,
+                nameError: "",
                 personalEmailError: false
             }
         }
@@ -203,7 +203,6 @@ export default {
 
         handleDeleteAdminPopup() {
             this.deleteAdminPopup = !this.deleteAdminPopup;
-            
         },
 
         removeAdmin(index) {
@@ -236,10 +235,17 @@ export default {
             }
         },
 
+        resetAddSubAdminForm() {
+            this.subAdmin.name = "",
+            this.subAdmin.nameError = "",
+            this.subAdmin.personalEmail = "",
+            this.subAdmin.personalEmailError = ""
+        },
+
         addSubAdmin() {
             this.validateSubAdminFormData()
             try{
-                if(this.isSubAdminFormDataValidated){
+                if(this.isSubAdminFormDataValidated()){
                     let subAdminRequest = this.createAddSubAdminRequest();
                     // await fetcher.post('/accounts/security-admins/invite', subAdminRequest)
                     this.addSubAdminToggle();
