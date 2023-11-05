@@ -200,9 +200,10 @@ export default {
         },
 
         async removeAdmin(index) {
-            this.admins.splice(index, 1)
-            // await fetcher.post(`/accounts/security-admins/${index}`)
-            this.handleDeleteAdminPopup()
+            let adminId = this.admins[index]._id;
+            this.admins.splice(index, 1);
+            await fetcher.delete(`/accounts/security-admins/${adminId}`);
+            this.handleDeleteAdminPopup();
         },
 
         setCurrentAdmin(index) {
