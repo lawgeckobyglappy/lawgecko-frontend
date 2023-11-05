@@ -127,7 +127,7 @@ export default {
       try {
         if (this.isAllValidated) {
           this.loading = true
-          const registerRequest = this.createRegisterRequest
+          const registerRequest = this.createRegisterRequest()
 
           await fetcher.post('/accounts/register', registerRequest)
 

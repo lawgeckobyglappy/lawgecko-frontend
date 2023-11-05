@@ -30,6 +30,7 @@ fetcher.interceptors.response.use(
       const errorMessage =
         data.error.payload.email?.reasons[0] ||
         data.error.payload.phoneNumber?.reasons[0] ||
+        data.error.payload.name?.reasons ||
         data.error.message;
       ("An error occured");
       throw new Error(errorMessage);
