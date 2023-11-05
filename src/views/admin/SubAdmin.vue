@@ -249,13 +249,7 @@ export default {
             try{
                 if(this.isSubAdminFormDataValidated()){
                     let subAdminRequest = this.createAddSubAdminRequest();
-                    let jwtToken = localStorage.getItem("token")
-                    const config = {
-                        headers: {
-                            Authorization: `Bearer ${jwtToken}`,
-                        },
-                    };
-                    await fetcher.post('/accounts/security-admins/invite', subAdminRequest, config)
+                    await fetcher.post('/accounts/security-admins/invite', subAdminRequest)
                     this.addSubAdminToggle();
                     this.admins.push({ status: "Pending", ...subAdminRequest })
                 }
