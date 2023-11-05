@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(admin) in admins" :key="admin._id" class="">
+                    <tr v-for="(admin, index) in admins" :key="index" class="">
                         <td>{{ admin.name }}</td>
                         <td>{{ admin.email }}</td>
                         <td>Full Sub-Admin Access</td>
@@ -167,7 +167,7 @@ export default {
             adminProfilePopup: false,
             deleteAdminPopup: false,
             admins: [],
-            currentAdmin: null,
+            currentAdmin: {},
             adminActions: [
                 {
                     title: "View"
@@ -206,7 +206,7 @@ export default {
         },
 
         setCurrentAdmin(index) {
-            this.currentAdmin = this.admins[index]
+            this.currentAdmin = this.admins[index];
             this.adminProfileToggle()
         },
 
@@ -253,12 +253,16 @@ export default {
         },
 
         async getAllAdmins(){
-            let response = await fetcher.get('/accounts/security-admins');
-            console.log(response)
-            this.admins = response.data.map(admin => ({
-                ...admin,
-                status: admin.status || "Pending"
-            }));
+            try{
+                let response = await fetcher.get('/accounts/security-admins');
+                console.log(response)
+                this.admins = response.data.map(admin => ({
+                    ...admin,
+                    status: admin.status || "Pending"
+                }));
+            } catch(error) {
+                console.log(error)
+            }
         }
 
 
