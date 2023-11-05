@@ -124,13 +124,14 @@
         </div>
         <PopUp v-if="addSubAdminPopup">
             <div class="popup">
-                <div class="mb-10 header">
+                <div class="mb-5 header">
                     <h1 class="font-bold text-2xl">Add New Admin</h1>
                     <button @click="addSubAdminToggle"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
                 </div>
                 <form class="form" @submit.prevent="addSubAdmin">
                     <div :class="{ 'error': subAdmin.nameError }">
                         <label class="font-bold text-left">Name</label>
+                        <p v-if="subAdmin.nameTooShort" class="text-red-500 text-xs">* {{ subAdmin.nameErrorMessage }}</p>
                         <input v-model="subAdmin.name" class="w-full mt-3"/>
                     </div>
                     <div :class="{ 'error': subAdmin.personalEmailError }">
@@ -180,8 +181,11 @@ export default {
                 name: "",
                 personalEmail: "",
                 nameError: "",
-                personalEmailError: false
-            }
+                personalEmailError: "",
+                emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                nameTooShort: false,
+                nameErrorMessage: ""
+            },
         }
     },
 
@@ -200,10 +204,14 @@ export default {
         },
 
         async removeAdmin(index) {
-            let adminId = this.admins[index]._id;
-            this.admins.splice(index, 1);
-            await fetcher.delete(`/accounts/security-admins/${adminId}`);
-            this.handleDeleteAdminPopup();
+            try {
+                let adminId = this.admins[index]._id;
+                this.admins.splice(index, 1);
+                await fetcher.delete(`/accounts/security-admins/${adminId}`);
+                this.handleDeleteAdminPopup();
+            } catch (error) {
+                console.log(error)
+            }
         },
 
         setCurrentAdmin(index) {
@@ -217,7 +225,7 @@ export default {
 
         validateSubAdminFormData() {
             this.subAdmin.nameError = this.subAdmin.name === "",
-            this.subAdmin.personalEmailError = this.subAdmin.personalEmail === ""
+            this.subAdmin.personalEmailError = this.subAdmin.personalEmail === "" || !this.subAdmin.emailRegex.test(this.subAdmin.personalEmail)
         },
 
         isSubAdminFormDataValidated() {
@@ -232,10 +240,17 @@ export default {
         },
 
         resetAddSubAdminForm() {
-            this.subAdmin.name = "",
-            this.subAdmin.nameError = "",
-            this.subAdmin.personalEmail = "",
+            this.subAdmin.name = ""
+            this.subAdmin.nameError = ""
+            this.subAdmin.personalEmail = ""
             this.subAdmin.personalEmailError = ""
+            this.subAdmin.nameTooShort = ""
+            this.subAdmin.nameErrorMessage = ""
+        },
+
+        handleAddSubAdminError(error){
+            this.subAdmin.nameErrorMessage = error.message === "Invalid name,Too short" ? "Name is too short" : "";
+            this.subAdmin.nameTooShort = !!this.subAdmin.nameErrorMessage;
         },
 
         async addSubAdmin() {
@@ -247,9 +262,10 @@ export default {
                     this.addSubAdminToggle();
                     this.admins.push({ status: "Pending", ...subAdminRequest })
                     this.admins = this.getAllAdmins()?.data
+                    this.resetAddSubAdminForm()
                 }
             } catch(error){
-                console.log(error);
+                this.handleAddSubAdminError(error);
             }
         },
 
