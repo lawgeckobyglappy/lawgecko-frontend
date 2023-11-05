@@ -52,6 +52,17 @@
                                             <MenuItem v-slot="{ active }">
                                                 <button
                                                 :class="[
+                                                    active ? 'bg-black text-white' : 'text-gray-900',
+                                                    'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                                                ]"
+                                                @click="resendInvite(index)"
+                                                >
+                                                Resend Invite
+                                                </button>
+                                            </MenuItem>
+                                            <MenuItem v-slot="{ active }">
+                                                <button
+                                                :class="[
                                                     active ? 'bg-red text-white' : 'text-gray-900',
                                                     'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                                                 ]"
@@ -87,8 +98,8 @@
                                     <h1 class="font-bold text-2xl">Admin</h1>
                                     <button @click="adminProfileToggle"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
                                 </div>
-                                <div class="popup-content">
-                                    <div class="admin-details-preview">
+                                <div class="popup-content flex flex-row">
+                                    <div class="admin-details-preview mr-4">
                                         <div>
                                             <label class="font-bold text-left">Name</label>
                                             <p>{{ currentAdmin.name }}</p>
@@ -98,7 +109,10 @@
                                             <p>{{ currentAdmin.email }}</p>
                                         </div>
                                     </div>
-                                    <hr class="my-5 border-2"/>
+                                    <div>
+                                        <h1>More Info</h1>
+                                    </div>
+                                    <!-- <hr class="my-5 border-2"/>
                                     <div class="form">
                                         <p class="mb-3">Lawgecko Email Credentials</p>
                                         <div>
@@ -113,7 +127,7 @@
                                             <TheButton text="Approve" class="mr-3"/>
                                             <TheButton text="Reject"/>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </PopUp>
@@ -278,6 +292,15 @@ export default {
                     status: admin.status || "Pending"
                 }));
             } catch(error) {
+                console.log(error)
+            }
+        },
+
+        async resendInvite(index) {
+            try {
+                let adminId = this.admins[index]._id;
+                await fetcher.patch(`/accounts/security-admins/resend/${adminId}`);
+            } catch (error) {
                 console.log(error)
             }
         }
