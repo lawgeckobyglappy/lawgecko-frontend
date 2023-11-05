@@ -6,6 +6,7 @@ import router from "@/router/index";
 export default createStore({
   state: {
     isAuthenticated: false,
+    // currentUser: null
   },
 
   getters: {},
@@ -35,7 +36,9 @@ export default createStore({
         const userData = await dispatch("getCurrentUser", jwtToken);
       
         if (userData) {
+          localStorage.setItem("token", jwtToken)
           commit('isAuthenticated', true);
+          // commit('isAuthenticated', true);
           router.push('/forum');
         } else {
           commit('isAuthenticated', false);

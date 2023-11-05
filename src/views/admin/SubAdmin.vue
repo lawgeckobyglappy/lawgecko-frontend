@@ -149,7 +149,7 @@
 import TheButton from '@/components/buttons/TheButton.vue';
 import PopUp from '@/components/PopUp.vue';
 import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-// import { fetcher } from '@/utils/fetcher';
+import { fetcher } from '@/utils/fetcher';
 
 export default {
     components: {
@@ -199,14 +199,16 @@ export default {
     methods: {
         addSubAdminToggle() {
             this.addSubAdminPopup = !this.addSubAdminPopup;
+            this.resetAddSubAdminForm();
         },
 
         handleDeleteAdminPopup() {
             this.deleteAdminPopup = !this.deleteAdminPopup;
         },
 
-        removeAdmin(index) {
+        async removeAdmin(index) {
             this.admins.splice(index, 1)
+            // await fetcher.post(`/accounts/security-admins/${index}`)
             this.handleDeleteAdminPopup()
         },
 
@@ -242,12 +244,18 @@ export default {
             this.subAdmin.personalEmailError = ""
         },
 
-        addSubAdmin() {
+        async addSubAdmin() {
             this.validateSubAdminFormData()
             try{
                 if(this.isSubAdminFormDataValidated()){
                     let subAdminRequest = this.createAddSubAdminRequest();
-                    // await fetcher.post('/accounts/security-admins/invite', subAdminRequest)
+                    let jwtToken = localStorage.getItem("token")
+                    const config = {
+                        headers: {
+                            Authorization: `Bearer ${jwtToken}`,
+                        },
+                    };
+                    await fetcher.post('/accounts/security-admins/invite', subAdminRequest, config)
                     this.addSubAdminToggle();
                     this.admins.push({ status: "Pending", ...subAdminRequest })
                 }
