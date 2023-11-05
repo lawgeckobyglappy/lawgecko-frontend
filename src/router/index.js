@@ -43,7 +43,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/admin/signUp",
+    path: "/admin/new/info",
     name: "admin-signup",
     component: AdminSignUp,
   },

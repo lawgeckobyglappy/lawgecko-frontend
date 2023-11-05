@@ -124,12 +124,10 @@ export default {
   methods: {
     async submit() {
       this.validateUserData()
-      console.log(this.form.phoneNumber)
       try {
         if (this.isAllValidated) {
           this.loading = true
           const registerRequest = this.createRegisterRequest
-          this.emailAddress = registerRequest.email
 
           await fetcher.post('/accounts/register', registerRequest)
 
@@ -166,12 +164,12 @@ export default {
     },
 
     resetForm() {
-      this.form.firstName = "",
+        this.form.firstName = "",
         this.form.lastName = "",
         this.form.phoneNumber = "",
         this.form.policySigned = null,
         this.form.emailAddress = ""
-      this.loading = false
+        this.loading = false
     },
 
     async googleAuth() {
@@ -274,6 +272,10 @@ export default {
     height:30px;
     margin-right: 10px;
   }
+
+.error input {
+  border-color: red;
+}
   @media (max-width: 768px) {
     .images {
       display: none;

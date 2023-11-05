@@ -6,6 +6,17 @@ export const fetcher = axios.create({
   baseURL: API_URL,
 });
 
+fetcher.interceptors.request.use((config) => {
+  // Retrieve the token from where it is stored (e.g., local storage or Vuex store)
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});
+
 fetcher.interceptors.response.use(
   
   (response) => response.data,
