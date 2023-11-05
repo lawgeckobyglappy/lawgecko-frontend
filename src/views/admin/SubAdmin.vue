@@ -15,7 +15,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(admin, index) in admins" :key="index" class="">
+                    <tr v-for="(admin) in admins" :key="admin._id" class="">
                         <td>{{ admin.name }}</td>
                         <td>{{ admin.email }}</td>
                         <td>Full Sub-Admin Access</td>
@@ -166,18 +166,7 @@ export default {
             addSubAdminPopup: false,
             adminProfilePopup: false,
             deleteAdminPopup: false,
-            admins: [
-                {
-                    name: "Collins",
-                    email: "collins.tito.siyabola@gmail.com",
-                    status: "Pending"
-                },
-                {
-                    name: "Abike",
-                    email: "tolu.abike.similoluwa@gmail.com",
-                    status: "Active"
-                },
-            ],
+            admins: [],
             currentAdmin: null,
             adminActions: [
                 {
@@ -194,6 +183,10 @@ export default {
                 personalEmailError: false
             }
         }
+    },
+
+    mounted() {
+        this.getAllAdmins();
     },
 
     methods: {
@@ -252,10 +245,20 @@ export default {
                     await fetcher.post('/accounts/security-admins/invite', subAdminRequest)
                     this.addSubAdminToggle();
                     this.admins.push({ status: "Pending", ...subAdminRequest })
+                    this.admins = this.getAllAdmins()?.data
                 }
             } catch(error){
                 console.log(error);
             }
+        },
+
+        async getAllAdmins(){
+            let response = await fetcher.get('/accounts/security-admins');
+            console.log(response)
+            this.admins = response.data.map(admin => ({
+                ...admin,
+                status: admin.status || "Pending"
+            }));
         }
 
 
