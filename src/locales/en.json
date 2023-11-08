@@ -85,16 +85,19 @@
   },
 
   "signup": {
+    "createAccount": "Create an Account",
     "firstName": "First Name",
     "lastName": "Last Name",
     "emailAddress": "Email Address",
     "phoneNumber": "Phone Number",
-    "terms":"By signing up, you agree to our Terms of Service and Privacy Policy, including Cookie Use"
+    "terms":"By signing up, you agree to our Terms of Service and Privacy Policy, including Cookie Use",
+    "preOwnedAccount":"Already Have an Account?"
   },
 
   "signin":{
     "paragraph":"Welcome Back!",
-    "emailAddress": "Email Address"
+    "emailAddress": "Email Address",
+    "noAccount": "Don't Have an Account?"
   },
 
   "adminlogin":{

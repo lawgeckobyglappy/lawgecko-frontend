@@ -11,6 +11,7 @@ import Dashboard from "../views/admin/DashboardPage.vue"
 import Resource from "../views/admin/ResourcePage.vue"
 import AdminSignUp from "../views/admin/auth/SignUp.vue"
 import OtpPage from "../views/admin/auth/OtpPage.vue";
+import CaptchaPage from "../views/admin/auth/CaptchaPage.vue";
 import ProfileSettings from "../views/admin/ProfileSettings.vue"
 
 const routes = [
@@ -50,6 +51,11 @@ const routes = [
     path: "/admin/otp",
     name: "otp",
     component: OtpPage,
+  },
+  {
+    path: "/admin/captcha",
+    name: "captcha",
+    component: CaptchaPage,
   },
   {
     path: "/admin",
