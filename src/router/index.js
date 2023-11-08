@@ -73,7 +73,8 @@ const routes = [
         path: "profile",
         component: ProfileSettings
       }
-    ]
+    ],
+    beforeEnter: guardAdminRoute
   },
 ];
 
@@ -88,5 +89,25 @@ router.beforeEach(async (to) => {
     return { name: "sign-in" };
   }
 });
+
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = store.state.isAuthenticated;
+//   if (!isAuthenticated && to.meta.requiresAuth) {
+//     next({
+//       name: "sign-in",
+//     });
+//   } else {
+//     next();
+//   }
+// });
+
+
+function guardAdminRoute(){
+  let user = localStorage.getItem("currentUser");
+  user = JSON.parse(user)
+  if(user?.role !== "super-admin"){
+    return { path: "/signin" };
+  }
+}
 
 export default router;
