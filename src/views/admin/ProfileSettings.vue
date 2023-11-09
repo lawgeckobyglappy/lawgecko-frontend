@@ -26,10 +26,10 @@
           <label for="address">Home Address:</label>
           <input type="text" id="address" name="address" :value="address" disabled />
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label for="id">Government Issued ID:</label>
           <input type="file" id="id" name="id">
-        </div>
+        </div> -->
     </form>
   </div>
 </template>

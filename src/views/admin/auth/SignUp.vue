@@ -59,7 +59,7 @@
 
 <script>
 import AvatarInput from "@/components/AvatarInput.vue";
-import AddressField from "@/components/Layouts/AddressField.vue";
+import AddressField from "@/components/layouts/AddressField.vue";
 
 export default {
    components: {

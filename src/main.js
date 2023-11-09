@@ -38,8 +38,8 @@ const vuetify = createVuetify({
 
 //components
 import TheButton from "@/components/buttons/TheButton.vue";
-import SideBar from "@/components/Layouts/SideBar.vue";
-import TheFooter from "@/components/Layouts/TheFooter.vue";
+import SideBar from "@/components/layouts/SideBar.vue";
+import TheFooter from "@/components/layouts/TheFooter.vue";
 import i18n from "./i18n";
 
 /* import the fontawesome core */
