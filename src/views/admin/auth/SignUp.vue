@@ -72,9 +72,14 @@ export default {
    components: {
     AvatarInput,
     AddressField,
-},
+  },
 
-   data() {
+  created() {
+      const token = this.$route.query.token;
+      this.token = token;
+  },
+
+  data() {
      return {
       form: {
         avatar: null,
@@ -97,7 +102,8 @@ export default {
           country: ""
         },
         governmentID: null,
-        bio: ""
+        bio: "",
+        token: ""
       },
      }
    },
@@ -122,9 +128,9 @@ export default {
       this.validateUserData()
       try {
         if (this.isAllValidated) {
-          console.log("Correct")
           const registerRequest = this.createRegisterRequest();
-          // await fetcher.post('/accounts/register', registerRequest)
+          console.log(registerRequest)
+          await fetcher.post(`/accounts/security-admins/invitations/${this.token}`, registerRequest)
         }
       } catch (error) {
         this.loading = false;
@@ -139,15 +145,16 @@ export default {
     },
 
     createRegisterRequest() {
-      return {
-        "profilePicture": this.avatar,
-        "firstName": this.form.firstName,
-        "lastName": this.form.lastName,
-        "phoneNumber": this.form.countryCode + this.form.phoneNumber,
-        "address": this.form.address,
-        "governmentID": this.form.governmentID,
-        "bio": this.form.bio
-      }
+      const formData = new FormData();
+      formData.append("address", JSON.stringify(this.form.address))
+      formData.append("firstName", this.form.firstName)
+      formData.append("lastName", this.form.lastName)
+      formData.append("phoneNumber", this.form.countryCode + this.form.phoneNumber)
+      formData.append("profilePicture", this.avatar)
+      formData.append("governmentID", this.form.governmentID)
+      formData.append("bio", this.form.bio)
+
+      return formData;
     }
    }
 

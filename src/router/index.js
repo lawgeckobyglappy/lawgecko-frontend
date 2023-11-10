@@ -46,6 +46,7 @@ const routes = [
     path: "/admin/new/info",
     name: "admin-signup",
     component: AdminSignUp,
+    props: (route) => ({ id: route.query.token })
   },
   {
     path: "/admin/otp",
