@@ -38,8 +38,17 @@
                     </div>
                     <div>
                         <label class="font-bold">Phone Number</label>
-                        <input type="tel" class="font-normal w-full mt-1" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
+                        <div class="flex justify-between">
+                          <select v-model="form.countryCode" id="countryCode" >
+                            <option value="+234">+234</option>
+                            <option value="+44">+44</option>
+                          </select>
+                          <input v-model="form.phoneNumber" @keydown.space.prevent placeholder="9098088770" />
+                        </div>
+                        <!-- <input type="tel" class="font-normal w-full mt-1" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" /> -->
                     </div>
+                    
+                      
                     <div>
                         <label class="font-bold">Government Issued ID</label>
                         <input type="file" accept="image/*" class="font-normal w-full mt-1" />
@@ -78,7 +87,8 @@ export default {
         streetNumber: "",
         postcode: "",
         city: "",
-        country: ""
+        country: "",
+        countryCode: "+234"
       },
      }
    },
@@ -117,12 +127,17 @@ export default {
  
 }
 
-.form input, textarea {
+.form input, textarea, select {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+select {
+  width: 15%;
+  margin-right: 10px;
 }
 
 .form button {

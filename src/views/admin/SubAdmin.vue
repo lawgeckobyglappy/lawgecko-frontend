@@ -221,7 +221,7 @@ export default {
             try {
                 let adminId = this.admins[index]._id;
                 this.admins.splice(index, 1);
-                await fetcher.delete(`/accounts/security-admins/${adminId}`);
+                await fetcher.delete(`/accounts/security-admins/invitations/${adminId}`);
                 this.handleDeleteAdminPopup();
             } catch (error) {
                 console.log(error)
@@ -272,7 +272,7 @@ export default {
             try{
                 if(this.isSubAdminFormDataValidated()){
                     let subAdminRequest = this.createAddSubAdminRequest();
-                    await fetcher.post('/accounts/security-admins/invite', subAdminRequest)
+                    await fetcher.post('/accounts/security-admins/invitations', subAdminRequest)
                     this.addSubAdminToggle();
                     this.admins.push({ status: "Pending", ...subAdminRequest })
                     this.admins = this.getAllAdmins()?.data
@@ -285,7 +285,7 @@ export default {
 
         async getAllAdmins(){
             try{
-                let response = await fetcher.get('/accounts/security-admins');
+                let response = await fetcher.get('/accounts/security-admins/invitations');
                 console.log(response)
                 this.admins = response.data.map(admin => ({
                     ...admin,
@@ -299,7 +299,7 @@ export default {
         async resendInvite(index) {
             try {
                 let adminId = this.admins[index]._id;
-                await fetcher.patch(`/accounts/security-admins/resend/${adminId}`);
+                await fetcher.patch(`/accounts/security-admins/invitations/${adminId}/resend`);
             } catch (error) {
                 console.log(error)
             }
