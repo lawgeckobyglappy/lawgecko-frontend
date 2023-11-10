@@ -34,7 +34,7 @@
                     ></address-field>
                     <div>
                         <label class="font-bold">Bio</label>
-                        <textarea class="font-normal w-full mt-1" placeholder="What's your area of interest?"></textarea>
+                        <textarea v-model="form.bio" class="font-normal w-full mt-1" placeholder="What's your area of interest?"></textarea>
                     </div>
                     <div :class="{ 'error': form.phoneNumberError }">
                         <label class="font-bold">Phone Number</label>
@@ -81,11 +81,6 @@ export default {
         defaultImageSrc: require("@/assets/images/defaultImage.jpeg"),
         firstName: "",
         lastName: "",
-        street: "",
-        streetNumber: "",
-        postcode: "",
-        city: "",
-        country: "",
         countryCode: "+234",
         phoneNumber: "",
         file: "",
@@ -93,7 +88,16 @@ export default {
         lastNameError: "",
         phoneNumberError: "",
         emailAddressError: "",
-        fileError: ""
+        fileError: "",
+        address: {
+          street: "",
+          streetNumber: "",
+          postcode: "",
+          city: "",
+          country: ""
+        },
+        governmentID: null,
+        bio: ""
       },
      }
    },
@@ -119,6 +123,8 @@ export default {
       try {
         if (this.isAllValidated) {
           console.log("Correct")
+          const registerRequest = this.createRegisterRequest();
+          // await fetcher.post('/accounts/register', registerRequest)
         }
       } catch (error) {
         this.loading = false;
@@ -131,6 +137,18 @@ export default {
     isAllValidated() {
       return !this.form.firstNameError && !this.form.lastNameError && !this.form.phoneNumberError && !this.form.fileError
     },
+
+    createRegisterRequest() {
+      return {
+        "profilePicture": this.avatar,
+        "firstName": this.form.firstName,
+        "lastName": this.form.lastName,
+        "phoneNumber": this.form.countryCode + this.form.phoneNumber,
+        "address": this.form.address,
+        "governmentID": this.form.governmentID,
+        "bio": this.form.bio
+      }
+    }
    }
 
    
