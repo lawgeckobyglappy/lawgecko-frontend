@@ -1,7 +1,7 @@
 <template>
   <h3 class="text-lg font-medium">{{ label }}</h3>
   <div class="grid grid-cols-3 gap-5">
-    <label class="font-bold col-span-2 block">
+    <label class="font-bold col-span-2 block" :class="{ 'error': streetError }">
       Street
       <input
         class="font-normal block mt-1 w-full text-sm placeholder-gray-400 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -88,6 +88,17 @@ export default {
   data() {
     return {
       streetRef: "",
+      streetError: "",
+      streetNumberError: "",
+      postcodeError: "",
+      cityError: "",
+      countryError: ""
+    }
+  },
+
+  watch: {
+    street() {
+      this.streetError = this.street === "";
     }
   },
 

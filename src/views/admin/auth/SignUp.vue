@@ -9,7 +9,7 @@
                   <avatar-input v-model="form.avatar" :default-src="form.defaultImageSrc"></avatar-input>
                 </div>
                 <div class="form">
-                  <form>
+                  <form @submit.prevent="submit">
                     <div class="name grid grid-cols-2 gap-3">
                       <div :class="{ 'error': form.firstNameError }">
                         <label class="font-bold">
@@ -36,7 +36,7 @@
                         <label class="font-bold">Bio</label>
                         <textarea class="font-normal w-full mt-1" placeholder="What's your area of interest?"></textarea>
                     </div>
-                    <div>
+                    <div :class="{ 'error': form.phoneNumberError }">
                         <label class="font-bold">Phone Number</label>
                         <div class="flex justify-between">
                           <select v-model="form.countryCode" id="countryCode" >
@@ -45,11 +45,9 @@
                           </select>
                           <input v-model="form.phoneNumber" @keydown.space.prevent placeholder="9098088770" />
                         </div>
-                        <!-- <input type="tel" class="font-normal w-full mt-1" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" /> -->
                     </div>
-                    
                       
-                    <div>
+                    <div :class="{ 'error': form.fileError }">
                         <label class="font-bold">Government Issued ID</label>
                         <input type="file" accept="image/*" class="font-normal w-full mt-1" />
                     </div>
@@ -82,16 +80,60 @@ export default {
         avatar: null,
         defaultImageSrc: require("@/assets/images/defaultImage.jpeg"),
         firstName: "",
-        lastName: "", 
+        lastName: "",
         street: "",
         streetNumber: "",
         postcode: "",
         city: "",
         country: "",
-        countryCode: "+234"
+        countryCode: "+234",
+        phoneNumber: "",
+        file: "",
+        firstNameError: "",
+        lastNameError: "",
+        phoneNumberError: "",
+        emailAddressError: "",
+        fileError: ""
       },
      }
    },
+
+   methods: {
+    validateUserData() {
+      this.form.firstNameError = this.form.firstName === "";
+      this.form.lastNameError = this.form.lastName === "";
+      this.form.phoneNumberError = this.form.phoneNumber === "";
+      this.form.fileError = this.form.file === "";
+    },
+
+    resetForm() {
+        this.form.firstName = "",
+        this.form.lastName = "",
+        this.form.phoneNumber = "",
+        this.form.file = "",
+        this.loading = false
+    },
+
+    async submit() {
+      this.validateUserData()
+      try {
+        if (this.isAllValidated) {
+          console.log("Correct")
+        }
+      } catch (error) {
+        this.loading = false;
+        this.handleRegistrationError(error)
+      }
+    }
+   },
+
+   computed: {
+    isAllValidated() {
+      return !this.form.firstNameError && !this.form.lastNameError && !this.form.phoneNumberError && !this.form.fileError
+    },
+   }
+
+   
    
 }
 </script>
