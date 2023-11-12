@@ -1,7 +1,7 @@
 <template>
   <h3 class="text-lg font-medium">{{ label }}</h3>
   <div class="grid grid-cols-3 gap-5">
-    <label class="font-bold col-span-2 block" :class="{ 'error': streetError }">
+    <label class="font-bold col-span-2 block">
       Street
       <input
         class="font-normal block mt-1 w-full text-sm placeholder-gray-400 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -88,17 +88,6 @@ export default {
   data() {
     return {
       streetRef: "",
-      streetError: "",
-      streetNumberError: "",
-      postcodeError: "",
-      cityError: "",
-      countryError: ""
-    }
-  },
-
-  watch: {
-    street() {
-      this.streetError = this.street === "";
     }
   },
 
@@ -140,7 +129,12 @@ export default {
         place.address_components.forEach(component => {
           component.types.forEach((type) => {
             if(mapping.hasOwnProperty(type)) {
-              this.$emit(mapping[type], component.long_name)
+              if (type === 'country') {
+              const countryCode = component.short_name;
+              this.$emit(mapping[type], countryCode);
+              } else{
+                this.$emit(mapping[type], component.long_name)
+              }
             }
           })
         });

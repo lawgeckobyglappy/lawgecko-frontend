@@ -6,7 +6,7 @@
                     <img src="/logo.svg" alt="lawgecko logo" class="w-40 logo mb-50" />
                 </div>
                 <div>
-                  <avatar-input v-model="form.avatar" :default-src="form.defaultImageSrc"></avatar-input>
+                  <avatar-input v-model="form.avatar" :default-src="form.defaultImageSrc" @input="handleAvatarInput"></avatar-input>
                 </div>
                 <div class="form">
                   <form @submit.prevent="submit">
@@ -26,11 +26,11 @@
                       </div>
                     </div>
                     <address-field
-                      v-model:street="form.street"
-                      v-model:streetNumber="form.streetNumber"
-                      v-model:postcode="form.postcode"
-                      v-model:city="form.city"
-                      v-model:country="form.country"
+                      v-model:street="form.address.street"
+                      v-model:streetNumber="form.address.streetNumber"
+                      v-model:postcode="form.address.postcode"
+                      v-model:city="form.address.city"
+                      v-model:country="form.address.country"
                     ></address-field>
                     <div>
                         <label class="font-bold">Bio</label>
@@ -46,8 +46,8 @@
                           <input v-model="form.phoneNumber" @keydown.space.prevent placeholder="9098088770" />
                         </div>
                     </div>
-                      
-                    <div :class="{ 'error': form.fileError }">
+                    <!-- :class="{ 'error': form.fileError }" -->
+                    <div>
                         <label class="font-bold">Government Issued ID</label>
                         <input type="file" accept="image/*" class="font-normal w-full mt-1" />
                     </div>
@@ -67,6 +67,7 @@
 <script>
 import AvatarInput from "@/components/AvatarInput.vue";
 import AddressField from "@/components/layouts/AddressField.vue";
+import { fetcher } from '@/utils/fetcher';
 
 export default {
    components: {
@@ -75,7 +76,7 @@ export default {
   },
 
   created() {
-      const token = this.$route.query.token;
+      const token = this.$route.query.t;
       this.token = token;
   },
 
@@ -93,7 +94,7 @@ export default {
         lastNameError: "",
         phoneNumberError: "",
         emailAddressError: "",
-        fileError: "",
+        // fileError: "",
         address: {
           street: "",
           streetNumber: "",
@@ -128,29 +129,35 @@ export default {
       this.validateUserData()
       try {
         if (this.isAllValidated) {
-          const registerRequest = this.createRegisterRequest();
-          console.log(registerRequest)
-          await fetcher.post(`/accounts/security-admins/invitations/${this.token}`, registerRequest)
+          const registerRequest = this.createRegisterRequest;
+          await fetcher.patch(`/accounts/security-admins/invitations/${this.token}`, registerRequest)
         }
       } catch (error) {
-        this.loading = false;
-        this.handleRegistrationError(error)
+        console.log(error)
+        // this.loading = false;
+        // this.handleRegistrationError(error)
       }
-    }
+    },
+
+    handleAvatarInput(file) {
+      this.form.avatar = file;
+      console.log("Received file:", file);
+    },
    },
 
    computed: {
     isAllValidated() {
-      return !this.form.firstNameError && !this.form.lastNameError && !this.form.phoneNumberError && !this.form.fileError
+      return !this.form.firstNameError && !this.form.lastNameError && !this.form.phoneNumberError
     },
 
     createRegisterRequest() {
       const formData = new FormData();
+      console.log("Profile -> ", this.form.avatar)
       formData.append("address", JSON.stringify(this.form.address))
       formData.append("firstName", this.form.firstName)
       formData.append("lastName", this.form.lastName)
       formData.append("phoneNumber", this.form.countryCode + this.form.phoneNumber)
-      formData.append("profilePicture", this.avatar)
+      formData.append("profilePicture", this.form.avatar)
       formData.append("governmentID", this.form.governmentID)
       formData.append("bio", this.form.bio)
 
