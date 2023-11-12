@@ -47,9 +47,9 @@
                         </div>
                     </div>
                     <!-- :class="{ 'error': form.fileError }" -->
-                    <div>
+                    <div :class="{ 'error': form.governmentIDError }">
                         <label class="font-bold">Government Issued ID</label>
-                        <input type="file" accept="image/*" class="font-normal w-full mt-1" />
+                        <input type="file" accept="image/*" class="font-normal w-full mt-1" @change="change" ref="governmentIDInput"/>
                     </div>
                     <button type="submit" class="mb-5 hover:-translate-y-1 transition-all bg-btn-green cursor-pointer">
                         <p class="font-bold">Register</p>
@@ -89,12 +89,10 @@ export default {
         lastName: "",
         countryCode: "+234",
         phoneNumber: "",
-        file: "",
         firstNameError: "",
         lastNameError: "",
         phoneNumberError: "",
         emailAddressError: "",
-        // fileError: "",
         address: {
           street: "",
           streetNumber: "",
@@ -102,7 +100,8 @@ export default {
           city: "",
           country: ""
         },
-        governmentID: null,
+        governmentID: "",
+        governmentIDError: "",
         bio: "",
         token: ""
       },
@@ -114,15 +113,21 @@ export default {
       this.form.firstNameError = this.form.firstName === "";
       this.form.lastNameError = this.form.lastName === "";
       this.form.phoneNumberError = this.form.phoneNumber === "";
-      this.form.fileError = this.form.file === "";
+      this.form.governmentIDError = this.form.governmentID === "";
     },
 
     resetForm() {
-        this.form.firstName = "",
-        this.form.lastName = "",
-        this.form.phoneNumber = "",
-        this.form.file = "",
-        this.loading = false
+        this.form.firstName = ""
+        this.form.lastName = ""
+        this.form.phoneNumber = ""
+        this.form.bio = ""
+        this.form.avatar = ""
+        this.form.address.street = ""
+        this.form.address.streetNumber = ""
+        this.form.address.postcode = ""
+        this.form.address.city = ""
+        this.form.address.country = ""
+        this.$refs.governmentIDInput.value = null
     },
 
     async submit() {
@@ -131,6 +136,7 @@ export default {
         if (this.isAllValidated) {
           const registerRequest = this.createRegisterRequest;
           await fetcher.patch(`/accounts/security-admins/invitations/${this.token}`, registerRequest)
+          this.resetForm();
         }
       } catch (error) {
         console.log(error)
@@ -141,17 +147,20 @@ export default {
 
     handleAvatarInput(file) {
       this.form.avatar = file;
-      console.log("Received file:", file);
     },
+
+    change(e) {
+        this.form.governmentID = e.target.files[0]
+      }
    },
 
    computed: {
     isAllValidated() {
-      return !this.form.firstNameError && !this.form.lastNameError && !this.form.phoneNumberError
+      return !this.form.firstNameError && !this.form.lastNameError && !this.form.phoneNumberError && !this.form.governmentIDError
     },
 
     createRegisterRequest() {
-      const formData = new FormData();
+      const formData = new FormData()
       console.log("Profile -> ", this.form.avatar)
       formData.append("address", JSON.stringify(this.form.address))
       formData.append("firstName", this.form.firstName)
@@ -160,13 +169,10 @@ export default {
       formData.append("profilePicture", this.form.avatar)
       formData.append("governmentID", this.form.governmentID)
       formData.append("bio", this.form.bio)
-
       return formData;
     }
    }
 
-   
-   
 }
 </script>
 

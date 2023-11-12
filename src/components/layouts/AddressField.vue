@@ -9,7 +9,7 @@
         @input="$emit('update:street', $event.target.value)"
         :value="street"
         ref="streetRef"
-        placeholder="Street"/>
+        placeholder="Aboyeji Street"/>
     </label>
   
     <label class="block font-bold">
@@ -19,7 +19,7 @@
         type="text"
         @input="$emit('update:streetNumber', $event.target.value)"
         :value="streetNumber"
-        placeholder="Number"/>
+        placeholder="11"/>
     </label>
   
     <label class="block font-bold -mt-4">
@@ -29,7 +29,7 @@
         type="text"
         @input="$emit('update:postcode', $event.target.value)"
         :value="postcode"
-        placeholder="Postcode"/>
+        placeholder="100001"/>
     </label>
   
     <label class="block font-bold -mt-4">
@@ -39,7 +39,7 @@
         type="text"
         @input="$emit('update:city', $event.target.value)"
         :value="city"
-        placeholder="City"/>
+        placeholder="Lagos"/>
     </label>
   
     <label class="block font-bold -mt-4">
@@ -49,7 +49,7 @@
         type="text"
         @input="$emit('update:country', $event.target.value)"
         :value="country"
-        placeholder="Country"/>
+        placeholder="NG"/>
     </label>
   </div>
 </template>
