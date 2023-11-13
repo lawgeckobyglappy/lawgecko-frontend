@@ -356,7 +356,6 @@ export default {
         async getAllAdmins(){
             try{
                 let response = await fetcher.get('/accounts/security-admins/invitations');
-                console.log(response.data[0].details)
                 this.admins = response.data.map(admin => ({
                     ...admin,
                     status: admin.status || "Pending"
@@ -386,8 +385,11 @@ export default {
             try {
                 let approveAdminRequest = this.createApproveAdminRequest();
                 let adminId = this.admins[index]._id;
+                console.log("I'm here")
                 await fetcher.patch(`/accounts/security-admins/invitations/${adminId}/approve`, approveAdminRequest);
                 this.approveAdmin();
+                this.adminProfileToggle();
+                this.admins[index].status = "Active"
             } catch (error) {
                 console.log(error);
             }
