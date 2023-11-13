@@ -34,6 +34,12 @@
 				<span class="menu-icon"><fa-icon :icon="['fas', 'user-gear']" /></span>
 				<span class="text">Settings</span>
 			</router-link>
+			<button class="button" @click="logout">
+                <a href="/signin">
+                    <span class="menu-icon"><fa-icon :icon="['fas', 'arrow-right-from-bracket']" /></span>
+                    <span class="text">Logout</span>
+                </a>
+            </button>
 		</div>
     </aside>
 </template>
@@ -50,6 +56,12 @@ export default {
         toggleMenu(){
             this.isExpanded = !this.isExpanded;
             localStorage.setItem("isExpanded", this.isExpanded)
+        },
+
+        logout(){
+            localStorage.removeItem("currentUser")
+            localStorage.removeItem("token")
+            console.log("Hello")
         }
     }
 }
