@@ -4,6 +4,7 @@
     <label class="font-bold col-span-2 block">
       Street
       <input
+        :class="{ 'error': street === '' }"
         class="font-normal block mt-1 w-full text-sm placeholder-gray-400 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
         type="text"
         @input="$emit('update:street', $event.target.value)"
@@ -152,5 +153,9 @@ input {
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.error input {
+  border-color: red;
 }
 </style>
