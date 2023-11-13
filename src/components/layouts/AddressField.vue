@@ -4,12 +4,13 @@
     <label class="font-bold col-span-2 block">
       Street
       <input
+        :class="{ 'error': street === '' }"
         class="font-normal block mt-1 w-full text-sm placeholder-gray-400 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
         type="text"
         @input="$emit('update:street', $event.target.value)"
         :value="street"
         ref="streetRef"
-        placeholder="Street"/>
+        placeholder="Aboyeji Street"/>
     </label>
   
     <label class="block font-bold">
@@ -19,7 +20,7 @@
         type="text"
         @input="$emit('update:streetNumber', $event.target.value)"
         :value="streetNumber"
-        placeholder="Number"/>
+        placeholder="11"/>
     </label>
   
     <label class="block font-bold -mt-4">
@@ -29,7 +30,7 @@
         type="text"
         @input="$emit('update:postcode', $event.target.value)"
         :value="postcode"
-        placeholder="Postcode"/>
+        placeholder="100001"/>
     </label>
   
     <label class="block font-bold -mt-4">
@@ -39,7 +40,7 @@
         type="text"
         @input="$emit('update:city', $event.target.value)"
         :value="city"
-        placeholder="City"/>
+        placeholder="Lagos"/>
     </label>
   
     <label class="block font-bold -mt-4">
@@ -49,7 +50,7 @@
         type="text"
         @input="$emit('update:country', $event.target.value)"
         :value="country"
-        placeholder="Country"/>
+        placeholder="NG"/>
     </label>
   </div>
 </template>
@@ -129,7 +130,12 @@ export default {
         place.address_components.forEach(component => {
           component.types.forEach((type) => {
             if(mapping.hasOwnProperty(type)) {
-              this.$emit(mapping[type], component.long_name)
+              if (type === 'country') {
+              const countryCode = component.short_name;
+              this.$emit(mapping[type], countryCode);
+              } else{
+                this.$emit(mapping[type], component.long_name)
+              }
             }
           })
         });
@@ -147,5 +153,9 @@ input {
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+
+.error input {
+  border-color: red;
 }
 </style>

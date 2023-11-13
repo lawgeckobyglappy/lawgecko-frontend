@@ -109,9 +109,37 @@
                                             <p>{{ currentAdmin.email }}</p>
                                         </div>
                                     </div>
-                                    <div>
-                                        <h1>More Info</h1>
+                                    <div v-if="this.currentAdmin.details" class="right-details">
+                                        <div>
+                                            <p class="font-bold">First Name</p>
+                                            <p>{{  this.currentAdmin.details.firstName }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">Last Name</p>
+                                            <p>{{  this.currentAdmin.details.lastName }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">Phone Number</p>
+                                            <p>{{  this.currentAdmin.details.phoneNumber }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">Street</p>
+                                            <p>{{  this.currentAdmin.details.address.street }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">City</p>
+                                            <p>{{  this.currentAdmin.details.address.city }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">Country</p>
+                                            <p>{{  this.currentAdmin.details.address.country }}</p>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">Government ID</p>
+                                            <img :src="'http://'+this.currentAdmin.details.governmentID" />
+                                        </div>
                                     </div>
+                                    
                                     <!-- <hr class="my-5 border-2"/>
                                     <div class="form">
                                         <p class="mb-3">Lawgecko Email Credentials</p>
@@ -123,12 +151,44 @@
                                             <label class="font-bold text-left">Password</label>
                                             <input class="w-full mt-3"/>
                                         </div>
-                                        <div class="flex align-center mt-5">
-                                            <TheButton text="Approve" class="mr-3"/>
-                                            <TheButton text="Reject"/>
-                                        </div>
                                     </div> -->
                                 </div>
+                                <div v-if="this.currentAdmin.details" class="flex align-center mt-5">
+                                    <TheButton text="Approve" class="mr-3" @click="approveAdmin"/>
+                                    <TheButton text="Request Change"/>
+                                </div>
+                            </div>
+                        </PopUp>
+
+                        <PopUp v-if="approveAdminPopup">
+                            <div class="popup">
+                                <div class="mb-5 header">
+                                    <h1 class="font-bold text-2xl">Approve</h1>
+                                    <button @click="approveAdmin"><fa-icon :icon="['far', 'rectangle-xmark']" size="lg"/></button>
+                                </div>
+                                <div class="form">
+                                    <form @submit.prevent="approveDetails(index)">
+                                        <p class="mb-3">Lawgecko Email Credentials</p>
+                                        <div>
+                                            <label class="font-bold text-left">Email Address</label>
+                                            <input v-model="credentials.email" class="w-full mt-3"/>
+                                        </div>
+                                        <div>
+                                            <label class="font-bold text-left">Password</label>
+                                            <input v-model="credentials.password" class="w-full mt-3"/>
+                                        </div>
+                                        <div class="flex align-center mt-5 justify-center">
+                                            <TheButton text="Submit" class="mr-3"/>
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- <div class="popup-content">
+                                    <h1>Are you sure you want to remove this Admin?</h1>
+                                    <div class="flex align-center mt-5 justify-center">
+                                        <TheButton text="Yes" class="mr-3" @click="removeAdmin(index)"/>
+                                        <TheButton text="No" @click="handleDeleteAdminPopup"/>
+                                    </div>
+                                </div> -->
                             </div>
                         </PopUp>
                     </tr>
@@ -181,6 +241,7 @@ export default {
             addSubAdminPopup: false,
             adminProfilePopup: false,
             deleteAdminPopup: false,
+            approveAdminPopup: false,
             admins: [],
             currentAdmin: {},
             adminActions: [
@@ -200,6 +261,11 @@ export default {
                 nameTooShort: false,
                 nameErrorMessage: ""
             },
+            credentials: {
+                email: "",
+                password: ""
+
+            }
         }
     },
 
@@ -221,7 +287,7 @@ export default {
             try {
                 let adminId = this.admins[index]._id;
                 this.admins.splice(index, 1);
-                await fetcher.delete(`/accounts/security-admins/${adminId}`);
+                await fetcher.delete(`/accounts/security-admins/invitations/${adminId}`);
                 this.handleDeleteAdminPopup();
             } catch (error) {
                 console.log(error)
@@ -253,6 +319,10 @@ export default {
             }
         },
 
+        approveAdmin(){
+            this.approveAdminPopup = !this.approveAdminPopup
+        },
+
         resetAddSubAdminForm() {
             this.subAdmin.name = ""
             this.subAdmin.nameError = ""
@@ -272,7 +342,7 @@ export default {
             try{
                 if(this.isSubAdminFormDataValidated()){
                     let subAdminRequest = this.createAddSubAdminRequest();
-                    await fetcher.post('/accounts/security-admins/invite', subAdminRequest)
+                    await fetcher.post('/accounts/security-admins/invitations', subAdminRequest)
                     this.addSubAdminToggle();
                     this.admins.push({ status: "Pending", ...subAdminRequest })
                     this.admins = this.getAllAdmins()?.data
@@ -285,8 +355,8 @@ export default {
 
         async getAllAdmins(){
             try{
-                let response = await fetcher.get('/accounts/security-admins');
-                console.log(response)
+                let response = await fetcher.get('/accounts/security-admins/invitations');
+                console.log(response.data[0].details)
                 this.admins = response.data.map(admin => ({
                     ...admin,
                     status: admin.status || "Pending"
@@ -299,9 +369,27 @@ export default {
         async resendInvite(index) {
             try {
                 let adminId = this.admins[index]._id;
-                await fetcher.patch(`/accounts/security-admins/resend/${adminId}`);
+                await fetcher.patch(`/accounts/security-admins/invitations/${adminId}/resend`);
             } catch (error) {
                 console.log(error)
+            }
+        },
+
+        createApproveAdminRequest(){
+            return {
+                "email": this.credentials.email,
+                "password": this.credentials.password
+            }
+        },
+
+        async approveDetails(index) {
+            try {
+                let approveAdminRequest = this.createApproveAdminRequest();
+                let adminId = this.admins[index]._id;
+                await fetcher.patch(`/accounts/security-admins/invitations/${adminId}/approve`, approveAdminRequest);
+                this.approveAdmin();
+            } catch (error) {
+                console.log(error);
             }
         }
 
@@ -366,9 +454,15 @@ th, td {
 }
 
 .popup-content {
-    max-height: 300px;
+    max-height: 500px;
     overflow-y: auto; 
     padding: 20px; 
+}
+
+.right-details {
+    padding-left: 8px;
+    border-left: 3px solid rgb(211, 211, 211);
+    max-width: 350px;
 }
 
 .admin-details-preview div{
