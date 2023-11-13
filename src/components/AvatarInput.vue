@@ -34,11 +34,16 @@ export default {
         change(e) {
             this.file = e.target.files[0]
             this.$emit('input', this.file);
-            let reader = new FileReader();
-            reader.readAsDataURL(this.file)
 
-            reader.onload = e => {
+            if (this.file) {
+                const blob = new Blob([this.file], { type: this.file.type });
+
+                let reader = new FileReader();
+                reader.readAsDataURL(blob);
+
+                reader.onload = (e) => {
                 this.src = e.target.result;
+                };
             }
         }
     }

@@ -6,7 +6,7 @@ import router from "@/router/index";
 export default createStore({
   state: {
     isAuthenticated: false,
-    // currentUser: null
+    currentUser: null
   },
 
   getters: {},
@@ -15,6 +15,10 @@ export default createStore({
     isAuthenticated(state, value) {
       state.isAuthenticated = value;
     },
+
+    currentUser(state, value) {
+      state.currentUser = value
+    }
   },
 
   actions: {
@@ -38,8 +42,15 @@ export default createStore({
         if (userData) {
           localStorage.setItem("token", jwtToken)
           commit('isAuthenticated', true);
-          // commit('isAuthenticated', true);
-          router.push('/forum');
+          commit('currentUser', userData.data)
+          localStorage.setItem("currentUser", JSON.stringify(userData.data))
+
+          if(userData.data.role === "super-admin"){
+            router.push('/admin');
+          } else {
+            router.push('/forum');
+          }
+          
         } else {
           commit('isAuthenticated', false);
         }
