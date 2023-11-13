@@ -98,18 +98,18 @@ export default {
 
   unmounted() {
     if(autoComplete){
-      google.maps.event.clearInstanceListeners(autoComplete);
+      window.google.maps.event.clearInstanceListeners(autoComplete);
     }
   },
 
   methods: {
     initAutocomplete() {
-      autoComplete = new google.maps.places.Autocomplete(this.$refs.streetRef, {
+      autoComplete = new window.google.maps.places.Autocomplete(this.$refs.streetRef, {
         types: ["address"],
         fields: ["address_components"],
       });
 
-      google.maps.event.addListener(autoComplete, "place_changed", () => {
+      window.google.maps.event.addListener(autoComplete, "place_changed", () => {
         const mapping = {
           route: "update:street",
           street_number: "update:streetNumber",
