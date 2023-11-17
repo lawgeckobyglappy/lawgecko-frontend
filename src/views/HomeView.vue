@@ -301,7 +301,7 @@
 <script>
 import TheCard from "@/components/TheCard.vue";
 import TheHeader from "@/components/TheHeader.vue";
-import TheFooter from "@/components/layouts/TheFooter.vue";
+import TheFooter from "@/components/Layouts/TheFooter.vue";
 import SectionHeader from "@/components/SectionHeader.vue";
 import TestimonialCard from "@/components/TestimonialCard.vue";
 
