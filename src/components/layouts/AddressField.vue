@@ -1,10 +1,9 @@
 <template>
   <h3 class="text-lg font-medium">{{ label }}</h3>
   <div class="grid grid-cols-3 gap-5">
-    <label class="font-bold col-span-2 block">
+    <label class="font-bold col-span-2 block" :class="{ 'error': isStreetError }">
       Street
       <input
-        :class="{ 'error': street === '' }"
         class="font-normal block mt-1 w-full text-sm placeholder-gray-400 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
         type="text"
         @input="$emit('update:street', $event.target.value)"
@@ -13,7 +12,7 @@
         placeholder="Aboyeji Street"/>
     </label>
   
-    <label class="block font-bold">
+    <label class="block font-bold" :class="{ 'error': isStreetNumberError }">
       Number
       <input
         class="font-normal block mt-1 w-full text-sm placeholder-gray-400 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -23,7 +22,7 @@
         placeholder="11"/>
     </label>
   
-    <label class="block font-bold -mt-4">
+    <label class="block font-bold -mt-4" :class="{ 'error': isPostcodeError }">
       Postcode
       <input
         class="font-normal block mt-1 w-full text-sm placeholder-gray-400 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -33,7 +32,7 @@
         placeholder="100001"/>
     </label>
   
-    <label class="block font-bold -mt-4">
+    <label class="block font-bold -mt-4" :class="{ 'error': isCityError }">
       City
       <input
         class="font-normal block mt-1 w-full text-sm placeholder-gray-400 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -43,7 +42,7 @@
         placeholder="Lagos"/>
     </label>
   
-    <label class="block font-bold -mt-4">
+    <label class="block font-bold -mt-4" :class="{ 'error': isCountryError }">
       Country
       <input
         class="font-normal block mt-1 w-full text-sm placeholder-gray-400 rounded-md border-gray-300 focus:ring-blue-500 focus:border-blue-500"
@@ -83,6 +82,26 @@ export default {
     country: {
       type: String,
       default: '',
+    },
+    isStreetError: {
+      type: Boolean,
+      default: false,
+    },
+    isStreetNumberError: {
+      type: Boolean,
+      default: false
+    },
+    isPostcodeError: {
+      type: Boolean,
+      default: false
+    },
+    isCityError: {
+      type: Boolean,
+      default: false
+    },
+    isCountryError: {
+      type: Boolean,
+      default: false
     },
   },
 

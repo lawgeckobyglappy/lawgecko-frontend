@@ -26,6 +26,11 @@
                       </div>
                     </div>
                     <address-field
+                      :isStreetError="form.address.streetError"
+                      :isStreetNumberError="form.address.streetNumberError"
+                      :isPostcodeError="form.address.postcoderError"
+                      :isCityError="form.address.cityError"
+                      :isCountryError="form.address.countryError"
                       v-model:street="form.address.street"
                       v-model:streetNumber="form.address.streetNumber"
                       v-model:postcode="form.address.postcode"
@@ -66,7 +71,7 @@
 
 <script>
 import AvatarInput from "@/components/AvatarInput.vue";
-import AddressField from "@/components/Layouts/AddressField.vue";
+import AddressField from "@/components/layouts/AddressField.vue";
 import { fetcher } from '@/utils/fetcher';
 
 export default {
@@ -98,7 +103,12 @@ export default {
           streetNumber: "",
           postcode: "",
           city: "",
-          country: ""
+          country: "",
+          streetError: false,
+          streetNumberError: false,
+          postcoderError: false,
+          cityError: false,
+          countryError: false,
         },
         governmentID: "",
         governmentIDError: "",
@@ -114,6 +124,11 @@ export default {
       this.form.lastNameError = this.form.lastName === "";
       this.form.phoneNumberError = this.form.phoneNumber === "";
       this.form.governmentIDError = this.form.governmentID === "";
+      this.form.address.streetError = this.form.address.street === "";
+      this.form.address.streetNumberError = this.form.address.streetNumber === "";
+      this.form.address.postcoderError = this.form.address.postcode === "";
+      this.form.address.cityError = this.form.address.city === "";
+      this.form.address.countryError = this.form.address.country === "";
     },
 
     resetForm() {
@@ -156,7 +171,11 @@ export default {
 
    computed: {
     isAllValidated() {
-      return !this.form.firstNameError && !this.form.lastNameError && !this.form.phoneNumberError && !this.form.governmentIDError
+      return !this.form.firstNameError && !this.form.lastNameError 
+        && !this.form.phoneNumberError && !this.form.governmentIDError
+        && !this.form.address.streetError && !this.form.address.streetNumberError 
+        && !this.form.address.postcoderError && !this.form.address.cityError 
+        && !this.form.address.countryError
     },
 
     createRegisterRequest() {

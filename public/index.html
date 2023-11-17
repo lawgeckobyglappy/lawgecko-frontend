@@ -8,12 +8,14 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
+    <script async
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUCD1BgPGLOppffauv_eM309tHQ3juP2U&libraries=places&callback=initMap">
+    </script>
     <div id="app"></div>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <script async
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUCD1BgPGLOppffauv_eM309tHQ3juP2U&libraries=places&callback=initMap">
-    </script>
   </body>
 </html>
+<!-- Cannot read properties of undefined (reading 'maps')
+TypeError: Cannot read properties of undefined (reading 'maps') -->
