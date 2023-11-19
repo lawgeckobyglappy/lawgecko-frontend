@@ -15,12 +15,14 @@
             <div>
                 <button class="font-bold p-2 border-15 mb-6 mt-2">Created Assessments</button>
             </div>
-            <div class="flex justify-center items-center">
-                <div class="p-10 border-2 w-80 h-80 cursor-pointer bg-neutral-100 text-center flex flex-col justify-center items-center rounded-lg">
-                    <fa-icon :icon="['fas', 'plus']" size="2xl" />
-                    <h1 class="font-bold mt-3">CREATE NEW ASSESSMENT</h1>
+            <router-link to="/admin/assessment">
+                <div class="flex justify-center items-center">
+                    <div class="p-10 border-2 w-80 h-80 cursor-pointer bg-neutral-100 text-center flex flex-col justify-center items-center rounded-lg">
+                        <fa-icon :icon="['fas', 'plus']" size="2xl" />
+                        <h1 class="font-bold mt-3">CREATE NEW ASSESSMENT</h1>
+                    </div>
                 </div>
-            </div>
+            </router-link>
         </div>
     </div>
 </template>

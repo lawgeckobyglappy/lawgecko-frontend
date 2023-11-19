@@ -13,6 +13,7 @@ import AdminSignUp from "../views/admin/auth/SignUp.vue"
 import OtpPage from "../views/admin/auth/OtpPage.vue";
 import CaptchaPage from "../views/admin/auth/CaptchaPage.vue";
 import ProfileSettings from "../views/admin/ProfileSettings.vue"
+import AssessmentEditor from "../views/assessment/AssessmentEditor.vue"
 
 const routes = [
   {
@@ -83,6 +84,11 @@ const routes = [
     ],
     beforeEnter: guardAdminRoute
   },
+  {
+    path: "/admin/assessment",
+    name: "assessment",
+    component: AssessmentEditor
+  }
 ];
 
 const router = createRouter({
