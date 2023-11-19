@@ -11,7 +11,9 @@ import Dashboard from "../views/admin/DashboardPage.vue"
 import Resource from "../views/admin/ResourcePage.vue"
 import AdminSignUp from "../views/admin/auth/SignUp.vue"
 import OtpPage from "../views/admin/auth/OtpPage.vue";
-
+import CaptchaPage from "../views/admin/auth/CaptchaPage.vue";
+import ProfileSettings from "../views/admin/ProfileSettings.vue"
+import AssessmentEditor from "../views/assessment/AssessmentEditor.vue"
 
 const routes = [
   {
@@ -42,14 +44,20 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/admin/signUp",
+    path: "/admin/new/info",
     name: "admin-signup",
     component: AdminSignUp,
+    props: (route) => ({ id: route.query.t })
   },
   {
     path: "/admin/otp",
     name: "otp",
     component: OtpPage,
+  },
+  {
+    path: "/admin/captcha",
+    name: "captcha",
+    component: CaptchaPage,
   },
   {
     path: "/admin",
@@ -68,9 +76,19 @@ const routes = [
       {
         path: "subAdmin",
         component: SubAdmin
+      },
+      {
+        path: "profile",
+        component: ProfileSettings
       }
-    ]
+    ],
+    beforeEnter: guardAdminRoute
   },
+  {
+    path: "/admin/assessment",
+    name: "assessment",
+    component: AssessmentEditor
+  }
 ];
 
 const router = createRouter({
@@ -84,5 +102,25 @@ router.beforeEach(async (to) => {
     return { name: "sign-in" };
   }
 });
+
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = store.state.isAuthenticated;
+//   if (!isAuthenticated && to.meta.requiresAuth) {
+//     next({
+//       name: "sign-in",
+//     });
+//   } else {
+//     next();
+//   }
+// });
+
+
+function guardAdminRoute(){
+  let user = localStorage.getItem("currentUser");
+  user = JSON.parse(user)
+  if(user?.role !== "super-admin"){
+    return { path: "/signin" };
+  }
+}
 
 export default router;

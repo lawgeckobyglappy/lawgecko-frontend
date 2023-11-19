@@ -6,6 +6,7 @@ import router from "@/router/index";
 export default createStore({
   state: {
     isAuthenticated: false,
+    currentUser: null
   },
 
   getters: {},
@@ -14,12 +15,16 @@ export default createStore({
     isAuthenticated(state, value) {
       state.isAuthenticated = value;
     },
+
+    currentUser(state, value) {
+      state.currentUser = value
+    }
   },
 
   actions: {
     async verifyLoginLink({ commit }, linkId) {
       try {
-        const response = await axios.post(`${API_URL}/auth/verify-login-link`, {
+        const response = await axios.post(`${API_URL}/accounts/verify-login-link`, {
           id: linkId,
         });
         const jwtToken = response.data.data;
@@ -35,8 +40,17 @@ export default createStore({
         const userData = await dispatch("getCurrentUser", jwtToken);
       
         if (userData) {
+          localStorage.setItem("token", jwtToken)
           commit('isAuthenticated', true);
-          router.push('/forum');
+          commit('currentUser', userData.data)
+          localStorage.setItem("currentUser", JSON.stringify(userData.data))
+
+          if(userData.data.role === "super-admin"){
+            router.push('/admin');
+          } else {
+            router.push('/forum');
+          }
+          
         } else {
           commit('isAuthenticated', false);
         }
@@ -54,7 +68,7 @@ export default createStore({
           },
         };
         const response = await axios.get(
-          `${API_URL}/auth/current-user`,
+          `${API_URL}/accounts/current-user`,
           config
         );
         return response.data;

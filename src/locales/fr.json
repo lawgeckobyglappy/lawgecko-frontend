@@ -87,14 +87,17 @@
   },
 
   "signup": {
+    "createAccount": "Créer un Compte.",
     "firstName": "Prénom",
     "lastName": "Nom de famille",
     "emailAddress": "Adresse e-mail",
     "phoneNumber": "Numéro de telephone",
-    "terms":"En vous inscrivant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité, y compris l'utilisation des cookies,"
+    "terms":"En vous inscrivant, vous acceptez nos Conditions d'utilisation et notre Politique de confidentialité, y compris l'utilisation des cookies,",
+    "preOwnedAccount":"Déjà un Compte?"
   },
   "signin":{
     "paragraph":"Entrez votre adresse e-mail pour vous connecter",
-    "emailAddress": "Adresse e-mail"
+    "emailAddress": "Adresse e-mail",
+    "noAccount" : "Vous n'avez pas de compte?"
   }
 }

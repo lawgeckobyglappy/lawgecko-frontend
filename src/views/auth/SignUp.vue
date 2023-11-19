@@ -9,7 +9,7 @@
           <img src="/logo.svg" alt="lawgecko logo" class="w-40 mx-auto logo" />
         </div>
         <div class="w-7/12 mx-auto form">
-          <p class="mb-10 mt-10 font-bold text-2xl">Create An Account</p>
+          <p class="mb-10 mt-10 font-bold text-2xl">{{$t ('signup.createAccount') }}</p>
           <form @submit.prevent="submit">
             <div class="name">
                 <div :class="{ 'error': form.firstNameError }">
@@ -80,7 +80,7 @@
               Sign up with Google
             </button>
           </div>
-          <p class="text-center font-semibold text-[#6E6E6E]">Already Have an Account? <a href="/signin" class="text-[#4172D1]"><span>Sign In</span></a> </p>
+          <p class="text-center font-semibold text-[#6E6E6E]">{{ $t('signup.preOwnedAccount') }}<a href="/signin" class="text-[#4172D1]"><span>Sign In</span></a> </p>
         </div>
       </div>
     </div>
@@ -124,14 +124,12 @@ export default {
   methods: {
     async submit() {
       this.validateUserData()
-      console.log(this.form.phoneNumber)
       try {
         if (this.isAllValidated) {
           this.loading = true
-          const registerRequest = this.createRegisterRequest
-          this.emailAddress = registerRequest.email
+          const registerRequest = this.createRegisterRequest()
 
-          await fetcher.post('/auth/register', registerRequest)
+          await fetcher.post('/accounts/register', registerRequest)
 
           this.emailProvider = "https://" + this.form.emailAddress.split("@")[1]
           this.popupTrigger = true
@@ -166,12 +164,12 @@ export default {
     },
 
     resetForm() {
-      this.form.firstName = "",
+        this.form.firstName = "",
         this.form.lastName = "",
         this.form.phoneNumber = "",
         this.form.policySigned = null,
         this.form.emailAddress = ""
-      this.loading = false
+        this.loading = false
     },
 
     async googleAuth() {
@@ -274,6 +272,10 @@ export default {
     height:30px;
     margin-right: 10px;
   }
+
+.error input {
+  border-color: red;
+}
   @media (max-width: 768px) {
     .images {
       display: none;

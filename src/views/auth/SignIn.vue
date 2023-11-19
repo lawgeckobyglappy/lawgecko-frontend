@@ -40,7 +40,7 @@
                     Continue with Google
                 </button>
                 <div>
-                    <p class="text-center font-semibold text-[#6E6E6E]">Don't Have an Account? <a href="SignUp" class="text-[#4172D1]">Sign Up</a></p>
+                    <p class="text-center font-semibold text-[#6E6E6E]">{{$t ('signin.noAccount')}}<a href="SignUp" class="text-[#4172D1]">Sign Up</a></p>
                 </div>
             </div>
         </div>
@@ -80,10 +80,11 @@ export default {
                     this.loading = true
                     const signInRequest = this.createSignInRequest
                     this.emailAddress = signInRequest.email
-                    await axios.post(`${API_URL}/auth/request-login-link`, signInRequest)
+                    await axios.post(`${API_URL}/accounts/request-login-link`, signInRequest)
                     this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
                     this.popupTrigger = true
                     setTimeout(() => {
+                        
                         this.popupTrigger = false
                     }, 20000)
                     this.resetForm()
@@ -105,7 +106,7 @@ export default {
         async googleAuth() {
             try {
                 const response = await googleAuthCodeLogin();
-                const token = await fetcher.post('/auth/handle-google-auth', { "code": response.code, "isLogin": true });
+                const token = await fetcher.post('/accounts/handle-google-auth', { "code": response.code, "isLogin": true });
                 await this.$store.dispatch('verifyToken', token.data);
             } catch (error) {
                 console.error("Error:", error);
