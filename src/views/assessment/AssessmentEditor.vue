@@ -43,7 +43,7 @@
                     </div>
                     <div>
                         <label class="font-bold">Assessment Summary</label>
-                        <QuillEditor theme="snow" class="font-normal w-full mt-1 h-36 rounded-lg"/>
+                        <QuillEditor theme="snow" placeholder="Start Typing..." class="font-normal w-full mt-1 h-36 rounded-lg"/>
                     </div>
                 </form>
             </div>
