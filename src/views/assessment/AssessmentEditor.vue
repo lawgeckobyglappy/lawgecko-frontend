@@ -36,14 +36,14 @@
                         <div>
                             <label class="font-bold">Grading Criteria</label>
                             <select>
-                                <option value="Ungraded" selected>Ungraded (Defaults)</option>
+                                <option value="Ungraded" selected>Ungraded (Default)</option>
                                 <option value="Severity Level">Severity Level</option>
                             </select>
                         </div>
                     </div>
                     <div>
                         <label class="font-bold">Assessment Summary</label>
-                        <textarea class="font-normal w-full mt-1 h-36" placeholder="Start Typing..."></textarea>
+                        <QuillEditor theme="snow" class="font-normal w-full mt-1 h-36 rounded-lg"/>
                     </div>
                 </form>
             </div>
@@ -53,11 +53,14 @@
 <script>
 import AssessmentSideBar from '@/components/layouts/AssessmentSideBar.vue';
 import TheButton from '@/components/buttons/TheButton.vue';
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default {
     components: {
         AssessmentSideBar,
-        TheButton
+        TheButton, 
+        QuillEditor
     },
 
     data() {
