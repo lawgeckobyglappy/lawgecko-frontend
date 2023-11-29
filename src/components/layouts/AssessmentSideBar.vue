@@ -185,10 +185,6 @@ h3, .button .text {
     transition: 0.3s ease-out;
 }
 
-.router-link-exact-active {
-    border-left: 2px solid rgb(113, 113, 113);
-}
-
 h3 {
     color: gray;
     margin-bottom: 0.5rem;
