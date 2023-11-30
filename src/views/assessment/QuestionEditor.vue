@@ -3,8 +3,8 @@
         <TheButton text="Preview" class="mr-3" />
         <TheButton text="Save" />
     </div>
-    <div>
-        <form class="form">
+    <div class="h-5/6 border-2 border-sky-900 overflow-auto">
+        <form class="form overflow-y-auto">
             <label class="font-bold">Question Type</label>
             <select>
                 <option value="No Limit" selected>Select Options</option>
@@ -19,23 +19,8 @@
             </div>
 
             <div>
-                <div>
-                    <div class="flex justify-between">
-                        <h1 class="font-bold text-xl">Multiple Choice Question:</h1>
-                        <div class="flex">
-                            <input type="checkbox" id="multiple" name="multiple" value="multiple" class="h-3 mt-1.5"/>
-                            <label for="multiple" class="whitespace-nowrap ml-2">Allow multiple answers</label>
-                        </div>
-                    </div>
-                    <div class="flex border h-36 mb-5 rounded-lg">
-                        <div class="mr-5 border-r-2 w-20 flex justify-center align-center">
-                            <h1 class="text-4xl">A</h1>
-                        </div>
-                        <div class="flex justify-center align-center w-full">
-                            <input placeholder="Write a statement here..." class="border-none w-full mr-15 mt-3 active:outline-none focus:outline-none focus:border-none"/>
-                        </div>
-                    </div>
-                </div>
+                <!-- <Option /> -->
+                <Option v-for="(option, index) in options" :key="index"/>
                 <TheButton text="Add an Option" />
             </div>
         </form>
@@ -43,17 +28,20 @@
 </template>
 <script>
 import TheButton from '@/components/buttons/TheButton.vue';
+import Option from '@/components/MCQOption.vue'
 import { QuillEditor } from '@vueup/vue-quill';
 
 export default {
     components: {
         TheButton, 
-        QuillEditor
+        QuillEditor,
+        Option,
     },
 
     data() {
         return {
-
+            questionType: null,
+            options: [Option, Option]
         }
     }
 }
