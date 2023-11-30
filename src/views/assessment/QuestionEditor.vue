@@ -3,8 +3,8 @@
         <TheButton text="Preview" class="mr-3" />
         <TheButton text="Save" />
     </div>
-    <div class="h-5/6 border-2 border-sky-900 overflow-auto">
-        <form class="form overflow-y-auto">
+    <div class="">
+        <form class="form">
             <label class="font-bold">Question Type</label>
             <select>
                 <option value="No Limit" selected>Select Options</option>
