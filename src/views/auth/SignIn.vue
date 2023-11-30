@@ -17,7 +17,6 @@
                             <p v-if="!loading" class="font-bold">{{ $t("header.signIn") }}</p>
                             <ButtonSpinner v-else />
                         </button>
-                        
                     </form>
                     <PopUp v-if="popupTrigger">
                         <fa-icon :icon="['fas', 'envelope-open-text']" size="2xl" style="color: #6CDFBD;" class="my-3" />

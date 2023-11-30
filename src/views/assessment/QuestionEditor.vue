@@ -15,7 +15,28 @@
 
             <div>
                 <label class="font-bold">Question Statement</label>
-                <QuillEditor theme="snow" placeholder="Start Typing..." class="font-normal w-full mt-1 h-36 rounded-lg"/>
+                <QuillEditor theme="snow" placeholder="Start Typing..." class="font-normal w-full mt-1 h-36 rounded-lg mb-5"/>
+            </div>
+
+            <div>
+                <div>
+                    <div class="flex justify-between">
+                        <h1 class="font-bold text-xl">Multiple Choice Question:</h1>
+                        <div class="flex">
+                            <input type="checkbox" id="multiple" name="multiple" value="multiple" class="h-3 mt-1.5"/>
+                            <label for="multiple" class="whitespace-nowrap ml-2">Allow multiple answers</label>
+                        </div>
+                    </div>
+                    <div class="flex border h-36 mb-5 rounded-lg">
+                        <div class="mr-5 border-r-2 w-20 flex justify-center align-center">
+                            <h1 class="text-4xl">A</h1>
+                        </div>
+                        <div class="flex justify-center align-center w-full">
+                            <input placeholder="Write a statement here..." class="border-none w-full mr-15 mt-3 active:outline-none focus:outline-none focus:border-none"/>
+                        </div>
+                    </div>
+                </div>
+                <TheButton text="Add an Option" />
             </div>
         </form>
     </div>
