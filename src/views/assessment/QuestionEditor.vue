@@ -3,14 +3,14 @@
         <TheButton text="Preview" class="mr-3" />
         <TheButton text="Save" />
     </div>
-    <div>
+    <div class="">
         <form class="form">
             <label class="font-bold">Question Type</label>
-            <select>
-                <option value="No Limit" selected>Select Options</option>
-                <option value="1">MCQ</option>
-                <option value="2">True False</option>
-                <option value="3">Free Text</option>
+            <select v-model="questionType" @change="handleQuestionTypeChange">
+                <option value="Null" selected>Select Options</option>
+                <option value="MCQ">MCQ</option>
+                <option value="True/False">True False</option>
+                <option value="Scale">Scale</option>
             </select>
 
             <div>
@@ -19,41 +19,91 @@
             </div>
 
             <div>
-                <div>
-                    <div class="flex justify-between">
-                        <h1 class="font-bold text-xl">Multiple Choice Question:</h1>
+                <div v-if="questionType === 'MCQ'" class="flex justify-between">
+                    <h1 class="font-bold text-xl">Multiple Choice Question:</h1>
+                    <div class="flex">
+                        <label for="multiple" class="whitespace-nowrap mr-1">Allow multiple answers</label>
+                        <input type="checkbox" id="multiple" name="multiple" value="multiple" class="h-3 mt-1.5 mr-4"/>
                         <div class="flex">
-                            <input type="checkbox" id="multiple" name="multiple" value="multiple" class="h-3 mt-1.5"/>
-                            <label for="multiple" class="whitespace-nowrap ml-2">Allow multiple answers</label>
-                        </div>
-                    </div>
-                    <div class="flex border h-36 mb-5 rounded-lg">
-                        <div class="mr-5 border-r-2 w-20 flex justify-center align-center">
-                            <h1 class="text-4xl">A</h1>
-                        </div>
-                        <div class="flex justify-center align-center w-full">
-                            <input placeholder="Write a statement here..." class="border-none w-full mr-15 mt-3 active:outline-none focus:outline-none focus:border-none"/>
+                            <p>Required</p>
+                            <SwitchToggle class="ml-1" />
                         </div>
                     </div>
                 </div>
-                <TheButton text="Add an Option" />
+                <div v-if="questionType === 'True/False'" class="flex justify-between">
+                    <h1 class="font-bold text-xl">Statement is:</h1>
+                    <div class="flex align-center">
+                        <div class="mr-4">
+                            <button class="border p-2" >True</button>
+                            <button class="border p-2" >False</button>
+                        </div>
+                        <div class="flex">
+                            <p>Required</p>
+                            <SwitchToggle class="mr-5 ml-1" />
+                        </div>
+                    </div>
+                </div>
+                <div v-if="questionType === 'Scale'" class="flex justify-between">
+                    <h1 class="font-bold text-xl">Severity Level:</h1>
+                    <div class="flex align-center">
+                        <!-- <div class="mr-4">
+                            <button class="border p-2" >1</button>
+                            <button class="border p-2" >10</button>
+                        </div> -->
+                        <div class="flex">
+                            <p>Required</p>
+                            <SwitchToggle class="mr-5 ml-1" />
+                        </div>
+                    </div>
+                </div>
+                <div v-if="questionType === 'MCQ'">
+                    <Option v-for="(option, index) in options" :key="index" :letter="option.letter"/>
+                    <TheButton v-if="questionNumber < 91" text="Add an Option" @click.prevent="addOption" class="w-32"/>
+                </div>
+                <div v-if="questionType === 'True/False' || questionType === 'Scale'">
+                    <Statement class="mt-2"/>
+                </div>
             </div>
         </form>
     </div>
 </template>
 <script>
 import TheButton from '@/components/buttons/TheButton.vue';
+import Option from '@/components/MCQOption.vue'
 import { QuillEditor } from '@vueup/vue-quill';
+import SwitchToggle from '@/components/SwitchToggle.vue'
+import Statement from '@/components/QuestionStatement.vue'
 
 export default {
     components: {
         TheButton, 
-        QuillEditor
+        QuillEditor,
+        Option,
+        SwitchToggle,
+        Statement
     },
 
     data() {
         return {
+            questionType: "Null",
+            options: [Option],
+            questionNumber: 66,
+            isTrue: true
+        }
+    },
 
+    methods: {
+        addOption(){
+            let option = {
+                letter: String.fromCharCode(this.questionNumber)
+            }
+            this.options.push(option)
+            this.questionNumber += 1;
+        },
+
+        handleQuestionTypeChange(){
+            this.questionNumber = 66
+            this.options = [Option]
         }
     }
 }

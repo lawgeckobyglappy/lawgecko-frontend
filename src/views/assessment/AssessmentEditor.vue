@@ -19,8 +19,13 @@ export default {
 </script>
 
 <style scoped>
+.sidebar-left {
+  position: fixed;
+}
 .main-view {
     flex: 1; 
     padding: 2rem;
+    overflow-y: auto;
+    margin-left: 250px;
 }
 </style>
