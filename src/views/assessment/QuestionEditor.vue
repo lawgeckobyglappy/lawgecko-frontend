@@ -6,11 +6,11 @@
     <div class="">
         <form class="form">
             <label class="font-bold">Question Type</label>
-            <select>
-                <option value="No Limit" selected>Select Options</option>
-                <option value="1">MCQ</option>
-                <option value="2">True False</option>
-                <option value="3">Free Text</option>
+            <select v-model="questionType" @change="handleQuestionTypeChange">
+                <option value="Null" selected>Select Options</option>
+                <option value="MCQ">MCQ</option>
+                <option value="True/False">True False</option>
+                <option value="Scale">Scale</option>
             </select>
 
             <div>
@@ -19,9 +19,50 @@
             </div>
 
             <div>
-                <!-- <Option /> -->
-                <Option v-for="(option, index) in options" :key="index"/>
-                <TheButton text="Add an Option" />
+                <div v-if="questionType === 'MCQ'" class="flex justify-between">
+                    <h1 class="font-bold text-xl">Multiple Choice Question:</h1>
+                    <div class="flex">
+                        <label for="multiple" class="whitespace-nowrap mr-1">Allow multiple answers</label>
+                        <input type="checkbox" id="multiple" name="multiple" value="multiple" class="h-3 mt-1.5 mr-4"/>
+                        <div class="flex">
+                            <p>Required</p>
+                            <SwitchToggle class="ml-1" />
+                        </div>
+                    </div>
+                </div>
+                <div v-if="questionType === 'True/False'" class="flex justify-between">
+                    <h1 class="font-bold text-xl">Statement is:</h1>
+                    <div class="flex align-center">
+                        <div class="mr-4">
+                            <button class="border p-2" >True</button>
+                            <button class="border p-2" >False</button>
+                        </div>
+                        <div class="flex">
+                            <p>Required</p>
+                            <SwitchToggle class="mr-5 ml-1" />
+                        </div>
+                    </div>
+                </div>
+                <div v-if="questionType === 'Scale'" class="flex justify-between">
+                    <h1 class="font-bold text-xl">Severity Level:</h1>
+                    <div class="flex align-center">
+                        <!-- <div class="mr-4">
+                            <button class="border p-2" >1</button>
+                            <button class="border p-2" >10</button>
+                        </div> -->
+                        <div class="flex">
+                            <p>Required</p>
+                            <SwitchToggle class="mr-5 ml-1" />
+                        </div>
+                    </div>
+                </div>
+                <div v-if="questionType === 'MCQ'">
+                    <Option v-for="(option, index) in options" :key="index" :letter="option.letter"/>
+                    <TheButton v-if="questionNumber < 91" text="Add an Option" @click.prevent="addOption" class="w-32"/>
+                </div>
+                <div v-if="questionType === 'True/False' || questionType === 'Scale'">
+                    <Statement class="mt-2"/>
+                </div>
             </div>
         </form>
     </div>
@@ -30,18 +71,39 @@
 import TheButton from '@/components/buttons/TheButton.vue';
 import Option from '@/components/MCQOption.vue'
 import { QuillEditor } from '@vueup/vue-quill';
+import SwitchToggle from '@/components/SwitchToggle.vue'
+import Statement from '@/components/QuestionStatement.vue'
 
 export default {
     components: {
         TheButton, 
         QuillEditor,
         Option,
+        SwitchToggle,
+        Statement
     },
 
     data() {
         return {
-            questionType: null,
-            options: [Option, Option]
+            questionType: "Null",
+            options: [Option],
+            questionNumber: 66,
+            isTrue: true
+        }
+    },
+
+    methods: {
+        addOption(){
+            let option = {
+                letter: String.fromCharCode(this.questionNumber)
+            }
+            this.options.push(option)
+            this.questionNumber += 1;
+        },
+
+        handleQuestionTypeChange(){
+            this.questionNumber = 66
+            this.options = [Option]
         }
     }
 }
