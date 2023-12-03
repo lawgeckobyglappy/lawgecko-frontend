@@ -1,9 +1,10 @@
 <template>
-    <div class="flex flex-row justify-end mb-3">
+    <div v-show="!mobile" class="flex flex-row justify-end mb-3">
         <TheButton text="Preview" class="mr-3" />
         <TheButton text="Save" />
     </div>
-    <div class="">
+    <div class="mb-10"></div>
+    <div>
         <form class="form">
             <label class="font-bold">Question Type</label>
             <select v-model="questionType" @change="handleQuestionTypeChange">
@@ -64,6 +65,10 @@
                     <Statement class="mt-2"/>
                 </div>
             </div>
+            <div v-show="mobile" class="flex flex-row mt-10 justify-end mb-3">
+                <TheButton text="Preview" class="mr-3" />
+                <TheButton text="Save" />
+            </div>
         </form>
     </div>
 </template>
@@ -88,8 +93,16 @@ export default {
             questionType: "Null",
             options: [Option],
             questionNumber: 66,
-            isTrue: true
+            isTrue: true,
+            windowWidth: null,
+            mobile: null
         }
+    },
+
+    mounted(){
+        window.addEventListener("resize", this.checkScreen);
+        window.addEventListener("load", this.checkScreen);
+        this.checkScreen()
     },
 
     methods: {
@@ -104,7 +117,17 @@ export default {
         handleQuestionTypeChange(){
             this.questionNumber = 66
             this.options = [Option]
-        }
+        },
+
+        checkScreen() {
+            this.windowWidth = window.innerWidth;
+
+            if (this.windowWidth <= 850) {
+                this.mobile = true;
+            } else {
+                this.mobile = false;
+            }
+        },
     }
 }
 </script>

@@ -3,6 +3,13 @@
         <div v-show="mobileNav" class="sidebar-left">
             <AssessmentSideBar />
         </div>
+        <div v-show="windowWidth <= 850" class="absolute top-8 right-8">
+            <fa-icon
+                :icon="['fas', 'bars']"
+                :class="{ 'icon-active': mobileNav }"
+                @click="toggleNav"
+            />
+        </div>
         <div class="main-view">
             <router-view />
         </div>
@@ -18,15 +25,15 @@ export default {
 
     data(){
         return {
-            windowWidth: null,
-            mobileNav: null
+            mobileNav: null,
+            windowWidth: null
         }
     },
 
     mounted(){
         window.addEventListener("resize", this.checkScreen);
         window.addEventListener("load", this.checkScreen);
-        this.checkScreen();
+        this.checkScreen()
     }, 
 
     methods: {
@@ -45,6 +52,10 @@ export default {
                 main.style.marginLeft = '250px';
                 this.mobileNav = true;
             }
+        },
+
+        toggleNav(){
+            this.mobileNav = !this.mobileNav
         }
     }
 }
@@ -53,6 +64,7 @@ export default {
 <style scoped>
 .sidebar-left {
   position: fixed;
+  z-index: 1;
 }
 .main-view {
     flex: 1; 
