@@ -2,6 +2,12 @@
     <div class="flex flex-row justify-end mb-3">
                 <TheButton text="Preview" class="mr-3" />
                 <TheButton text="Save" />
+                <div v-show="mobile">
+                    <fa-icon
+                        :icon="['fas', 'bars']"
+                        :class="{ 'icon-active': mobileNav }"
+                    />
+                </div>
             </div>
             <div class="coverImage">
                 <input type="file" accept="image/*" class="hidden"/>
@@ -59,7 +65,24 @@ export default {
 
     data() {
         return {
-            src: require("@/assets/images/default.webp")
+            src: require("@/assets/images/default.webp"),
+            mobile: null
+        }
+    },
+
+    created() {
+        window.addEventListener("resize", this.checkScreen);
+        this.checkScreen();
+    },
+
+    methods: {
+        checkScreen() {
+            this.windowWidth = window.innerWidth;
+            if (this.windowWidth <= 850) {
+                this.mobile = true;
+                return;
+            }
+            this.mobile = false;
         }
     }
 }

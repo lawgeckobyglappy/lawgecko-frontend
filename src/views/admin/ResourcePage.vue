@@ -3,7 +3,7 @@
         <div class="flex flex-row align-center mb-15">
             <h1 class="mr-10 text-3xl font-bold">Resources</h1>
         </div>
-        <div class="px-20">
+        <div class="search-assessment">
             <div class="flex flex-row w-full">
                 <select class="mr-2">
                     <option value="all" selected>ALL</option>
@@ -41,8 +41,20 @@ select {
   cursor: pointer;
 }
 
+.search-assessment{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
 button {
     border-bottom: 3px solid teal;
+}
+
+@media (max-width: 1024px){
+    .search-assessment{
+        padding-left: 5px;
+        padding-right: 5px;
+    }
 }
 
 </style>

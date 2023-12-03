@@ -1,6 +1,6 @@
 <template>
     <div class="flex">
-        <div class="sidebar-left">
+        <div v-show="mobileNav" class="sidebar-left">
             <AssessmentSideBar />
         </div>
         <div class="main-view">
@@ -14,6 +14,38 @@ import AssessmentSideBar from '@/components/layouts/AssessmentSideBar.vue';
 export default {
     components: {
         AssessmentSideBar
+    },
+
+    data(){
+        return {
+            windowWidth: null,
+            mobileNav: null
+        }
+    },
+
+    mounted(){
+        window.addEventListener("resize", this.checkScreen);
+        window.addEventListener("load", this.checkScreen);
+        this.checkScreen();
+    }, 
+
+    methods: {
+        checkScreen() {
+            this.windowWidth = window.innerWidth;
+            const main = document.getElementsByClassName('main-view')[0];
+
+            if (!main) {
+                return;
+            }
+
+            if (this.windowWidth <= 850) {
+                main.style.marginLeft = '0';
+                this.mobileNav = false;
+            } else {
+                main.style.marginLeft = '250px';
+                this.mobileNav = true;
+            }
+        }
     }
 }
 </script>
