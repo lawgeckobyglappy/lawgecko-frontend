@@ -18,7 +18,7 @@
         <div class="menu">
             <input placeholder="Search Questions" class="my-5"/>
             <div class="overflow-auto max-h-72">
-                <QuestionBar v-for="(question, index) of questions" :id="index" />
+                <QuestionBar v-for="(question, index) of questions" :key="index" />
             </div>
             <div class="flex justify-end">
                 <button class="p-3 my-3 border-solid border-1 bg-green-900 border-gray-500" @click.prevent="addQuestion">Add Question</button>

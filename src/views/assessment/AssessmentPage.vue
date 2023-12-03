@@ -1,17 +1,20 @@
 <template>
-    <div class="flex flex-row justify-end mb-3">
-                <TheButton text="Preview" class="mr-3" />
-                <TheButton text="Save" />
+    <div>
+        <div v-show="!mobile" class="flex flex-row justify-end mb-3">
+            <TheButton text="Preview" class="mr-3" />
+            <TheButton text="Save" />
+        </div>
+        <div class="mb-10"></div>
+    </div>
+    <div class="coverImage">
+        <input type="file" accept="image/*" class="hidden"/>
+        <div class="relative inline-block mb-7">
+            <img :src="src" alt="Avatar" class="h-36 w-72 h-36 object-cover rounded-lg "/>
+            <div class="absolute top-0 h-full w-full rounded-lg bg-green-900 bg-opacity-25 flex items-center justify-center">
+                <button><fa-icon :icon="['fas', 'camera']" size="xl" style="color: #a1a0a0;" /></button>
             </div>
-            <div class="coverImage">
-                <input type="file" accept="image/*" class="hidden"/>
-                <div class="relative inline-block mb-7">
-                    <img :src="src" alt="Avatar" class="h-36 w-72 h-36 object-cover rounded-lg "/>
-                    <div class="absolute top-0 h-full w-full rounded-lg bg-green-900 bg-opacity-25 flex items-center justify-center">
-                        <button><fa-icon :icon="['fas', 'camera']" size="xl" style="color: #a1a0a0;" /></button>
-                    </div>
-                </div>
-            </div>
+        </div>
+    </div>
             <div class="form">
                 <form>
                     <div>
@@ -40,6 +43,10 @@
                         <label class="font-bold">Assessment Summary</label>
                         <QuillEditor theme="snow" placeholder="Start Typing..." class="font-normal w-full mt-1 h-36 rounded-lg"/>
                     </div>
+                    <div v-show="mobile" class="flex mt-10 flex-row justify-end mb-3">
+                        <TheButton text="Preview" class="mr-3" />
+                        <TheButton text="Save" />
+                    </div>
                 </form>
             </div>
             <div class="main-view">
@@ -59,8 +66,28 @@ export default {
 
     data() {
         return {
-            src: require("@/assets/images/default.webp")
+            src: require("@/assets/images/default.webp"),
+            windowWidth: null,
+            mobile: null
         }
+    },
+
+    mounted(){
+        window.addEventListener("resize", this.checkScreen);
+        window.addEventListener("load", this.checkScreen);
+        this.checkScreen()
+    },
+
+    methods: {
+        checkScreen() {
+            this.windowWidth = window.innerWidth;
+
+            if (this.windowWidth <= 850) {
+                this.mobile = true;
+            } else {
+                this.mobile = false;
+            }
+        },
     }
 }
 </script>
