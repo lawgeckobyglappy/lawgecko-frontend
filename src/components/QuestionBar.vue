@@ -4,9 +4,9 @@
         <div class="mr-auto flex w-full items-center">
             <div>
                 <span v-if="isEditable">
-                    <a href="#" class="text-sm ml-2">Question Number</a>
+                    <a :v-model="defaultTitle" href="#" class="text-sm ml-2">{{ defaultTitle }}</a>
                 </span>
-                <form v-else class="w-28">
+                <form v-else class="w-28 ml-2">
                     <input v-model="defaultTitle" class="h-8 ml-0 text-sm border-none active:outline-none focus:outline-none"/>
                 </form>
             </div>  
