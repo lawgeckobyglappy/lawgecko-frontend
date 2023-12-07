@@ -47,10 +47,6 @@
                 <div v-if="questionType === 'Scale'" class="flex justify-between">
                     <h1 class="font-bold text-xl">Severity Level:</h1>
                     <div class="flex align-center">
-                        <!-- <div class="mr-4">
-                            <button class="border p-2" >1</button>
-                            <button class="border p-2" >10</button>
-                        </div> -->
                         <div class="flex">
                             <p>Required</p>
                             <SwitchToggle class="mr-5 ml-1" />
