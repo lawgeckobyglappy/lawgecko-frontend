@@ -14,6 +14,9 @@ import OtpPage from "../views/admin/auth/OtpPage.vue";
 import CaptchaPage from "../views/admin/auth/CaptchaPage.vue";
 import ProfileSettings from "../views/admin/ProfileSettings.vue"
 import AssessmentEditor from "../views/assessment/AssessmentEditor.vue"
+import QuestionEditor from "../views/assessment/QuestionEditor.vue"
+import AssessmentPage from "../views/assessment/AssessmentPage.vue"
+import Preview from "../views/assessment/AssessmentPreview.vue"
 
 const routes = [
   {
@@ -87,8 +90,25 @@ const routes = [
   {
     path: "/admin/assessment",
     name: "assessment",
-    component: AssessmentEditor
-  }
+    component: AssessmentEditor,
+    children: [
+      {
+        path: "",
+        name: "assessmentDetails",
+        component: AssessmentPage
+      },
+      {
+        path: "question",
+        name: "assessmentQuestion",
+        component: QuestionEditor
+      },
+      {
+        path: "preview",
+        name: "preview",
+        component: Preview
+      }
+    ]
+  },
 ];
 
 const router = createRouter({

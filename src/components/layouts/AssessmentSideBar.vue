@@ -12,27 +12,37 @@
             </router-link>
         </div>
 
-        <h3 class="font-bold">UNTITLED ASSESSMENT</h3>
+        <router-link to="/admin/assessment">
+            <h3 class="font-bold hover:text-green-500">UNTITLED ASSESSMENT</h3>
+        </router-link>
         <div class="menu">
             <input placeholder="Search Questions" class="my-5"/>
+            <div class="overflow-auto max-h-72">
+                <QuestionBar v-for="(question, index) of questions" :key="index" />
+            </div>
             <div class="flex justify-end">
-                <button class="p-3 my-3 border-solid border-1 bg-green-900 border-gray-500">Add Question</button>
+                <button class="p-3 my-3 border-solid border-1 bg-green-900 border-gray-500" @click.prevent="addQuestion">Add Question</button>
             </div>
         </div>
 
         <div class="flex"></div>
-		
-		<div class="menu">
-			<!-- Empty for now -->
-		</div>
+
     </aside>
 </template>
 
 <script>
+import QuestionBar from '@/components/QuestionBar.vue'
+
 export default {
+    components: {
+        QuestionBar
+    },
+
     data() {
         return {
-            
+            isEditable: true,
+            defaultTitle: "Question Number",
+            questions: [QuestionBar]
         }
     },
 
@@ -41,7 +51,11 @@ export default {
             localStorage.removeItem("currentUser")
             localStorage.removeItem("token")
             console.log("Hello")
-        }
+        },
+
+        addQuestion(){
+            this.questions.push(QuestionBar)
+        },
     }
 }
 </script>
@@ -60,17 +74,18 @@ aside {
     transition: 0.2s ease-in-out;
 }
 
-aside .flex {
+/* aside .flex {
 	flex: 1 1 0%;
-}
+} */
 
 .logo {
     margin-bottom: 1rem;
-
 }
+
 .logo img {
     width: 2rem;
 }
+
 .isExpanded {
     width: 250px;
 }
@@ -140,16 +155,6 @@ h3, .button .text {
 .menu-icon {
     margin-right: 0.5rem;
     transition: 0.3s ease-out;
-}
-
-.menu-icon .text,
-.router-link-exact-active,
-.button:hover {
-    color: brown;
-}
-
-.router-link-exact-active {
-    border-left: 2px solid rgb(113, 113, 113);
 }
 
 h3 {
