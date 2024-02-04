@@ -163,7 +163,7 @@ export default {
     handleAvatarInput(file) {
       this.form.avatar = file;
     },
-
+    
     change(e) {
         this.form.governmentID = e.target.files[0]
       }
