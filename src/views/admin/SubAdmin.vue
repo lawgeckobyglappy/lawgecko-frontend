@@ -342,10 +342,10 @@ export default {
             try{
                 if(this.isSubAdminFormDataValidated()){
                     let subAdminRequest = this.createAddSubAdminRequest();
-                    await fetcher.post('/accounts/security-admins/invitations', subAdminRequest)
+                    // await fetcher.post('/accounts/security-admins/invitations', subAdminRequest)
                     this.addSubAdminToggle();
                     this.admins.push({ status: "Pending", ...subAdminRequest })
-                    this.admins = this.getAllAdmins()?.data
+                    // this.admins = this.getAllAdmins()?.data
                     this.resetAddSubAdminForm()
                 }
             } catch(error){
