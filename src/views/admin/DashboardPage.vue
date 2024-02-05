@@ -1,3 +1,3 @@
 <template>
-    <p>I'm not the admin, I'm the admin's uncle</p>
+    <p>Dashboard in progress</p>
 </template>

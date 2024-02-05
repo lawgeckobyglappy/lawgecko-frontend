@@ -85,7 +85,7 @@ const routes = [
         component: ProfileSettings
       }
     ],
-    beforeEnter: guardAdminRoute
+    // beforeEnter: guardAdminRoute
   },
   {
     path: "/admin/assessment",
@@ -135,12 +135,12 @@ router.beforeEach(async (to) => {
 // });
 
 
-function guardAdminRoute(){
-  let user = localStorage.getItem("currentUser");
-  user = JSON.parse(user)
-  if(user?.role !== "super-admin"){
-    return { path: "/signin" };
-  }
-}
+// function guardAdminRoute(){
+//   let user = localStorage.getItem("currentUser");
+//   user = JSON.parse(user)
+//   if(user?.role !== "super-admin"){
+//     return { path: "/signin" };
+//   }
+// }
 
 export default router;
