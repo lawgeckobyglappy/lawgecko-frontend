@@ -46,8 +46,8 @@
     </div>
 </template>
 <script>
-import { API_URL } from '@/constant'
-import axios from 'axios'
+// import { API_URL } from '@/constant'
+// import axios from 'axios'
 import PopUp from '@/components/PopUp.vue'
 import ButtonSpinner from '@/components/spinner/ButtonSpinner.vue'
 import { googleAuthCodeLogin } from "vue3-google-login"
@@ -79,11 +79,10 @@ export default {
                     this.loading = true
                     const signInRequest = this.createSignInRequest
                     this.emailAddress = signInRequest.email
-                    await axios.post(`${API_URL}/accounts/request-login-link`, signInRequest)
+                    // await axios.post(`${API_URL}/accounts/request-login-link`, signInRequest)
                     this.emailProvider = "https://"+this.form.emailAddress.split("@")[1]
                     this.popupTrigger = true
                     setTimeout(() => {
-                        
                         this.popupTrigger = false
                     }, 20000)
                     this.resetForm()
